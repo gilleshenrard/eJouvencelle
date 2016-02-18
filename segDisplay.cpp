@@ -38,7 +38,7 @@ void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
 /************************************************************/
 void segDisplay::pushPins()
 {
-  for(int i=0 ; i<7 ; i++)
+  for(char i=0 ; i<7 ; i++)
     pinMode(pins[i], OUTPUT);
 }
 
@@ -54,7 +54,7 @@ void segDisplay::displayNumber(int Number)
     Starting from 64 to 0, the test will define if the current bit is true or false,
     then shift to the right*/
 
-  for(unsigned char i=64, j=0 ; i>0 ; i/=2, j++)
+  for(char i=64, j=0 ; i>0 ; i/=2, j++)
     if(segDisplay::numbers[num] & i)
       digitalWrite(segments[j], HIGH);    //if test value != 0 -> true then HIGH
     else
@@ -68,7 +68,7 @@ void segDisplay::displayNumber(int Number)
 /************************************************************/
 void segDisplay::noDisplay()
 {
-  for(i=0 ; i<7 ; i++)
+  for(char i=0 ; i<7 ; i++)
     digitalWrite(segments[i], LOW);
 }
 

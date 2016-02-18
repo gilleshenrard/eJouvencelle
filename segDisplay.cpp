@@ -25,7 +25,11 @@ segDisplay::~segDisplay()
 /*  O : /                                                   */
 /************************************************************/
 void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
-{}
+{
+  int tmp[7]={a, b, c, d, e, f, g};
+  for(char i=0 ; i<7 ; i++)
+    self.pins[i]=tmp[i];
+}
 
 /************************************************************/
 /*  I : /                                                   */

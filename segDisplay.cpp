@@ -9,17 +9,6 @@ segDisplay::segDisplay()
 {
   pinSet=false;
   dot=0;
-
-  numbers[0].display=126;
-  numbers[1].display=48;
-  numbers[2].display=109;
-  numbers[3].display=121;
-  numbers[4].display=51;
-  numbers[5].display=91;
-  numbers[6].display=95;
-  numbers[7].display=112;
-  numbers[8].display=127;
-  numbers[9].display=123;
 }
 
 /************************************************************/
@@ -54,7 +43,7 @@ void segDisplay::displayNumber(int Number)
     then shift to the right*/
 
   for(unsigned char i=64, j=0 ; i>0 ; i/=2, j++)
-    if(numbers[num]&i)
+    if(segDisplay::numbers[num] & i)
       digitalWrite(segments[j], HIGH);    //if test value != 0 -> true then HIGH
     else
       digitalWrite(segments[j], LOW);     //else, the bit is set to 0, thus the signal is LOW

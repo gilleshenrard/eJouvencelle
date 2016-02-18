@@ -24,7 +24,15 @@ segDisplay::~segDisplay()
 /*  P :                                                     */
 /*  O : /                                                   */
 /************************************************************/
-void segDisplay::setupPins()
+void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
+{}
+
+/************************************************************/
+/*  I : /                                                   */
+/*  P :                                                     */
+/*  O : /                                                   */
+/************************************************************/
+void segDisplay::pushPins()
 {
   for(int i=0 ; i<7 ; i++)
     pinMode(pins[i], OUTPUT);

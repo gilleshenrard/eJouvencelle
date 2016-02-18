@@ -21,7 +21,7 @@ typedef union
 class segDisplay
 {
 	static const t_display numbers[10]={{.display=126},
-						{.display=48},
+						{.display=48}, 
 						{.display=109},
 						{.display=121},
 						{.display=51},

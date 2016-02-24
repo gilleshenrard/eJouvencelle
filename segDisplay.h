@@ -7,14 +7,14 @@ typedef union
 	unsigned char display;
 	typedef struct
 	{
-		int dot:1;
-		int a:1;
-		int b:1;
-		int c:1;
-		int d:1;
-		int e:1;
-		int f:1;
-		int g:1;
+		unsigned char dot:1;
+		unsigned char a:1;
+		unsigned char b:1;
+		unsigned char c:1;
+		unsigned char d:1;
+		unsigned char e:1;
+		unsigned char f:1;
+		unsigned char g:1;
 	}segments;
 }t_display;
 

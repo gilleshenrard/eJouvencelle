@@ -38,10 +38,10 @@ class segDisplay
 
 	public:
 		segDisplay();
+		segDisplay(int a, int b, int c, int d, int e, int f, int g);
 		~segDisplay();
 
 		void setup();
-
 		void setPins(int a, int b, int c, int d, int e, int f, int g);
 
 		void displayNumber(int num);

@@ -1,11 +1,21 @@
 #include"segDisplay.h"
 
-void setup() {
-  // put your setup code here, to run once:
+display = segDisplay(4, 5, 6, 7, 8, 9, 10);
+unsigned long prevTime = millis();
+int number = 0;
 
+void setup() {
+  display.setup();
+  display.display(number);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  unsigned long newTime = millis();
+  if(newTime-prevTime >= 1000)
+  {
+    number++;
+    number%=10;
+    display.display(number);
+    prevTime = newTime;
+  }
 }

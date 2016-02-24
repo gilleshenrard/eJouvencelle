@@ -44,7 +44,7 @@ class segDisplay
 		void setup();
 		void setPins(int a, int b, int c, int d, int e, int f, int g);
 
-		void displayNumber(int num);
+		void display(int num);
 		void noDisplay();
 		void displayDot();
 		void noDot();

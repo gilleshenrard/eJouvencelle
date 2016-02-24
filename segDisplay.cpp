@@ -49,8 +49,11 @@ void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
 /************************************************************/
 void segDisplay::setup()
 {
-  for(char i=0 ; i<7 ; i++)
-    pinMode(pins[i], OUTPUT);
+  if(pinSet)
+  {
+    for(char i=0 ; i<7 ; i++)
+      pinMode(pins[i], OUTPUT);
+  }
 }
 
 /************************************************************/
@@ -61,15 +64,18 @@ void segDisplay::setup()
 /************************************************************/
 void segDisplay::displayNumber(int Number)
 {
-  /* Tests, bit by bit, the values defined for each pin into numbers[num].
-    Starting from 64 to 0, the test will define if the current bit is true or false,
-    then shift to the right*/
-
-  for(char i=64, j=0 ; i>0 ; i/=2, j++)
-    if(segDisplay::numbers[num] & i)
-      digitalWrite(segments[j], HIGH);    //if test value != 0 -> true then HIGH
-    else
-      digitalWrite(segments[j], LOW);     //else, the bit is set to 0, thus the signal is LOW
+  if(pinSet)
+  {
+    /* Tests, bit by bit, the values defined for each pin into numbers[num].
+      Starting from 64 to 0, the test will define if the current bit is true or false,
+      then shift to the right*/
+  
+    for(char i=64, j=0 ; i>0 ; i/=2, j++)
+      if(segDisplay::numbers[num] & i)
+        digitalWrite(segments[j], HIGH);    //if test value != 0 -> true then HIGH
+      else
+        digitalWrite(segments[j], LOW);     //else, the bit is set to 0, thus the signal is LOW
+  }
 }
 
 /************************************************************/
@@ -79,8 +85,11 @@ void segDisplay::displayNumber(int Number)
 /************************************************************/
 void segDisplay::noDisplay()
 {
-  for(char i=0 ; i<7 ; i++)
-    digitalWrite(segments[i], LOW);
+  if(pinSet)
+  {
+    for(char i=0 ; i<7 ; i++)
+      digitalWrite(segments[i], LOW);
+  }
 }
 
 /************************************************************/
@@ -90,6 +99,7 @@ void segDisplay::noDisplay()
 /************************************************************/
 void segDisplay::displayDot()
 {
+  if(pinSet)
     digitalWrite(dot, HIGH);
 }
 
@@ -100,5 +110,6 @@ void segDisplay::displayDot()
 /************************************************************/
 void segDisplay::noDot()
 {
+  if(pinSet)
     digitalWrite(dot, LOW);
 }

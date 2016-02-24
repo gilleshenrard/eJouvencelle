@@ -62,7 +62,7 @@ void segDisplay::setup()
 /*    received number                                       */
 /*  O : /                                                   */
 /************************************************************/
-void segDisplay::displayNumber(int Number)
+void segDisplay::display(int Number)
 {
   if(pinSet)
   {

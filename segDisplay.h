@@ -40,8 +40,9 @@ class segDisplay
 		segDisplay();
 		~segDisplay();
 
+		void setup();
+
 		void setPins(int a, int b, int c, int d, int e, int f, int g);
-		void pushPins();
 
 		void displayNumber(int num);
 		void noDisplay();

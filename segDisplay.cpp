@@ -5,6 +5,17 @@
 /*  P : Builds and initialises a new 7-segment display      */
 /*  O : /                                                   */
 /************************************************************/
+segDisplay::segDisplay(int a, int b, int c, int d, int e, int f, int g)
+:pinSet=false, dot=0
+{
+  setPins(a, b, c, d, e, f, g);
+}
+
+/************************************************************/
+/*  I : /                                                   */
+/*  P : Builds and initialises a new 7-segment display      */
+/*  O : /                                                   */
+/************************************************************/
 segDisplay::segDisplay()
 :pinSet=false, dot=0
 {}
@@ -27,6 +38,8 @@ void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
   int tmp[7]={a, b, c, d, e, f, g};
   for(char i=0 ; i<7 ; i++)
     self.pins[i]=tmp[i];
+    
+  pinSet=true;
 }
 
 /************************************************************/
@@ -34,7 +47,7 @@ void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
 /*  P :                                                     */
 /*  O : /                                                   */
 /************************************************************/
-void segDisplay::pushPins()
+void segDisplay::setup()
 {
   for(char i=0 ; i<7 ; i++)
     pinMode(pins[i], OUTPUT);

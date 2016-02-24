@@ -5,20 +5,21 @@
 /*  P : Builds and initialises a new 7-segment display      */
 /*  O : /                                                   */
 /************************************************************/
+segDisplay::segDisplay()
+:pinSet=false, dot=0
+{}
+
+/************************************************************/
+/*  I : Matching pin numbers for each segment               */
+/*  P : Builds and initialises a new 7-segment display      */
+/*      with the matching pin numbers                       */
+/*  O : /                                                   */
+/************************************************************/
 segDisplay::segDisplay(int a, int b, int c, int d, int e, int f, int g)
 :pinSet=false, dot=0
 {
   setPins(a, b, c, d, e, f, g);
 }
-
-/************************************************************/
-/*  I : /                                                   */
-/*  P : Builds and initialises a new 7-segment display      */
-/*  O : /                                                   */
-/************************************************************/
-segDisplay::segDisplay()
-:pinSet=false, dot=0
-{}
 
 /************************************************************/
 /*  I : /                                                   */
@@ -29,8 +30,8 @@ segDisplay::~segDisplay()
 {}
 
 /************************************************************/
-/*  I : /                                                   */
-/*  P :                                                     */
+/*  I : Pin number to assign to each segment                */
+/*  P : assigns pin numbers to display segments             */
 /*  O : /                                                   */
 /************************************************************/
 void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
@@ -44,7 +45,7 @@ void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
 
 /************************************************************/
 /*  I : /                                                   */
-/*  P :                                                     */
+/*  P : Sets the display pins as output                     */
 /*  O : /                                                   */
 /************************************************************/
 void segDisplay::setup()
@@ -58,23 +59,28 @@ void segDisplay::setup()
 
 /************************************************************/
 /*  I : Number to display                                   */
-/*  P : Sets the pin values of the display to display the   */
-/*    received number                                       */
+/*  P : Displays the selected number by setting each pin    */
+/*      value                                               */
 /*  O : /                                                   */
 /************************************************************/
 void segDisplay::display(int Number)
 {
   if(pinSet)
   {
-    /* Tests, bit by bit, the values defined for each pin into numbers[num].
-      Starting from 64 to 0, the test will define if the current bit is true or false,
-      then shift to the right*/
+    /*Looks into numbers[] for the right number to display
+      Starts from the MSB to the LSB (into numbers[number]), to get the values to assign to segment A to segment G
+      Also starts from the pin assigned to segment A, and goes on to the pin assigned to the segment G
+      Tests the value of each bit with a '&' operation
+      At each step, writes HIGH to the current pin if the result is > 0
+      Writes LOW if the result is == 0*/
   
     for(char i=64, j=0 ; i>0 ; i/=2, j++)
+    {
       if(segDisplay::numbers[num] & i)
         digitalWrite(segments[j], HIGH);    //if test value != 0 -> true then HIGH
       else
         digitalWrite(segments[j], LOW);     //else, the bit is set to 0, thus the signal is LOW
+    }
   }
 }
 

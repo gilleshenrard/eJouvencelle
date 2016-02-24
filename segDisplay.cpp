@@ -67,12 +67,14 @@ void segDisplay::display(int Number)
 {
   if(pinSet)
   {
-    /*Looks into numbers[] for the right number to display
-      Starts from the MSB to the LSB (into numbers[number]), to get the values to assign to segment A to segment G
-      Also starts from the pin assigned to segment A, and goes on to the pin assigned to the segment G
-      Tests the value of each bit with a '&' operation
-      At each step, writes HIGH to the current pin if the result is > 0
-      Writes LOW if the result is == 0*/
+    /*Each bit of the byte numbers[number] corresponds to the value to assign to a led of the display
+      Starting with i at the 7th bit in numbers[number]
+      Starting with j at the pin corresponding to the segment A
+      At each loop :
+        - Testing value of the current bit into numbers[number] with a '&' operation
+        - If result != 0 : writing HIGH into the current pin
+        - If result == 0 : writing LOW
+        - Stepping to the next bit and the next pin*/
   
     for(char i=64, j=0 ; i>0 ; i/=2, j++)
     {

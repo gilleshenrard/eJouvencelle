@@ -6,7 +6,7 @@
 /*  O : /                                                   */
 /************************************************************/
 segDisplay::segDisplay()
-:pinSet=false, dot=0
+:pinSet(false), dot(0)
 {}
 
 /************************************************************/
@@ -16,7 +16,7 @@ segDisplay::segDisplay()
 /*  O : /                                                   */
 /************************************************************/
 segDisplay::segDisplay(int a, int b, int c, int d, int e, int f, int g)
-:pinSet=false, dot=0
+:pinSet(false), dot(0)
 {
   setPins(a, b, c, d, e, f, g);
 }

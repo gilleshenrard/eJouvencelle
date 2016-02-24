@@ -20,16 +20,16 @@ typedef union
 
 class segDisplay
 {
-	static const t_display numbers[10]={{.display=126},
-						{.display=48}, 
-						{.display=109},
-						{.display=121},
-						{.display=51},
-						{.display=91},
-						{.display=95},
-						{.display=112},
-						{.display=127},
-						{.display=123}};
+	static const t_display numbers[10]={{.display=0b1111110},
+						{.display=0b0110000}, 
+						{.display=0b1101101},
+						{.display=0b1111001},
+						{.display=0b0110011},
+						{.display=0b1011011},
+						{.display=0b1011111},
+						{.display=0b1110000},
+						{.display=0b1111111},
+						{.display=0b1111001}};
 
 	private:
 		bool pinSet;

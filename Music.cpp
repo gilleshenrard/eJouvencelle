@@ -42,7 +42,16 @@ void Music::setNotes(int notes[], const int notesSize){
  * P : Plays the current selected note                          *
  * O : /                                                        *
  ****************************************************************/
-void Music::Start(){
+void Music::setup(){
+  pinMode(pin, OUTPUT);
+}
+
+/****************************************************************
+ * I : /                                                        *
+ * P : Plays the current selected note                          *
+ * O : /                                                        *
+ ****************************************************************/
+void Music::start(){
   tone(this->pin, this->Notes[this->noteCount]);
 }
 
@@ -51,7 +60,7 @@ void Music::Start(){
  * P : Stops playing                                            *
  * O : /                                                        *
  ****************************************************************/
-void Music::Stop(){
+void Music::stop(){
   noTone(this->pin);
 }
 
@@ -60,7 +69,7 @@ void Music::Stop(){
  * P : Resets the melody                                        *
  * O : /                                                        *
  ****************************************************************/
-void Music::Reset(){
+void Music::reset(){
   this->noteCount=0;
   this->finished=false;
 }

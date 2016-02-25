@@ -6,7 +6,7 @@
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin)
-:pin(Pin), Notes(NULL), noteCount(0), notesSize(0), finished(false)
+:pin(Pin), Notes(NULL), noteCount(0), notesSize(0)
 {}
 
 /****************************************************************
@@ -15,7 +15,7 @@ Music::Music(int Pin)
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin, int notes[], const int notesSz)
-:pin(Pin), Notes(notes), noteCount(0), notesSize(notesSz), finished(false)
+:pin(Pin), Notes(notes), noteCount(0), notesSize(notesSz)
 {}
 
 /****************************************************************
@@ -70,26 +70,5 @@ void Music::Reset(){
  * P : Handles the beat for the music, and updates finished     *
  * O : /                                                        *
  ****************************************************************/
-void Music::onBeat(){
-  this->Stop();
-
-  if(this->noteCount >= this->notesSize){
-    this->finished=true;
-    this->noteCount=0;
-  }
-  else
-    this->finished = false;
-
-  this->Start();
-
-  this->noteCount+=1;
-}
-
-/****************************************************************
- * I : /                                                        *
- * P : Tells if the melody is finished                          *
- * O : /                                                        *
- ****************************************************************/
-bool Music::isFinished(){
-  return this->finished;
+void Music::refresh(){
 }

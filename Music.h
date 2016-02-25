@@ -14,9 +14,10 @@ class Music{
       Music(int, int[], const int);
       ~Music();
       void setNotes(int[], const int);
-      void Start();
-      void Stop();
-      void Reset();
+      void setup();
+      void start();
+      void stop();
+      void reset();
       void refresh(unsigned long);
 };
 #endif

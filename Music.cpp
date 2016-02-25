@@ -79,5 +79,5 @@ void Music::reset(){
  * P : Handles the beat for the music, and updates finished     *
  * O : /                                                        *
  ****************************************************************/
-void Music::refresh(){
+void Music::refresh(unsigned long curTime){
 }

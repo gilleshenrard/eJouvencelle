@@ -5,6 +5,7 @@
 class Music{
   private:
       int pin;
+      unsigned lon prevTime;
       int *Notes;
       int NotesSize;
       int *NotesLength;

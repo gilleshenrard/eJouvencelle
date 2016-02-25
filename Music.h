@@ -8,7 +8,6 @@ class Music{
       int *Notes;
       int notesSize;
       int noteCount;
-      bool finished;
 
   public:
       Music(int);
@@ -18,7 +17,6 @@ class Music{
       void Start();
       void Stop();
       void Reset();
-      void onBeat();
-      bool isFinished();
+      void refresh(unsigned long);
 };
 #endif

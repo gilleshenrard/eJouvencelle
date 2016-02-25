@@ -6,7 +6,7 @@
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin)
-:pin(Pin), Notes(NULL), noteCount(0), notesSize(0)
+:pin(Pin), Notes(NULL), notesSize(0), NotesLength(NULL), notesLengthSize(0), noteCount(0)
 {}
 
 /****************************************************************
@@ -14,8 +14,8 @@ Music::Music(int Pin)
  * P : Builds a new Music module                                *
  * O : /                                                        *
  ****************************************************************/
-Music::Music(int Pin, int notes[], const int notesSz)
-:pin(Pin), Notes(notes), noteCount(0), notesSize(notesSz)
+Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], const int notesLenSz)
+:pin(Pin), Notes(notes), notesSize(notesSz), NotesLength(NULL), notesLengthSize(notesLen), noteCount(notesLenSz)
 {}
 
 /****************************************************************
@@ -32,9 +32,20 @@ Music::~Music()
  * P : Destroys the current Music module                        *
  * O : /                                                        *
  ****************************************************************/
-void Music::setNotes(int notes[], const int notesSize){
-  this->Notes = notes;
-  this->notesSize = notesSize;
+void Music::setNotes(int notes[], const int notesS){
+  Notes = notes;
+  notesSize = notesS;
+}
+
+/****************************************************************
+ * I : Notes array                                              *
+ *     Notes array size                                         *
+ * P : Destroys the current Music module                        *
+ * O : /                                                        *
+ ****************************************************************/
+void Music::setNotesLength(int notesl[], const int notesLSize){
+  NotesLength = notesl;
+  notesLengthSize = notesLSize;
 }
 
 /****************************************************************
@@ -52,7 +63,7 @@ void Music::setup(){
  * O : /                                                        *
  ****************************************************************/
 void Music::start(){
-  tone(this->pin, this->Notes[this->noteCount]);
+  tone(pin, Notes[noteCount]);
 }
 
 /****************************************************************
@@ -61,7 +72,7 @@ void Music::start(){
  * O : /                                                        *
  ****************************************************************/
 void Music::stop(){
-  noTone(this->pin);
+  noTone(pin);
 }
 
 /****************************************************************
@@ -70,8 +81,8 @@ void Music::stop(){
  * O : /                                                        *
  ****************************************************************/
 void Music::reset(){
-  this->noteCount=0;
-  this->finished=false;
+  noteCount=0;
+  finished=false;
 }
 
 /****************************************************************
@@ -80,4 +91,5 @@ void Music::reset(){
  * O : /                                                        *
  ****************************************************************/
 void Music::refresh(unsigned long curTime){
+  
 }

@@ -6,8 +6,10 @@
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin)
-:pin(Pin), Notes(NULL), notesSize(0), NotesLength(NULL), notesLengthSize(0), noteCount(0)
-{}
+:prevTime(0), Notes(NULL), notesSize(0), NotesLength(NULL), notesLengthSize(0), noteCount(0)
+{
+  pin = Pin;
+}
 
 /****************************************************************
  * I : Pin on which the buzzer is plugged                       *
@@ -15,8 +17,14 @@ Music::Music(int Pin)
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], const int notesLenSz)
-:pin(Pin), Notes(notes), notesSize(notesSz), NotesLength(NULL), notesLengthSize(notesLen), noteCount(notesLenSz)
-{}
+:prevTime(0), noteCount(0)
+{
+  pin=Pin;
+  Notes=notes;
+  notesSize=notesSz;
+  NotesLength=noteslen;
+  notesLengthSize=notesLenSz;
+}
 
 /****************************************************************
  * I : /                                                        *

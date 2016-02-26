@@ -14,7 +14,7 @@ class Music{
 
   public:
       Music(int);
-      Music(int, int[], const int, int[], const int);
+      Music(int, int[], const int, int[], int);
       ~Music();
       void setNotes(int[], const int);
       void setNotesLength(int[];

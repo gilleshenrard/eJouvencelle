@@ -6,9 +6,8 @@ class Music{
   private:
       int pin;
       int *Notes;
-      int NotesSize;
       int *NotesLength;
-      int NotesLengthSize;
+      int NotesSize;
       int noteIndex;
       int BPM;
 
@@ -17,7 +16,7 @@ class Music{
       Music(int, int[], const int, int[], const int);
       ~Music();
       void setNotes(int[], const int);
-      void setNotesLength(int[], const int);
+      void setNotesLength(int[];
       void setBPM(int);
       void setup();
       void start();

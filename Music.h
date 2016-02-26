@@ -10,6 +10,7 @@ class Music{
       int NotesSize;
       int noteIndex;
       int BPM;
+      unsigned long prevTime;
 
   public:
       Music(int);
@@ -22,6 +23,6 @@ class Music{
       void start();
       void stop();
       void reset();
-      void refresh(unsigned long, unsigned long);
+      void refresh(unsigned long);
 };
 #endif

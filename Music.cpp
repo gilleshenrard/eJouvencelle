@@ -6,7 +6,7 @@
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin)
-:prevTime(0), Notes(NULL), notesSize(0), NotesLength(NULL), noteIndex(0)
+:prevTime(0), Notes(NULL), notesSize(0), NotesLength(NULL), noteIndex(0), BPM(0), prevTime(0)
 {
   pin = Pin;
 }
@@ -16,13 +16,14 @@ Music::Music(int Pin)
  * P : Builds a new Music module                                *
  * O : /                                                        *
  ****************************************************************/
-Music::Music(int Pin, int notes[], const int notesSz, int notesLen[])
-:prevTime(0), noteIndex(0)
+Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], int newBPM)
+:prevTime(0), noteIndex(0), prevTime(0)
 {
   pin=Pin;
   Notes=notes;
   notesSize=notesSz;
   NotesLength=noteslen;
+  BPM=newBPM;
 }
 
 /****************************************************************
@@ -105,7 +106,7 @@ void Music::reset(){
  * P : Handles the beat for the music, and updates finished     *
  * O : /                                                        *
  ****************************************************************/
-void Music::refresh(unsigned long prevTime, unsigned long curTime){
+void Music::refresh(unsigned long curTime){
   if(NotesLength[Index])
   {
     unsigned long lengthMillis=60000/(BPM*NotesLength[noteIndex]);
@@ -117,6 +118,7 @@ void Music::refresh(unsigned long prevTime, unsigned long curTime){
       noteIndex++;
       if(noteIndex < NotesSize)
         this->start();
+      prevTime=curTime;
     }
   }
 }

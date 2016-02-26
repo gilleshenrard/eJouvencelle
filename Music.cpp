@@ -57,6 +57,15 @@ void Music::setNotesLength(int notesl[], const int notesLSize){
 }
 
 /****************************************************************
+ * I : BPM to assign                                            *
+ * P : Changes the BPM of the melody                            *
+ * O : /                                                        *
+ ****************************************************************/
+void Music::setBPM(int newBPM){
+  BPM = newBPM;
+}
+
+/****************************************************************
  * I : /                                                        *
  * P : Plays the current selected note                          *
  * O : /                                                        *

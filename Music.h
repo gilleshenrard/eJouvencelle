@@ -10,6 +10,7 @@ class Music{
       int *NotesLength;
       int NotesLengthSize;
       int noteIndex;
+      int BPM;
 
   public:
       Music(int);
@@ -17,6 +18,7 @@ class Music{
       ~Music();
       void setNotes(int[], const int);
       void setNotesLength(int[], const int);
+      void setBPM(int);
       void setup();
       void start();
       void stop();

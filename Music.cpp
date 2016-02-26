@@ -6,7 +6,7 @@
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin)
-:prevTime(0), Notes(NULL), notesSize(0), NotesLength(NULL), notesLengthSize(0), noteCount(0)
+:prevTime(0), Notes(NULL), notesSize(0), NotesLength(NULL), notesLengthSize(0), noteIndex(0)
 {
   pin = Pin;
 }
@@ -17,7 +17,7 @@ Music::Music(int Pin)
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], const int notesLenSz)
-:prevTime(0), noteCount(0)
+:prevTime(0), noteIndex(0)
 {
   pin=Pin;
   Notes=notes;
@@ -71,7 +71,7 @@ void Music::setup(){
  * O : /                                                        *
  ****************************************************************/
 void Music::start(){
-  tone(pin, Notes[noteCount]);
+  tone(pin, Notes[noteIndex]);
 }
 
 /****************************************************************
@@ -89,7 +89,7 @@ void Music::stop(){
  * O : /                                                        *
  ****************************************************************/
 void Music::reset(){
-  noteCount=0;
+  noteIndex=0;
   finished=false;
 }
 
@@ -98,6 +98,5 @@ void Music::reset(){
  * P : Handles the beat for the music, and updates finished     *
  * O : /                                                        *
  ****************************************************************/
-void Music::refresh(unsigned long curTime){
-  
+void Music::refresh(unsigned long prevTime, unsigned long curTime){
 }

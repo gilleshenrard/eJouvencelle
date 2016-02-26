@@ -6,7 +6,7 @@
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin)
-:prevTime(0), Notes(NULL), notesSize(0), NotesLength(NULL), notesLengthSize(0), noteIndex(0)
+:prevTime(0), Notes(NULL), notesSize(0), NotesLength(NULL), noteIndex(0)
 {
   pin = Pin;
 }
@@ -16,14 +16,13 @@ Music::Music(int Pin)
  * P : Builds a new Music module                                *
  * O : /                                                        *
  ****************************************************************/
-Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], const int notesLenSz)
+Music::Music(int Pin, int notes[], const int notesSz, int notesLen[])
 :prevTime(0), noteIndex(0)
 {
   pin=Pin;
   Notes=notes;
   notesSize=notesSz;
   NotesLength=noteslen;
-  notesLengthSize=notesLenSz;
 }
 
 /****************************************************************
@@ -51,9 +50,8 @@ void Music::setNotes(int notes[], const int notesS){
  * P : Destroys the current Music module                        *
  * O : /                                                        *
  ****************************************************************/
-void Music::setNotesLength(int notesl[], const int notesLSize){
+void Music::setNotesLength(int notesl[]){
   NotesLength = notesl;
-  notesLengthSize = notesLSize;
 }
 
 /****************************************************************
@@ -108,4 +106,17 @@ void Music::reset(){
  * O : /                                                        *
  ****************************************************************/
 void Music::refresh(unsigned long prevTime, unsigned long curTime){
+  if(NotesLength[Index])
+  {
+    unsigned long lengthMillis=60000/(BPM*NotesLength[noteIndex]);
+    unsigned long lapse = curTime-prevTime;
+  
+    if(lapse >= lengthMillis)
+    {
+      this->stop();
+      noteIndex++;
+      if(noteIndex < NotesSize)
+        this->start();
+    }
+  }
 }

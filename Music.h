@@ -5,12 +5,11 @@
 class Music{
   private:
       int pin;
-      unsigned lon prevTime;
       int *Notes;
       int NotesSize;
       int *NotesLength;
       int NotesLengthSize;
-      int noteCount;
+      int noteIndex;
 
   public:
       Music(int);
@@ -22,6 +21,6 @@ class Music{
       void start();
       void stop();
       void reset();
-      void refresh(unsigned long);
+      void refresh(unsigned long, unsigned long);
 };
 #endif

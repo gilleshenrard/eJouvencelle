@@ -20,7 +20,7 @@ typedef union
 
 class segDisplay
 {
-	static const t_display numbers[10]={{.display=0b1111110},
+	static const constexpr t_display numbers[10]={{.display=0b1111110},
 						{.display=0b0110000}, 
 						{.display=0b1101101},
 						{.display=0b1111001},

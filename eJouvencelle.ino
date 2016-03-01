@@ -1,6 +1,6 @@
 #include"segDisplay.h"
 
-display = segDisplay(4, 5, 6, 7, 8, 9, 10);
+segDisplay display = segDisplay(4, 5, 6, 7, 8, 9, 10);
 unsigned long prevTime = millis();
 int number = 0;
 

@@ -38,7 +38,7 @@ void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
 {
   int tmp[7]={a, b, c, d, e, f, g};
   for(char i=0 ; i<7 ; i++)
-    self.pins[i]=tmp[i];
+    this->pins[i]=tmp[i];
     
   pinSet=true;
 }
@@ -78,10 +78,10 @@ void segDisplay::display(int Number)
   
     for(char i=64, j=0 ; i>0 ; i/=2, j++)
     {
-      if(segDisplay::numbers[num] & i)
-        digitalWrite(segments[j], HIGH);    //if test value != 0 -> true then HIGH
+      if(segDisplay::numbers[Number].display & i)
+        digitalWrite(pins[j], HIGH);    //if test value != 0 -> true then HIGH
       else
-        digitalWrite(segments[j], LOW);     //else, the bit is set to 0, thus the signal is LOW
+        digitalWrite(pins[j], LOW);     //else, the bit is set to 0, thus the signal is LOW
     }
   }
 }
@@ -96,7 +96,7 @@ void segDisplay::noDisplay()
   if(pinSet)
   {
     for(char i=0 ; i<7 ; i++)
-      digitalWrite(segments[i], LOW);
+      digitalWrite(pins[i], LOW);
   }
 }
 

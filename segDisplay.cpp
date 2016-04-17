@@ -1,5 +1,7 @@
 #include "segDisplay.h"
 
+constexpr t_display segDisplay::numbers[];
+
 /************************************************************/
 /*  I : /                                                   */
 /*  P : Builds and initialises a new 7-segment display      */

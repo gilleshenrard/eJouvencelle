@@ -42,7 +42,17 @@ void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
   for(char i=0 ; i<7 ; i++)
     this->pins[i]=tmp[i];
     
-  pinSet=true;
+  this->pinSet=true;
+}
+
+/************************************************************/
+/*  I : Pin number to assign to the display dot             */
+/*  P : assigns pin numbers to display dot                  */
+/*  O : /                                                   */
+/************************************************************/
+void segDisplay::setDot(int t_dot)
+{
+  this->dot=t_dot;
 }
 
 /************************************************************/
@@ -52,10 +62,10 @@ void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
 /************************************************************/
 void segDisplay::setup()
 {
-  if(pinSet)
+  if(this->pinSet)
   {
     for(char i=0 ; i<7 ; i++)
-      pinMode(pins[i], OUTPUT);
+      pinMode(this->pins[i], OUTPUT);
   }
 }
 
@@ -67,7 +77,7 @@ void segDisplay::setup()
 /************************************************************/
 void segDisplay::display(int Number)
 {
-  if(pinSet)
+  if(this->pinSet)
   {
     /*Each bit of the byte numbers[number] corresponds to the value to assign to a led of the display
       Starting with i at the 7th bit in numbers[number]
@@ -81,9 +91,9 @@ void segDisplay::display(int Number)
     for(char i=64, j=0 ; i>0 ; i/=2, j++)
     {
       if(segDisplay::numbers[Number].display & i)
-        digitalWrite(pins[j], HIGH);    //if test value != 0 -> true then HIGH
+        digitalWrite(this->pins[j], HIGH);    //if test value != 0 -> true then HIGH
       else
-        digitalWrite(pins[j], LOW);     //else, the bit is set to 0, thus the signal is LOW
+        digitalWrite(this->pins[j], LOW);     //else, the bit is set to 0, thus the signal is LOW
     }
   }
 }
@@ -95,10 +105,10 @@ void segDisplay::display(int Number)
 /************************************************************/
 void segDisplay::noDisplay()
 {
-  if(pinSet)
+  if(this->pinSet)
   {
     for(char i=0 ; i<7 ; i++)
-      digitalWrite(pins[i], LOW);
+      digitalWrite(this->pins[i], LOW);
   }
 }
 
@@ -107,10 +117,10 @@ void segDisplay::noDisplay()
 /*  P : Turns the dot on the display on                     */
 /*  O : /                                                   */
 /************************************************************/
-void segDisplay::displayDot()
+void segDisplay::displayDot(int val)
 {
-  if(pinSet)
-    digitalWrite(dot, HIGH);
+  if(this->pinSet)
+    digitalWrite(this->dot, val);
 }
 
 /************************************************************/
@@ -120,6 +130,6 @@ void segDisplay::displayDot()
 /************************************************************/
 void segDisplay::noDot()
 {
-  if(pinSet)
-    digitalWrite(dot, LOW);
+  if(this->pinSet)
+    digitalWrite(this->dot, LOW);
 }

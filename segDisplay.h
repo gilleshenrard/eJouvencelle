@@ -29,7 +29,7 @@ class segDisplay
                                           {.display=0b1011111},
                                           {.display=0b1110000},
                                           {.display=0b1111111},
-                                          {.display=0b1111001}};
+                                          {.display=0b1111011}};
 
 	private:
 		bool pinSet;

@@ -6,9 +6,9 @@
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin)
-:prevTime(0), Notes(NULL), notesSize(0), NotesLength(NULL), noteIndex(0), BPM(0), prevTime(0)
+:prevTime(0), Notes(NULL), notesSize(0), NotesLength(NULL), noteIndex(0), BPM(0), prevTime(0), finished(false)
 {
-  pin = Pin;
+  this->pin = Pin;
 }
 
 /****************************************************************
@@ -17,13 +17,13 @@ Music::Music(int Pin)
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], int newBPM)
-:prevTime(0), noteIndex(0), prevTime(0)
+:prevTime(0), noteIndex(0), prevTime(0), finished(false)
 {
-  pin=Pin;
-  Notes=notes;
-  notesSize=notesSz;
-  NotesLength=noteslen;
-  BPM=newBPM;
+  this->pin=Pin;
+  this->Notes=notes;
+  this->notesSize=notesSz;
+  this->NotesLength=noteslen;
+  this->BPM=newBPM;
 }
 
 /****************************************************************
@@ -41,8 +41,8 @@ Music::~Music()
  * O : /                                                        *
  ****************************************************************/
 void Music::setNotes(int notes[], const int notesS){
-  Notes = notes;
-  notesSize = notesS;
+  this->Notes = notes;
+  this->notesSize = notesS;
 }
 
 /****************************************************************
@@ -52,7 +52,7 @@ void Music::setNotes(int notes[], const int notesS){
  * O : /                                                        *
  ****************************************************************/
 void Music::setNotesLength(int notesl[]){
-  NotesLength = notesl;
+  this->NotesLength = notesl;
 }
 
 /****************************************************************
@@ -61,7 +61,7 @@ void Music::setNotesLength(int notesl[]){
  * O : /                                                        *
  ****************************************************************/
 void Music::setBPM(int newBPM){
-  BPM = newBPM;
+  this->BPM = newBPM;
 }
 
 /****************************************************************
@@ -70,7 +70,7 @@ void Music::setBPM(int newBPM){
  * O : /                                                        *
  ****************************************************************/
 void Music::setup(){
-  pinMode(pin, OUTPUT);
+  pinMode(this->pin, OUTPUT);
 }
 
 /****************************************************************
@@ -79,7 +79,8 @@ void Music::setup(){
  * O : /                                                        *
  ****************************************************************/
 void Music::start(){
-  tone(pin, Notes[noteIndex]);
+  if(!this->isFinished())
+    tone(this->pin, this->Notes[this->noteIndex]);
 }
 
 /****************************************************************
@@ -88,7 +89,7 @@ void Music::start(){
  * O : /                                                        *
  ****************************************************************/
 void Music::stop(){
-  noTone(pin);
+  noTone(this->pin);
 }
 
 /****************************************************************
@@ -97,8 +98,8 @@ void Music::stop(){
  * O : /                                                        *
  ****************************************************************/
 void Music::reset(){
-  noteIndex=0;
-  finished=false;
+  this->noteIndex=0;
+  this->finished=false;
 }
 
 /****************************************************************
@@ -107,18 +108,30 @@ void Music::reset(){
  * O : /                                                        *
  ****************************************************************/
 void Music::refresh(unsigned long curTime){
-  if(NotesLength[Index])
+  if(this->NotesLength[this->Index])
   {
-    unsigned long lengthMillis=60000/(BPM*NotesLength[noteIndex]);
-    unsigned long lapse = curTime-prevTime;
+    unsigned long lengthMillis=60000 / (this->BPM * this->NotesLength[this->noteIndex]);
+    unsigned long lapse = curTime-this->prevTime;
   
     if(lapse >= lengthMillis)
     {
       this->stop();
-      noteIndex++;
-      if(noteIndex < NotesSize)
+      this->noteIndex++;
+      if(this->noteIndex < this->NotesSize)
         this->start();
-      prevTime=curTime;
+      else
+        this->finished=true;
+      this->prevTime=curTime;
     }
   }
+}
+
+/****************************************************************
+ * I : /                                                        *
+ * P : Informs about whether the melody is finished or not      *
+ * O : Melody state                                             *
+ ****************************************************************/
+bool Music::isFinished()
+{
+  return this->finished;
 }

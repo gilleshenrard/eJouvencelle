@@ -11,6 +11,7 @@ class Music{
       int noteIndex;
       int BPM;
       unsigned long prevTime;
+      bool finished;
 
   public:
       Music(int);
@@ -24,5 +25,7 @@ class Music{
       void stop();
       void reset();
       void refresh(unsigned long);
+
+      bool isFinished();
 };
 #endif

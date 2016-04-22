@@ -12,6 +12,7 @@ class Music{
       int BPM;
       unsigned long prevTime;
       bool finished;
+      bool started;
 
   public:
       Music(int Pin, int notes[]=NULL, const int notesSz=0, int notesLen[]=NULL, int newBPM=0);

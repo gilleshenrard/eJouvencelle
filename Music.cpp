@@ -6,9 +6,8 @@
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], int newBPM)
-:noteIndex(0), finished(false)
+:noteIndex(0), prevTime(0), finished(false), started(false)
 {
-  this->prevTime=millis();
   this->pin=Pin;
   this->Notes=notes;
   this->NotesSize=notesSz;
@@ -69,8 +68,12 @@ void Music::setup(){
  * O : /                                                        *
  ****************************************************************/
 void Music::start(){
-  if(!this->isFinished())
+  if(!this->finished)
+  {
     tone(this->pin, this->Notes[this->noteIndex]);
+    started=true;
+    this->prevTime=millis();
+  }
 }
 
 /****************************************************************
@@ -80,6 +83,7 @@ void Music::start(){
  ****************************************************************/
 void Music::stop(){
   noTone(this->pin);
+  this->started=false;
 }
 
 /****************************************************************
@@ -98,7 +102,7 @@ void Music::reset(){
  * O : /                                                        *
  ****************************************************************/
 void Music::refresh(unsigned long curTime){
-  if(this->NotesLength[this->noteIndex])
+  if(this->NotesLength[this->noteIndex] && started && !finished)
   {
     unsigned long lengthMillis=60000 / (this->BPM * this->NotesLength[this->noteIndex]);
     unsigned long lapse = curTime - this->prevTime;
@@ -107,10 +111,10 @@ void Music::refresh(unsigned long curTime){
     {
       this->stop();
       this->noteIndex++;
-      if(this->noteIndex < this->NotesSize)
-        this->start();
-      else
+      if(this->noteIndex >= this->NotesSize)
         this->finished=true;
+
+      this->start();
       this->prevTime=curTime;
     }
   }

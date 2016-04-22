@@ -4,7 +4,7 @@
 int startbutton=3;
 int resetbutton=2;
 
-unsigned long prevTime = millis();
+unsigned long prevTime = 0;
 bool started=false;
 
 int notes[5]={440, 550, 660, 770, 880};
@@ -51,4 +51,5 @@ void startbuttonfell()
 void resetbuttonfell()
 {
   melody.reset();
+  display.display(0);
 }

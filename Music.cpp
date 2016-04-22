@@ -5,24 +5,13 @@
  * P : Builds a new Music module                                *
  * O : /                                                        *
  ****************************************************************/
-Music::Music(int Pin)
-:prevTime(0), Notes(NULL), notesSize(0), NotesLength(NULL), noteIndex(0), BPM(0), prevTime(0), finished(false)
-{
-  this->pin = Pin;
-}
-
-/****************************************************************
- * I : Pin on which the buzzer is plugged                       *
- * P : Builds a new Music module                                *
- * O : /                                                        *
- ****************************************************************/
 Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], int newBPM)
-:prevTime(0), noteIndex(0), prevTime(0), finished(false)
+:noteIndex(0), prevTime(0), finished(false)
 {
   this->pin=Pin;
   this->Notes=notes;
-  this->notesSize=notesSz;
-  this->NotesLength=noteslen;
+  this->NotesSize=notesSz;
+  this->NotesLength=notesLen;
   this->BPM=newBPM;
 }
 
@@ -42,7 +31,7 @@ Music::~Music()
  ****************************************************************/
 void Music::setNotes(int notes[], const int notesS){
   this->Notes = notes;
-  this->notesSize = notesS;
+  this->NotesSize = notesS;
 }
 
 /****************************************************************
@@ -108,7 +97,7 @@ void Music::reset(){
  * O : /                                                        *
  ****************************************************************/
 void Music::refresh(unsigned long curTime){
-  if(this->NotesLength[this->Index])
+  if(this->NotesLength[this->noteIndex])
   {
     unsigned long lengthMillis=60000 / (this->BPM * this->NotesLength[this->noteIndex]);
     unsigned long lapse = curTime-this->prevTime;

@@ -14,11 +14,10 @@ class Music{
       bool finished;
 
   public:
-      Music(int);
-      Music(int, int[], const int, int[], int);
+      Music(int Pin, int notes[]=NULL, const int notesSz=0, int notesLen[]=NULL, int newBPM=0);
       ~Music();
       void setNotes(int[], const int);
-      void setNotesLength(int[];
+      void setNotesLength(int[]);
       void setBPM(int);
       void setup();
       void start();

@@ -100,7 +100,7 @@ void Music::refresh(unsigned long curTime){
   if(this->NotesLength[this->noteIndex])
   {
     unsigned long lengthMillis=60000 / (this->BPM * this->NotesLength[this->noteIndex]);
-    unsigned long lapse = curTime-this->prevTime;
+    unsigned long lapse = curTime - this->prevTime;
   
     if(lapse >= lengthMillis)
     {

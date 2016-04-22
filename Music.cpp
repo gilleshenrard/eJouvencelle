@@ -6,8 +6,9 @@
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], int newBPM)
-:noteIndex(0), prevTime(0), finished(false)
+:noteIndex(0), finished(false)
 {
+  this->prevTime=millis();
   this->pin=Pin;
   this->Notes=notes;
   this->NotesSize=notesSz;

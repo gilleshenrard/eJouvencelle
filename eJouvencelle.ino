@@ -5,7 +5,7 @@ int startbutton=3;
 int resetbutton=2;
 
 unsigned long prevTime = 0;
-bool started=false;
+volatile bool started=false, reseted=false;
 
 int notes[5]={440, 550, 660, 770, 880};
 int length[5]={2, 4, 4, 2, 2};
@@ -27,14 +27,27 @@ void setup() {
 
 void loop() {
   unsigned long newTime = millis();
-  
-  if(newTime-prevTime >= 1000 && started)
+
+  if(reseted)
   {
-    number++;
-    number%=10;
-    display.display(number);
-    prevTime = newTime;
+    melody.reset();
+    display.display(0);
+    reseted=false;
   }
+
+  if(started)
+  {
+    if(newTime-prevTime >= 500)
+    {
+      number++;
+      number%=10;
+      display.display(number);
+      prevTime = newTime;
+    }
+    melody.start();
+  }
+  else
+    melody.stop();
 
   melody.refresh(newTime);
 }
@@ -42,14 +55,9 @@ void loop() {
 void startbuttonfell()
 {
   started=!started;
-  if(started)
-    melody.start();
-  else
-    melody.stop();
 }
 
 void resetbuttonfell()
 {
-  melody.reset();
-  display.display(0);
+  reseted=true;
 }

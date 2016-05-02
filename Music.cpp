@@ -24,24 +24,12 @@ Music::~Music()
 {}
 
 /****************************************************************
- * I : Notes array                                              *
- *     Notes array size                                         *
- * P : Destroys the current Music module                        *
+ * I : BPM to assign                                            *
+ * P : Changes the BPM of the melody                            *
  * O : /                                                        *
  ****************************************************************/
-void Music::setNotes(int notes[], const int notesS){
-  this->Notes = notes;
-  this->NotesSize = notesS;
-}
-
-/****************************************************************
- * I : Notes array                                              *
- *     Notes array size                                         *
- * P : Destroys the current Music module                        *
- * O : /                                                        *
- ****************************************************************/
-void Music::setNotesLength(int notesl[]){
-  this->NotesLength = notesl;
+void Music::setBPM(int newBPM){
+  this->BPM = newBPM;
 }
 
 /****************************************************************
@@ -49,8 +37,8 @@ void Music::setNotesLength(int notesl[]){
  * P : Changes the BPM of the melody                            *
  * O : /                                                        *
  ****************************************************************/
-void Music::setBPM(int newBPM){
-  this->BPM = newBPM;
+int Music::getIndex(){
+  return this->notesIndex;
 }
 
 /****************************************************************
@@ -68,10 +56,10 @@ void Music::setup(){
  * O : /                                                        *
  ****************************************************************/
 void Music::start(){
-  if(!this->finished)
+  if(!this->finished && !this->started)
   {
     tone(this->pin, this->Notes[this->noteIndex]);
-    started=true;
+    this->started=true;
     this->prevTime=millis();
   }
 }
@@ -82,8 +70,11 @@ void Music::start(){
  * O : /                                                        *
  ****************************************************************/
 void Music::stop(){
-  noTone(this->pin);
-  this->started=false;
+  if(this->started)
+  {
+    noTone(this->pin);
+    this->started=false;
+  }
 }
 
 /****************************************************************
@@ -102,7 +93,7 @@ void Music::reset(){
  * O : /                                                        *
  ****************************************************************/
 void Music::refresh(unsigned long curTime){
-  if(this->NotesLength[this->noteIndex] && started && !finished)
+  if(this->NotesLength[this->noteIndex] && this->started && !this->finished)
   {
     unsigned long lengthMillis=60000 / (this->BPM * this->NotesLength[this->noteIndex]);
     unsigned long lapse = curTime - this->prevTime;

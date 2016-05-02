@@ -12,13 +12,13 @@ class Music{
       int BPM;
       unsigned long prevTime;
       bool finished;
+      bool last;
       bool started;
 
   public:
       Music(int Pin, int notes[]=NULL, const int notesSz=0, int notesLen[]=NULL, int newBPM=0);
       ~Music();
       void setBPM(int);
-      int getIndex();
       void setup();
       void start();
       void stop();
@@ -26,5 +26,6 @@ class Music{
       void refresh(unsigned long);
 
       bool isFinished();
+      bool lastNote();
 };
 #endif

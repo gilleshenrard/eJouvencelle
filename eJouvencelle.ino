@@ -12,8 +12,14 @@ int length[5]={2, 4, 4, 2, 2};
 Music melody = Music(12, notes, 5, length, 60);
 
 segDisplay display = segDisplay(7, 8, 11, 10, 9, 6, 5);
-int number = 0;
+bool displayOn=false, numberSet=false;
+int number = 0, flicker=0;
 
+/******************************************************************************/
+/*  I : /                                                                     */
+/*  P : Initiates all the I/O pins and variables                              */
+/*  O : /                                                                     */
+/******************************************************************************/
 void setup() {
   display.setup();
   display.display(number);
@@ -25,38 +31,96 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(resetbutton), resetbuttonfell, FALLING);
 }
 
+/******************************************************************************/
+/*  I : /                                                                     */
+/*  P : Program main loop                                                     */
+/*  O : /                                                                     */
+/******************************************************************************/
 void loop() {
   unsigned long newTime = millis();
 
-  if(reseted)
-  {
-    melody.reset();
-    display.display(0);
-    reseted=false;
-  }
-
   if(started)
   {
-    if(newTime-prevTime >= 500)
-    {
-      number++;
-      number%=10;
-      display.display(number);
-      prevTime = newTime;
-    }
     melody.start();
+    if(melody.lastNote())
+      animate(newTime);
   }
   else
+  {
     melody.stop();
+    if(reseted)
+    {
+      melody.reset();
+      number=0;
+      display.display(number);
+      reseted=false;
+      displayOn=false;
+      numberSet=false;
+      flicker=0;
+    }
+  }
 
   melody.refresh(newTime);
 }
 
+/**********************************************************************************/
+/*  I : /                                                                         */
+/*  P : Handles the push on the animation                                         */
+/*  O : /                                                                         */
+/**********************************************************************************/
+void animate(unsigned long newTime)
+{
+  if(flicker<=20)
+  {
+    if(newTime-prevTime>=125)
+    {
+      displayOn = !displayOn;
+      prevTime=newTime;
+      flicker++;
+    }
+  
+    if(displayOn)
+      display.display(number);
+    else
+      display.noDisplay();
+  }
+  else
+  {
+    if(newTime-prevTime>=2000)
+    {
+      if(!numberSet)
+      {
+        number++;
+        display.display(number);
+        numberSet=true;
+      }
+      else
+      {
+        melody.reset();
+        displayOn=false;
+        numberSet=false;
+        flicker=0;
+      }
+      prevTime=newTime;
+    }
+  }
+}
+
+/**********************************************************************************/
+/*  I : /                                                                         */
+/*  P : Handles the push on the start button                                      */
+/*  O : /                                                                         */
+/**********************************************************************************/
 void startbuttonfell()
 {
   started=!started;
 }
 
+/**********************************************************************************/
+/*  I : /                                                                         */
+/*  P : Handles the push on the reset button                                      */
+/*  O : /                                                                         */
+/**********************************************************************************/
 void resetbuttonfell()
 {
   reseted=true;

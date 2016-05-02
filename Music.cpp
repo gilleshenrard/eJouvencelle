@@ -33,15 +33,6 @@ void Music::setBPM(int newBPM){
 }
 
 /****************************************************************
- * I : BPM to assign                                            *
- * P : Changes the BPM of the melody                            *
- * O : /                                                        *
- ****************************************************************/
-int Music::getIndex(){
-  return this->notesIndex;
-}
-
-/****************************************************************
  * I : /                                                        *
  * P : Plays the current selected note                          *
  * O : /                                                        *
@@ -84,6 +75,7 @@ void Music::stop(){
  ****************************************************************/
 void Music::reset(){
   this->noteIndex=0;
+  this->last=false;
   this->finished=false;
 }
 
@@ -102,6 +94,9 @@ void Music::refresh(unsigned long curTime){
     {
       this->stop();
       this->noteIndex++;
+      if(this->noteIndex+1 >= this->NotesSize)
+        this->last=true;
+
       if(this->noteIndex >= this->NotesSize)
         this->finished=true;
 
@@ -119,4 +114,14 @@ void Music::refresh(unsigned long curTime){
 bool Music::isFinished()
 {
   return this->finished;
+}
+
+/****************************************************************
+ * I : /                                                        *
+ * P : Informs about whether the melody is finished or not      *
+ * O : Melody state                                             *
+ ****************************************************************/
+bool Music::lastNote()
+{
+  return this->last;
 }

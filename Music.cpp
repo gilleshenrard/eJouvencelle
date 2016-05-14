@@ -6,7 +6,7 @@
  * O : /                                                        *
  ****************************************************************/
 Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], int newBPM)
-:noteIndex(0), prevTime(0), finished(false), started(false)
+:noteIndex(0), prevTime(0), isFinished(false), lastnote(false), isStarted(false)
 {
   this->pin=Pin;
   this->Notes=notes;
@@ -47,10 +47,10 @@ void Music::setup(){
  * O : /                                                        *
  ****************************************************************/
 void Music::start(unsigned long curTime){
-  if(!this->finished && !this->started)
+  if(!this->finished() && !this->started())
   {
     tone(this->pin, this->Notes[this->noteIndex]);
-    this->started=true;
+    this->isStarted=true;
     this->prevTime=curTime;
   }
 }
@@ -61,10 +61,10 @@ void Music::start(unsigned long curTime){
  * O : /                                                        *
  ****************************************************************/
 void Music::stop(){
-  if(this->started)
+  if(this->started())
   {
     noTone(this->pin);
-    this->started=false;
+    this->isStarted=false;
   }
 }
 
@@ -75,8 +75,8 @@ void Music::stop(){
  ****************************************************************/
 void Music::reset(){
   this->noteIndex=0;
-  this->last=false;
-  this->finished=false;
+  this->lastnote=false;
+  this->isFinished=false;
 }
 
 /****************************************************************
@@ -85,7 +85,7 @@ void Music::reset(){
  * O : /                                                        *
  ****************************************************************/
 void Music::refresh(unsigned long curTime){
-  if(this->NotesLength[this->noteIndex] && this->started && !this->finished)
+  if(this->NotesLength[this->noteIndex] && this->started() && !this->finished())
   {
     unsigned long lengthMillis=60000 / (this->BPM * this->NotesLength[this->noteIndex]);
     unsigned long lapse = curTime - this->prevTime;
@@ -95,12 +95,12 @@ void Music::refresh(unsigned long curTime){
       this->stop();
       this->noteIndex++;
       if(this->noteIndex+1 >= this->NotesSize)
-        this->last=true;
+        this->lastnote=true;
 
       if(this->noteIndex >= this->NotesSize)
       {
-        this->finished=true;
-        this->last=false;
+        this->isFinished=true;
+        this->lastnote=false;
       }
 
       this->start(curTime);
@@ -113,9 +113,9 @@ void Music::refresh(unsigned long curTime){
  * P : Informs about whether the melody is started or not       *
  * O : Melody state                                             *
  ****************************************************************/
-bool Music::isStarted()
+bool Music::started()
 {
-  return this->started;
+  return this->isStarted;
 }
 
 /****************************************************************
@@ -123,9 +123,9 @@ bool Music::isStarted()
  * P : Informs about whether the melody is finished or not      *
  * O : Melody state                                             *
  ****************************************************************/
-bool Music::isFinished()
+bool Music::finished()
 {
-  return this->finished;
+  return this->isFinished;
 }
 
 /****************************************************************
@@ -133,7 +133,7 @@ bool Music::isFinished()
  * P : Informs about whether the melody is finished or not      *
  * O : Melody state                                             *
  ****************************************************************/
-bool Music::lastNote()
+bool Music::last()
 {
-  return this->last;
+  return this->lastNote;
 }

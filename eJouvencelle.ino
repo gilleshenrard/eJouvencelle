@@ -42,7 +42,7 @@ void loop() {
   if(started)
   {
     melody.start(newTime);
-    if(melody.lastNote())
+    if(melody.last())
       animate(newTime);
   }
   else

@@ -46,12 +46,12 @@ void Music::setup(){
  * P : Plays the current selected note                          *
  * O : /                                                        *
  ****************************************************************/
-void Music::start(){
+void Music::start(unsigned long curTime){
   if(!this->finished && !this->started)
   {
     tone(this->pin, this->Notes[this->noteIndex]);
     this->started=true;
-    this->prevTime=millis();
+    this->prevTime=curTime;
   }
 }
 
@@ -100,10 +100,19 @@ void Music::refresh(unsigned long curTime){
       if(this->noteIndex >= this->NotesSize)
         this->finished=true;
 
-      this->start();
-      this->prevTime=curTime;
+      this->start(curTime);
     }
   }
+}
+
+/****************************************************************
+ * I : /                                                        *
+ * P : Informs about whether the melody is started or not       *
+ * O : Melody state                                             *
+ ****************************************************************/
+bool Music::isStarted()
+{
+  return this->started;
 }
 
 /****************************************************************

@@ -98,7 +98,10 @@ void Music::refresh(unsigned long curTime){
         this->last=true;
 
       if(this->noteIndex >= this->NotesSize)
+      {
         this->finished=true;
+        this->last=false;
+      }
 
       this->start(curTime);
     }

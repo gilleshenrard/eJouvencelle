@@ -117,19 +117,13 @@ void segDisplay::noDisplay()
 /*  P : Turns the dot on the display on                     */
 /*  O : /                                                   */
 /************************************************************/
-void segDisplay::displayDot(int val)
+void segDisplay::displayDot(bool state=true)
 {
   if(this->pinSet)
-    digitalWrite(this->dot, val);
-}
-
-/************************************************************/
-/*  I : /                                                   */
-/*  P : Turns the dot on the display off                    */
-/*  O : /                                                   */
-/************************************************************/
-void segDisplay::noDot()
-{
-  if(this->pinSet)
-    digitalWrite(this->dot, LOW);
+  {
+    if(state)
+      digitalWrite(this->dot, HIGH);
+    else
+      digitalWrite(this->dot, LOW);
+  }
 }

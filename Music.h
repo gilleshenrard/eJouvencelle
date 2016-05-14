@@ -20,11 +20,12 @@ class Music{
       ~Music();
       void setBPM(int);
       void setup();
-      void start();
+      void start(unsigned long curTime);
       void stop();
       void reset();
-      void refresh(unsigned long);
+      void refresh(unsigned long curTime);
 
+      bool isStarted();
       bool isFinished();
       bool lastNote();
 };

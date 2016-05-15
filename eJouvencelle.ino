@@ -1,8 +1,8 @@
 #include"segDisplay.h"
 #include"Music.h"
 
-int startbutton=3;
-int resetbutton=2;
+#define startbutton 3
+#define resetbutton 2
 
 unsigned long prevTime = 0;
 volatile bool started=false, reseted=false;

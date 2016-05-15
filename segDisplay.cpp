@@ -117,7 +117,7 @@ void segDisplay::noDisplay()
 /*  P : Turns the dot on the display on                     */
 /*  O : /                                                   */
 /************************************************************/
-void segDisplay::displayDot(bool state=true)
+void segDisplay::displayDot(bool state)
 {
   if(this->pinSet)
   {

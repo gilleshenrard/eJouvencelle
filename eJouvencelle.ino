@@ -13,7 +13,7 @@ Music melody = Music(12, notes, 5, length, 60);
 
 segDisplay display = segDisplay(7, 8, 11, 10, 9, 6, 5);
 bool displayOn=false, numberSet=false;
-int number = 0, flicker=0;
+unsigned char number = 0, flicker=0;
 
 /******************************************************************************/
 /*  I : /                                                                     */

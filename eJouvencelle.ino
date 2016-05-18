@@ -5,13 +5,13 @@
 #define resetbutton 2
 
 unsigned long prevTime = 0;
-volatile bool started=false, reseted=false;
+volatile bool started=false, reseted=false, last=false;
 
 int notes[5]={440, 550, 660, 770, 880};
 int length[5]={2, 4, 4, 2, 2};
 Music melody = Music(12, notes, 5, length, 60);
 
-segDisplay display = segDisplay(7, 8, 11, 10, 9, 6, 5);
+segDisplay display = segDisplay(6, 5, 9, 10, 11, 7, 8);
 bool displayOn=false, numberSet=false;
 unsigned char number = 0, flicker=0;
 
@@ -42,7 +42,9 @@ void loop() {
   if(started)
   {
     melody.start(newTime);
-    if(melody.last())
+    if(melody.last() && !last)
+      last=true;
+    if(last)
       animate(newTime);
   }
   else
@@ -100,6 +102,7 @@ void animate(unsigned long newTime)
         displayOn=false;
         numberSet=false;
         flicker=0;
+        last=false;
       }
       prevTime=newTime;
     }

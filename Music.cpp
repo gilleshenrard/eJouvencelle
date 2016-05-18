@@ -135,5 +135,5 @@ bool Music::finished()
  ****************************************************************/
 bool Music::last()
 {
-  return this->lastNote;
+  return this->lastnote;
 }

@@ -1,5 +1,6 @@
 #include"segDisplay.h"
 #include"Music.h"
+#include"notes.h"
 
 #define startbutton 3
 #define resetbutton 2
@@ -7,9 +8,12 @@
 unsigned long prevTime = 0;
 volatile bool started=false, reseted=false, last=false;
 
-int notes[5]={440, 550, 660, 770, 880};
-int length[5]={2, 4, 4, 2, 2};
-Music melody = Music(11, notes, 5, length, 60);
+int notes[28]={NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,/**/
+     NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,/**/
+     NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
+   /*NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5,*/ NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5, NOTE_C5};
+int length[28]={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2};
+Music melody = Music(11, notes, 28, length, 75);
 
 segDisplay display = segDisplay(6, 5, 9, 10, 12, 7, 8);
 bool displayOn=false, numberSet=false;

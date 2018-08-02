@@ -9,10 +9,10 @@
 unsigned long prevTime = 0;
 volatile bool started=false, reseted=false, last=false;
 
-int notes[28]={NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,/**/
-     NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,/**/
-     NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
-   /*NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5,*/ NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5, NOTE_C5};
+int notes[28]={NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
+               NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
+               NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5 /*suspension*/, NOTE_D5,
+               NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5, NOTE_C5};
 int length[28]={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2};
 int BeatsPM = 100;
 Music melody = Music(11, notes, 28, length, BeatsPM);

@@ -88,8 +88,19 @@ void CD4511::display(int Number)
 /*  P : Turns the display off                               */
 /*  O : /                                                   */
 /************************************************************/
-void CD4511::noDisplay()
+void CD4511::displayOFF()
 {
   if(this->blank > -1)
     digitalWrite(this->blank, LOW);
+}
+
+/************************************************************/
+/*  I : /                                                   */
+/*  P : Turns the display off                               */
+/*  O : /                                                   */
+/************************************************************/
+void CD4511::displayON()
+{
+  if(this->blank > -1)
+    digitalWrite(this->blank, HIGH);
 }

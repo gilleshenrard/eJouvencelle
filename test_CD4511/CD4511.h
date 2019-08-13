@@ -14,6 +14,7 @@ class CD4511
 		void setup();
 
 		void display(int num);
-		void noDisplay();
+		void displayOFF();
+		void displayON();
 };
 #endif

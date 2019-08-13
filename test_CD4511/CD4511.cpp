@@ -11,13 +11,13 @@
 /************************************************************/
 CD4511::CD4511(int a, int b, int c, int d, int latch, int blank, int test)
 {
-  this.a = a;
-  this.b = b;
-  this.c = c;
-  this.d = d;
-  this.latch = latch;
-  this.blank = blank;
-  this.test = test;
+  this->a = a;
+  this->b = b;
+  this->c = c;
+  this->d = d;
+  this->latch = latch;
+  this->blank = blank;
+  this->test = test;
 }
 
 /************************************************************/

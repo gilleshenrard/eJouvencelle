@@ -45,8 +45,9 @@ void CD4511::setup()
 	pinMode(this->d, OUTPUT);
 	digitalWrite(this->d, LOW);
 
-	//set the latch to HIGH to avoid further modification
+	//setup latch pin and send a pulse to fixate the 0 value
 	pinMode(this->latch, OUTPUT);
+	digitalWrite(this->latch, LOW);
 	digitalWrite(this->latch, HIGH);
 	
 	//enable the blank pin if selected
@@ -67,10 +68,6 @@ void CD4511::setup()
 void CD4511::display(int Number)
 {
   if(Number > -1 && Number < 10){
-    //set the blank pin as HIGH to allow number display
-    if(this->blank > -1)
-      digitalWrite(this->blank, HIGH);
-
     //set each value pin by cutting each of 4 first bits of Number
     digitalWrite(this->a, (Number & 1 == 0 ? LOW : HIGH));
     digitalWrite(this->b, (Number & 2 == 0 ? LOW : HIGH));
@@ -80,6 +77,9 @@ void CD4511::display(int Number)
     //pulse the latch with a falling edge to set the new BCD value
     digitalWrite(this->latch, LOW);
     digitalWrite(this->latch, HIGH);
+
+    //set the blank pin as HIGH to allow number display
+    displayON();
   }
 }
 
@@ -96,7 +96,7 @@ void CD4511::displayOFF()
 
 /************************************************************/
 /*  I : /                                                   */
-/*  P : Turns the display off                               */
+/*  P : Turns the display on                                */
 /*  O : /                                                   */
 /************************************************************/
 void CD4511::displayON()

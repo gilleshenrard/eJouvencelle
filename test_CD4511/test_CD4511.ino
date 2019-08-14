@@ -10,23 +10,8 @@ void setup() {
 }
 
 void loop() {
-  if(Serial.available()){
-    msg=Serial.readString();
-
-    if(msg.substring(0,2) == "PRT"){
-      tmp = msg.substring(4, 4);
-      nb = tmp.toInt();
-      Serial.write(nb);
-      displ.display(nb);
-    }
-    else if(msg.substring(0,2) == "BLK"){
-      blk = !blk;
-      if(blk)
-        displ.displayON();
-      else
-        displ.displayOFF();
-
-      Serial.write("Toggling display");
-    }
+  for(int i=0 ; i<9 ; i++){
+    displ.display(i);
+    delay(1000);
   }
 }

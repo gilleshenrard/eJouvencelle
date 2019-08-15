@@ -10,8 +10,13 @@ void setup() {
 }
 
 void loop() {
-  for(int i=0 ; i<9 ; i++){
+  int tmp = LOW;
+  digitalWrite(LED_BUILTIN, HIGH);
+  
+  displ.displayON();
+
+  for(int i=0 ; i<10 ; i++){
     displ.display(i);
-    delay(1000);
+    delay(500);
   }
 }

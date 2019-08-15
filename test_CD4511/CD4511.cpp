@@ -67,15 +67,33 @@ void CD4511::setup()
 /************************************************************/
 void CD4511::display(int Number)
 {
+  digitalWrite(LED_BUILTIN, HIGH);
   if(Number > -1 && Number < 10){
+    
     //set each value pin by cutting each of 4 first bits of Number
-    digitalWrite(this->a, (Number & 1 == 0 ? LOW : HIGH));
-    digitalWrite(this->b, (Number & 2 == 0 ? LOW : HIGH));
-    digitalWrite(this->c, (Number & 4 == 0 ? LOW : HIGH));
-    digitalWrite(this->d, (Number & 8 == 0 ? LOW : HIGH));
+    if(Number & 1)
+      digitalWrite(this->a, HIGH);
+    else
+      digitalWrite(this->a, LOW);
+    
+    if(Number & 2)
+      digitalWrite(this->b, HIGH);
+    else
+      digitalWrite(this->b, LOW);
+    
+    if(Number & 4)
+      digitalWrite(this->c, HIGH);
+    else
+      digitalWrite(this->c, LOW);
+    
+    if(Number & 8)
+      digitalWrite(this->d, HIGH);
+    else
+      digitalWrite(this->d, LOW);
 
     //pulse the latch with a falling edge to set the new BCD value
     digitalWrite(this->latch, LOW);
+    delay(500);
     digitalWrite(this->latch, HIGH);
 
     //set the blank pin as HIGH to allow number display

@@ -61,13 +61,12 @@ void CD4511::setup()
 
 /************************************************************/
 /*  I : Number to display                                   */
-/*  P : Displays the selected number by setting each pin    */
-/*      value                                               */
+/*  P : Sets each pin on the CD4511 to display the number   */
+/*        when the blank pin is released                    */
 /*  O : /                                                   */
 /************************************************************/
-void CD4511::display(int Number)
+void CD4511::setNumber(int Number)
 {
-  digitalWrite(LED_BUILTIN, HIGH);
   if(Number > -1 && Number < 10){
     
     //set each value pin by cutting each of 4 first bits of Number
@@ -93,11 +92,7 @@ void CD4511::display(int Number)
 
     //pulse the latch with a falling edge to set the new BCD value
     digitalWrite(this->latch, LOW);
-    delay(500);
     digitalWrite(this->latch, HIGH);
-
-    //set the blank pin as HIGH to allow number display
-    displayON();
   }
 }
 

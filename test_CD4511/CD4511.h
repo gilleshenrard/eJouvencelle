@@ -13,7 +13,7 @@ class CD4511
 
 		void setup();
 
-		void display(int num);
+    void setNumber(int num);
 		void displayOFF();
 		void displayON();
 };

@@ -1,6 +1,6 @@
-#include"segDisplay.h"
-#include"Music.h"
-#include"notes.h"
+#include"src/segDisplay/segDisplay.h"
+#include"src/Music/Music.h"
+#include"src/Music/notes.h"
 
 #define startbutton 3
 #define resetbutton 2

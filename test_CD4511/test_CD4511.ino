@@ -39,6 +39,7 @@ void loop() {
   //display all numbers from 0 to 9 (for 0.5s each)
   for(int i=0 ; i<10 ; i++){
     displ.setNumber(i);
+    displ.commit();
     delay(500);
   }
 

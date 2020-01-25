@@ -65,6 +65,10 @@ void CD4511::setup()
 /*        when the blank pin is released                    */
 /*  O : /                                                   */
 /************************************************************/
+/*  WARNING : to actually display a number, the method      */
+/*            commit() must be called afterwards            */
+/*            (CD4511 needs a falling edge on the latch pin)*/
+/************************************************************/
 void CD4511::setNumber(int Number)
 {
   output_u decoder;
@@ -77,11 +81,19 @@ void CD4511::setNumber(int Number)
     digitalWrite(this->b, (decoder.pinsval.b ? HIGH : LOW));
     digitalWrite(this->c, (decoder.pinsval.c ? HIGH : LOW));
     digitalWrite(this->d, (decoder.pinsval.d ? HIGH : LOW));
+  }
+}
 
+/************************************************************/
+/*  I : /                                                   */
+/*  P : Sends a falling edge to the latch pin (commits val.)*/
+/*  O : /                                                   */
+/************************************************************/
+void CD4511::commit()
+{
     //pulse the latch with a falling edge to set the new BCD value
     digitalWrite(this->latch, LOW);
     digitalWrite(this->latch, HIGH);
-  }
 }
 
 /************************************************************/

@@ -67,28 +67,16 @@ void CD4511::setup()
 /************************************************************/
 void CD4511::setNumber(int Number)
 {
+  output_u decoder;
+  
   if(Number > -1 && Number < 10){
-    
+    decoder.nb = (char)Number;
+
     //set each value pin by cutting each of 4 first bits of Number
-    if(Number & 1)
-      digitalWrite(this->a, HIGH);
-    else
-      digitalWrite(this->a, LOW);
-    
-    if(Number & 2)
-      digitalWrite(this->b, HIGH);
-    else
-      digitalWrite(this->b, LOW);
-    
-    if(Number & 4)
-      digitalWrite(this->c, HIGH);
-    else
-      digitalWrite(this->c, LOW);
-    
-    if(Number & 8)
-      digitalWrite(this->d, HIGH);
-    else
-      digitalWrite(this->d, LOW);
+    digitalWrite(this->a, (decoder.pinsval.a ? HIGH : LOW));
+    digitalWrite(this->b, (decoder.pinsval.b ? HIGH : LOW));
+    digitalWrite(this->c, (decoder.pinsval.c ? HIGH : LOW));
+    digitalWrite(this->d, (decoder.pinsval.d ? HIGH : LOW));
 
     //pulse the latch with a falling edge to set the new BCD value
     digitalWrite(this->latch, LOW);

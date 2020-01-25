@@ -1,16 +1,22 @@
 #include "CD4511.h"
 
 /*
+ * Devices used during tests :
+ *  - 1 x Arduino Nano V3
+ *  - 1 x CD4511
+ *  - 7 x 220 Ohms resistors
+ *  - 1 x com. cathode 7-segment (FJ11001AH)
+ * 
  * CD4511 library testing procedure
  * --------------------------------
  *      CD4511 pins   |   Arduino pins
- *      B : 1         |   6 
- *      C : 2         |   7
+ *      B : 1         |   D6
+ *      C : 2         |   D7
  *      Test : 3      |   +5V
- *      Blank : 4     |   10
- *      Latch : 5     |   9
- *      D : 5         |   8
- *      A : 7         |   5
+ *      Blank : 4     |   D10
+ *      Latch : 5     |   D9
+ *      D : 6         |   D8
+ *      A : 7         |   D5
  *      VSS : 8       |   GND
  *      VDD : 16      |   +5V
  *      

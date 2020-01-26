@@ -2,7 +2,7 @@
 #define SEGDISPLAY_H_INCLUDED
 #include<Arduino.h>
 
-union t_display
+typedef union
 {
 	unsigned char display;
 	typedef struct
@@ -16,7 +16,7 @@ union t_display
 		unsigned char f:1;
 		unsigned char g:1;
 	}segments;
-};
+}t_display;
 
 class segDisplay
 {

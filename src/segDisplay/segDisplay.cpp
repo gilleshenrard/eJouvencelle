@@ -86,7 +86,7 @@ void segDisplay::display(int Number)
         - Testing value of the current bit into numbers[number] with a '&' operation
         - If result != 0 : writing HIGH into the current pin
         - If result == 0 : writing LOW
-        - Stepping to the next bit and the next pin*/
+        - Stepping to the next bit and the next pin
   
     for(char i=64, j=0 ; i>0 ; i/=2, j++)
     {
@@ -95,6 +95,15 @@ void segDisplay::display(int Number)
       else
         digitalWrite(this->pins[j], LOW);     //else, the bit is set to 0, thus the signal is LOW
     }
+	*/
+	
+	digitalWrite(this->pins[0], segDisplay::numbers[Number].segments.a);
+	digitalWrite(this->pins[1], segDisplay::numbers[Number].segments.b);
+	digitalWrite(this->pins[2], segDisplay::numbers[Number].segments.c);
+	digitalWrite(this->pins[3], segDisplay::numbers[Number].segments.d);
+	digitalWrite(this->pins[4], segDisplay::numbers[Number].segments.e);
+	digitalWrite(this->pins[5], segDisplay::numbers[Number].segments.f);
+	digitalWrite(this->pins[6], segDisplay::numbers[Number].segments.g);
   }
 }
 

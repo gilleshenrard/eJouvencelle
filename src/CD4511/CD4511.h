@@ -28,8 +28,8 @@ class CD4511
 
 		void setup();
 
-    void setNumber(int num);
-    void commit();
+		void setNumber(int num);
+    		void commit();
 		void displayOFF();
 		void displayON();
 };

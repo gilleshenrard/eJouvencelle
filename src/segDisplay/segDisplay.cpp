@@ -77,7 +77,7 @@ void segDisplay::setup()
 /************************************************************/
 void segDisplay::display(int Number)
 {
-  if(this->pinSet)
+  if(this->pinSet && Number > -1 && Number < 10)
   {
     /*Each bit of the byte numbers[number] corresponds to the value to assign to a led of the display
       Starting with i at the 7th bit in numbers[number]
@@ -97,13 +97,13 @@ void segDisplay::display(int Number)
     }
 	*/
 	
-	digitalWrite(this->pins[0], segDisplay::numbers[Number].segments.a);
-	digitalWrite(this->pins[1], segDisplay::numbers[Number].segments.b);
-	digitalWrite(this->pins[2], segDisplay::numbers[Number].segments.c);
-	digitalWrite(this->pins[3], segDisplay::numbers[Number].segments.d);
-	digitalWrite(this->pins[4], segDisplay::numbers[Number].segments.e);
-	digitalWrite(this->pins[5], segDisplay::numbers[Number].segments.f);
-	digitalWrite(this->pins[6], segDisplay::numbers[Number].segments.g);
+	  digitalWrite(this->pins[0], segDisplay::numbers[Number].segments.a);
+	  digitalWrite(this->pins[1], segDisplay::numbers[Number].segments.b);
+	  digitalWrite(this->pins[2], segDisplay::numbers[Number].segments.c);
+	  digitalWrite(this->pins[3], segDisplay::numbers[Number].segments.d);
+	  digitalWrite(this->pins[4], segDisplay::numbers[Number].segments.e);
+	  digitalWrite(this->pins[5], segDisplay::numbers[Number].segments.f);
+	  digitalWrite(this->pins[6], segDisplay::numbers[Number].segments.g);
   }
 }
 

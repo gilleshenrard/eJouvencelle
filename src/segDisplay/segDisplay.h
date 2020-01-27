@@ -5,7 +5,7 @@
 typedef union
 {
 	unsigned char display;
-	typedef struct
+	struct
 	{
 		unsigned char dot:1;
 		unsigned char a:1;

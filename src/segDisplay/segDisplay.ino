@@ -19,22 +19,14 @@
  */
 
 segDisplay displ = segDisplay(5, 6, 7, 8, 9, 10, 11);
-//CD4511 displ = CD4511(5, 6, 7, 8, 9, 10);
 
 void setup() {
   displ.setup();
 }
 
 void loop() {
-  //turn on the display
-//  displ.displayON();
-
   //display all numbers from 0 to 9 (for 0.5s each)
   for(int i=0 ; i<10 ; i++){
-    /*
-    displ.setNumber(i);
-    displ.commit();
-    */
     displ.display(i);
     delay(500);
   }

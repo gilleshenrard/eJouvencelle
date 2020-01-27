@@ -79,24 +79,6 @@ void segDisplay::display(int Number)
 {
   if(this->pinSet && Number > -1 && Number < 10)
   {
-    /*Each bit of the byte numbers[number] corresponds to the value to assign to a led of the display
-      Starting with i at the 7th bit in numbers[number]
-      Starting with j at the pin corresponding to the segment A
-      At each loop :
-        - Testing value of the current bit into numbers[number] with a '&' operation
-        - If result != 0 : writing HIGH into the current pin
-        - If result == 0 : writing LOW
-        - Stepping to the next bit and the next pin
-  
-    for(char i=64, j=0 ; i>0 ; i/=2, j++)
-    {
-      if(segDisplay::numbers[Number].display & i)
-        digitalWrite(this->pins[j], HIGH);    //if test value != 0 -> true then HIGH
-      else
-        digitalWrite(this->pins[j], LOW);     //else, the bit is set to 0, thus the signal is LOW
-    }
-	*/
-	
 	  digitalWrite(this->pins[0], segDisplay::numbers[Number].segments.a);
 	  digitalWrite(this->pins[1], segDisplay::numbers[Number].segments.b);
 	  digitalWrite(this->pins[2], segDisplay::numbers[Number].segments.c);

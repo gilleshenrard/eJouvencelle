@@ -2,25 +2,27 @@
 
 /*
  * Devices used during tests :
- *  - 1 x Arduino Nano V3
+ *  - 1 x Arduino Nano V3 / Atmega 328p-au
  *  - 1 x CD4511
  *  - 7 x 220 Ohms resistors
  *  - 1 x com. cathode 7-segment (FJ11001AH)
  * 
  * CD4511 library testing procedure
  * --------------------------------
- *      CD4511 pins   |   Arduino pins
- *      B : 1         |   D6
- *      C : 2         |   D7
- *      Test : 3      |   +5V
- *      Blank : 4     |   D10
- *      Latch : 5     |   D9
- *      D : 6         |   D8
- *      A : 7         |   D5
- *      VSS : 8       |   GND
- *      VDD : 16      |   +5V
+ *      CD4511 pins   |   Arduino pins   |   Atmega328p-au
+ *      --------------|------------------|----------------
+ *      B   : 1       |   D5             |   9   : PD5
+ *      C   : 2       |   D6             |   10  : PD6
+ *      LT  : 3       |   +5V            |   +5V
+ *      BL  : 4       |   D7             |   11  : PD7
+ *      LE  : 5       |   D8             |   12  : PB0
+ *      D   : 6       |   D9             |   13  : PB1
+ *      A   : 7       |   D10            |   14  : PB2
+ *      VSS : 8       |   GND            |   GND
+ *      VDD : 16      |   +5V            |   +5V
  *      
- *      CD4511 pins   |   7 segment display (pin 1 bottom left)
+ *      CD4511 pins   |   7 segment display (1 bottom left)
+ *      --------------|------------------------------------
  *      e : 9         |   1
  *      d : 10        |   2
  *      c : 11        |   4
@@ -32,7 +34,7 @@
  *                    |   8 : GND
  */
 
-CD4511 displ = CD4511(5, 6, 7, 8, 9, 10);
+CD4511 displ = CD4511(10, 5, 6, 9, 8, 7);
 
 void setup() {
   displ.setup();

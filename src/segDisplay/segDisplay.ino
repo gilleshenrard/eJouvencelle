@@ -8,18 +8,18 @@
  *      
  *      Arduino pins  |   Atmega328p-au   |   7 segment display (1 bottom left)
  *      --------------|-------------------|------------------------------------
- *      D5            |   9:PD5           |   e:1
- *      D6            |   10:PD6          |   d:2
- *      D7            |   11:PD7          |   c:4
- *      D8            |   12:PB0          |   b:6
+ *      D6            |   9 :PD5          |   e:1
+ *      D8            |   10:PD6          |   d:2
+ *      D10           |   11:PD7          |   c:4
+ *      D11           |   12:PB0          |   b:6
  *      D9            |   13:PB1          |   a:7
- *      D10           |   14:PB2          |   f:9
- *      D11           |   15:PB3          |   g:10
+ *      D7            |   14:PB2          |   f:9
+ *      D5            |   15:PB3          |   g:10
  *                    |   3 : GND
  *                    |   8 : GND
  */
 
-segDisplay displ = segDisplay(9, 8, 7, 6, 5, 10, 11);
+segDisplay displ = segDisplay(9, 11, 10, 8, 6, 7, 5);
 
 void setup() {
   displ.setup();

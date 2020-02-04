@@ -34,7 +34,7 @@ class segDisplay
 	private:
 		bool pinSet;
 		int dot;
-		int pins[7];
+		int a, b, c, d, e, f, g;
 
 	public:
 		segDisplay();
@@ -43,7 +43,7 @@ class segDisplay
 
 		void setup();
 		void setPins(int a, int b, int c, int d, int e, int f, int g);
-    		void setDot(int dot);
+    void setDot(int dot);
 
 		void display(int num);
 		void noDisplay();

@@ -38,9 +38,13 @@ segDisplay::~segDisplay()
 /************************************************************/
 void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
 {
-  int tmp[7]={a, b, c, d, e, f, g};
-  for(char i=0 ; i<7 ; i++)
-    this->pins[i]=tmp[i];
+  this->a = a;
+  this->b = b;
+  this->c = c;
+  this->d = d;
+  this->e = e;
+  this->f = f;
+  this->g = g;
     
   this->pinSet=true;
 }
@@ -64,8 +68,20 @@ void segDisplay::setup()
 {
   if(this->pinSet)
   {
-    for(char i=0 ; i<7 ; i++)
-      pinMode(this->pins[i], OUTPUT);
+    pinMode(this->a, OUTPUT);
+    digitalWrite(this->a, LOW);
+    pinMode(this->b, OUTPUT);
+    digitalWrite(this->b, LOW);
+    pinMode(this->c, OUTPUT);
+    digitalWrite(this->c, LOW);
+    pinMode(this->d, OUTPUT);
+    digitalWrite(this->d, LOW);
+    pinMode(this->e, OUTPUT);
+    digitalWrite(this->e, LOW);
+    pinMode(this->f, OUTPUT);
+    digitalWrite(this->f, LOW);
+    pinMode(this->g, OUTPUT);
+    digitalWrite(this->g, LOW);
   }
 }
 
@@ -79,13 +95,13 @@ void segDisplay::display(int Number)
 {
   if(this->pinSet && Number > -1 && Number < 10)
   {
-	  digitalWrite(this->pins[0], segDisplay::numbers[Number].segments.a);
-	  digitalWrite(this->pins[1], segDisplay::numbers[Number].segments.b);
-	  digitalWrite(this->pins[2], segDisplay::numbers[Number].segments.c);
-	  digitalWrite(this->pins[3], segDisplay::numbers[Number].segments.d);
-	  digitalWrite(this->pins[4], segDisplay::numbers[Number].segments.e);
-	  digitalWrite(this->pins[5], segDisplay::numbers[Number].segments.f);
-	  digitalWrite(this->pins[6], segDisplay::numbers[Number].segments.g);
+	  digitalWrite(this->a, segDisplay::numbers[Number].segments.a);
+	  digitalWrite(this->b, segDisplay::numbers[Number].segments.b);
+	  digitalWrite(this->c, segDisplay::numbers[Number].segments.c);
+	  digitalWrite(this->d, segDisplay::numbers[Number].segments.d);
+	  digitalWrite(this->e, segDisplay::numbers[Number].segments.e);
+	  digitalWrite(this->f, segDisplay::numbers[Number].segments.f);
+	  digitalWrite(this->g, segDisplay::numbers[Number].segments.g);
   }
 }
 
@@ -98,8 +114,13 @@ void segDisplay::noDisplay()
 {
   if(this->pinSet)
   {
-    for(char i=0 ; i<7 ; i++)
-      digitalWrite(this->pins[i], LOW);
+      digitalWrite(this->a, LOW);
+      digitalWrite(this->b, LOW);
+      digitalWrite(this->c, LOW);
+      digitalWrite(this->d, LOW);
+      digitalWrite(this->e, LOW);
+      digitalWrite(this->f, LOW);
+      digitalWrite(this->g, LOW);
   }
 }
 

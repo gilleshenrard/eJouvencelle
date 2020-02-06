@@ -2,9 +2,9 @@
 
 /************************************************************/
 /*  I : Matching pin numbers for each decoder pin           */
-/*		Pin number of the Latch Enable decoder pin 			*/
-/*		Pin number of the Blank decoder pin 				*/
-/*		Pin number of the Test decoder pin 					*/
+/*		Pin number of the Latch Enable decoder pin 			      */
+/*		Pin number of the Blank decoder pin (ignored by def.) */
+/*		Pin number of the Test decoder pin (ignored by def.)  */
 /*  P : Builds and initialises a new CD4511 decoder	        */
 /*      with the matching pin numbers                       */
 /*  O : /                                                   */
@@ -22,7 +22,7 @@ CD4511::CD4511(int a, int b, int c, int d, int latch, int blank, int test)
 
 /************************************************************/
 /*  I : /                                                   */
-/*  P : Destroys the current CD4511                     	*/
+/*  P : Destroys the current CD4511                     	  */
 /*  O : /                                                   */
 /************************************************************/
 CD4511::~CD4511()
@@ -38,10 +38,13 @@ void CD4511::setup()
 	//set the BCD value to 0
 	pinMode(this->a, OUTPUT);
 	digitalWrite(this->a, LOW);
+ 
 	pinMode(this->b, OUTPUT);
 	digitalWrite(this->b, LOW);
+	
 	pinMode(this->c, OUTPUT);
 	digitalWrite(this->c, LOW);
+	
 	pinMode(this->d, OUTPUT);
 	digitalWrite(this->d, LOW);
 
@@ -73,14 +76,16 @@ void CD4511::setNumber(int Number)
 {
   output_u decoder;
   
-  if(Number > -1 && Number < 10){
+  if(Number > -1 && Number < 10)
+  {
+    //set the char part of the union with Number
     decoder.nb = (char)Number;
 
     //set each value pin by cutting each of 4 first bits of Number
-    digitalWrite(this->a, (decoder.pinsval.a ? HIGH : LOW));
-    digitalWrite(this->b, (decoder.pinsval.b ? HIGH : LOW));
-    digitalWrite(this->c, (decoder.pinsval.c ? HIGH : LOW));
-    digitalWrite(this->d, (decoder.pinsval.d ? HIGH : LOW));
+    digitalWrite(this->a, decoder.pinsval.a);
+    digitalWrite(this->b, decoder.pinsval.b);
+    digitalWrite(this->c, decoder.pinsval.c);
+    digitalWrite(this->d, decoder.pinsval.d);
   }
 }
 

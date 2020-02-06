@@ -32,12 +32,10 @@ class segDisplay
                                           {.display=0b01111011}};
 
 	private:
-		bool pinSet;
 		int dot;
 		int a, b, c, d, e, f, g;
 
 	public:
-		segDisplay();
 		segDisplay(int a, int b, int c, int d, int e, int f, int g);
 		~segDisplay();
 

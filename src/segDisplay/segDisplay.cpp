@@ -3,24 +3,21 @@
 constexpr t_display segDisplay::numbers[];
 
 /************************************************************/
-/*  I : /                                                   */
-/*  P : Builds and initialises a new 7-segment display      */
-/*  O : /                                                   */
-/************************************************************/
-segDisplay::segDisplay()
-:pinSet(false), dot(0)
-{}
-
-/************************************************************/
 /*  I : Matching pin numbers for each segment               */
 /*  P : Builds and initialises a new 7-segment display      */
 /*      with the matching pin numbers                       */
 /*  O : /                                                   */
 /************************************************************/
 segDisplay::segDisplay(int a, int b, int c, int d, int e, int f, int g)
-:pinSet(false), dot(0)
+:dot(0)
 {
-  setPins(a, b, c, d, e, f, g);
+  this->a = a;
+  this->b = b;
+  this->c = c;
+  this->d = d;
+  this->e = e;
+  this->f = f;
+  this->g = g;
 }
 
 /************************************************************/
@@ -45,8 +42,6 @@ void segDisplay::setPins(int a, int b, int c, int d, int e, int f, int g)
   this->e = e;
   this->f = f;
   this->g = g;
-    
-  this->pinSet=true;
 }
 
 /************************************************************/
@@ -61,28 +56,31 @@ void segDisplay::setDot(int t_dot)
 
 /************************************************************/
 /*  I : /                                                   */
-/*  P : Sets the display pins as output                     */
+/*  P : Sets the display pins as output and set them LOW    */
 /*  O : /                                                   */
 /************************************************************/
 void segDisplay::setup()
 {
-  if(this->pinSet)
-  {
-    pinMode(this->a, OUTPUT);
-    digitalWrite(this->a, LOW);
-    pinMode(this->b, OUTPUT);
-    digitalWrite(this->b, LOW);
-    pinMode(this->c, OUTPUT);
-    digitalWrite(this->c, LOW);
-    pinMode(this->d, OUTPUT);
-    digitalWrite(this->d, LOW);
-    pinMode(this->e, OUTPUT);
-    digitalWrite(this->e, LOW);
-    pinMode(this->f, OUTPUT);
-    digitalWrite(this->f, LOW);
-    pinMode(this->g, OUTPUT);
-    digitalWrite(this->g, LOW);
-  }
+  pinMode(this->a, OUTPUT);
+  digitalWrite(this->a, LOW);
+  
+  pinMode(this->b, OUTPUT);
+  digitalWrite(this->b, LOW);
+  
+  pinMode(this->c, OUTPUT);
+  digitalWrite(this->c, LOW);
+  
+  pinMode(this->d, OUTPUT);
+  digitalWrite(this->d, LOW);
+  
+  pinMode(this->e, OUTPUT);
+  digitalWrite(this->e, LOW);
+  
+  pinMode(this->f, OUTPUT);
+  digitalWrite(this->f, LOW);
+  
+  pinMode(this->g, OUTPUT);
+  digitalWrite(this->g, LOW);
 }
 
 /************************************************************/
@@ -93,7 +91,7 @@ void segDisplay::setup()
 /************************************************************/
 void segDisplay::display(int Number)
 {
-  if(this->pinSet && Number > -1 && Number < 10)
+  if(Number > -1 && Number < 10)
   {
 	  digitalWrite(this->a, segDisplay::numbers[Number].segments.a);
 	  digitalWrite(this->b, segDisplay::numbers[Number].segments.b);
@@ -112,30 +110,21 @@ void segDisplay::display(int Number)
 /************************************************************/
 void segDisplay::noDisplay()
 {
-  if(this->pinSet)
-  {
-      digitalWrite(this->a, LOW);
-      digitalWrite(this->b, LOW);
-      digitalWrite(this->c, LOW);
-      digitalWrite(this->d, LOW);
-      digitalWrite(this->e, LOW);
-      digitalWrite(this->f, LOW);
-      digitalWrite(this->g, LOW);
-  }
+  digitalWrite(this->a, LOW);
+  digitalWrite(this->b, LOW);
+  digitalWrite(this->c, LOW);
+  digitalWrite(this->d, LOW);
+  digitalWrite(this->e, LOW);
+  digitalWrite(this->f, LOW);
+  digitalWrite(this->g, LOW);
 }
 
 /************************************************************/
-/*  I : /                                                   */
+/*  I : level to set to the dot (true by default)           */
 /*  P : Turns the dot on the display on                     */
 /*  O : /                                                   */
 /************************************************************/
 void segDisplay::displayDot(bool state)
 {
-  if(this->pinSet)
-  {
-    if(state)
-      digitalWrite(this->dot, HIGH);
-    else
-      digitalWrite(this->dot, LOW);
-  }
+  digitalWrite(this->dot, (state ? HIGH : LOW));
 }

@@ -5,7 +5,7 @@
  * P : Builds a new Music module                                *
  * O : /                                                        *
  ****************************************************************/
-Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], int newBPM)
+Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], int newBPM = 0)
 :noteIndex(0), prevTime(0), isFinished(false), lastnote(false), isStarted(false)
 {
   this->pin=Pin;

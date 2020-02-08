@@ -1,6 +1,9 @@
 #import "Music.h"
 #import "notes.h"
 
+//timer values (0x3D08 = 1Hz)
+#define BPM120 0xF42 // 4Hz tick (8th note at 120 BPM)
+
 int notes[28]={NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
                NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
                NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5 /*suspension*/, NOTE_D5,
@@ -23,8 +26,7 @@ void setup() {
   TCCR1B = 0;// same for TCCR1B
   TCNT1  = 0;//initialize counter value to 0
   // set compare match register for 1hz increments
-  //15624 = 1s
-  OCR1A = 3906;// = (16*10^6) / (1*1024) - 1 (must be <65536)
+  OCR1A = BPM120;
   // turn on CTC mode
   TCCR1B |= (1 << WGM12);
   // Set CS10 and CS12 bits for 1024 prescaler

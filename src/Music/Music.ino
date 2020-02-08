@@ -8,7 +8,7 @@ int notes[28]={NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
 int length[28]={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2};
 
 volatile bool toggle1 = true;
-int BeatsPM = 100;
+int BeatsPM = 120;
 Music melody = Music(11, notes, 28, length, BeatsPM);
 
 void setup() {

@@ -14,7 +14,8 @@ int notes[28]={NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
                NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5, NOTE_C5};
 int length[28]={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2};
 
-volatile bool toggle1 = true;
+volatile bool tick = false;
+bool toggle1 = true;
 int BeatsPM = 120;
 Music melody = Music(11, notes, 28, length, BeatsPM);
 
@@ -55,18 +56,11 @@ void setup() {
 
 /****************************************************************************/
 /*  I : timer1 comparator vector                                            */
-/*  P : toggle pin 13 at 4Hz (2Hz full wave)                                */
+/*  P : toggle pin 13 at 32Hz (16Hz full wave)                              */
 /*  O : /                                                                   */
 /****************************************************************************/
 ISR(TIMER1_COMPA_vect){
-  if (toggle1){
-    digitalWrite(13,HIGH);
-    toggle1 = 0;
-  }
-  else{
-    digitalWrite(13,LOW);
-    toggle1 = 1;
-  }
+  tick = true;
 }
 
 /****************************************************************************/
@@ -76,6 +70,14 @@ ISR(TIMER1_COMPA_vect){
 /****************************************************************************/
 void loop() {
   unsigned long newTime = millis();
+
+  if(tick)
+  {
+    tick = false;
+
+    digitalWrite(13,(toggle1 ? HIGH : LOW));
+    toggle1 = !toggle1;
+  }
 
   melody.start(newTime);
   melody.refresh(newTime);

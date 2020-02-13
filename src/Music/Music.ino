@@ -1,8 +1,12 @@
 #import "Music.h"
 #import "notes.h"
 
-//timer1 values (0x3D08 = 1Hz because (16*10^6) / (1*1024) - 1)
-#define BPM120 0xF42 // 4Hz tick (8th note at 120 BPM)
+//timer1 values
+// (value = 16,000,000 / (prescaler * Hz) - 1) -> must be < 65536 for timer1
+// 1/64 notes are chosen because smallest musical increment
+#define BPM120 62499 // 32Hz tick (1/64 note at 120 BPM)
+#define BPM140 53570 // 37.333Hz tick (1/64 note at 140 BPM)
+#define BPM160 46873 // 42.667Hz tick (1/64 note at 160 BPM)
 
 int notes[28]={NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
                NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
@@ -28,21 +32,21 @@ void setup() {
   melody.setup();
   pinMode(13, OUTPUT);
   digitalWrite(13, HIGH);
-
-  //set timer1 interrupt at 4Hz
+  
+  //clear TCCR1
   TCCR1A = 0;
   TCCR1B = 0;
 
   //reset counter value +
-  //set compare match register for 4hz increments
+  //set compare match register for 32 Hz increments
   TCNT1  = 0;
   OCR1A = BPM120;
 
   // turn on CTC mode
-  // + Set prescaler to 1024
+  // + Set CS12, CS11 and CS10 bits for 8 prescaler
   // + enable timer compare interrupt
   TCCR1B |= (1 << WGM12);
-  TCCR1B |= (1 << CS12) | (1 << CS10);  
+  TCCR1B |= (0 << CS12) | (1 << CS11) | (0 << CS10);
   TIMSK1 |= (1 << OCIE1A);
 
   //allow interrupts

@@ -63,7 +63,7 @@ void Music::start(unsigned long curTime){
 /*      LASTNOTE: no further notes afterwards                   */
 /*      ENDNOTE : last note has been played, end of music       */
 /****************************************************************/
-int Music::onTick(std::string& music)
+int Music::onTick(String& music)
 {
     //check if note duration has been reached
     if(this->m_nbtick > 0)
@@ -75,15 +75,15 @@ int Music::onTick(std::string& music)
     //NOTE UPDATE
 
     //was the last tick the last note?
-    if(this->m_nextNote == std::string::npos)
+    if(this->m_nextNote == -1)
         return ENDNOTE;
 
     //roll the music to the right (nextNote is off by 1 increment)
     this->m_curNote = this->m_nextNote;
-    this->m_nextNote = music.find_first_of(' ', this->m_curNote+1);
+    this->m_nextNote = music.indexOf(' ', this->m_curNote);
 
     //are there any notes left to decode?
-    if(this->m_nextNote == std::string::npos)
+    if(this->m_nextNote == -1)
         return LASTNOTE;
 
     //update nextNote to point to an actual note
@@ -93,8 +93,8 @@ int Music::onTick(std::string& music)
     //NOTE DECODING
 
     //get the code for the current note
-    std::string note = music.substr(this->m_curNote, this->m_nextNote);
-    std::string::iterator it = note.begin();
+    String note = music.substring(this->m_curNote, this->m_nextNote - 1);
+    char* it = note.c_str();
 
     //decode eventual octave change
     if(isdigit(*it))
@@ -134,7 +134,7 @@ int Music::onTick(std::string& music)
     }
 
     //shift the note to the right octave
-    frequency = frequency / pow(2.0, (7.0 - (float)this->m_octave));
+    frequency = frequency / Music::divisors[this->m_octave];
     it++;
 
     //decode sharp or flat notes
@@ -150,13 +150,13 @@ int Music::onTick(std::string& music)
     }
 
     //decode note duration (nb of ticks = nb of 1/32 notes)
-    int index = note.find(*it);
-    note = note.substr(index);
-    unsigned char duration = (char)stoi(note);
+    int index = note.indexOf(*it);
+    note = note.substring(index);
+    unsigned char duration = (unsigned char)note.toInt();
     this->m_nbtick = 32 / duration;
 
     //decode dotted note (duration * 1.5)
-    if (note.find(".") != std::string::npos)
+    if (note.indexOf(".") != -1)
         this->m_nbtick = (unsigned char)((float)this->m_nbtick * 1.5);
 
     return NOTEOK;

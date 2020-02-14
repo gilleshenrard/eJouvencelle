@@ -74,7 +74,7 @@ int Music::onTick(String& music)
 
     //NOTE UPDATE
 
-    //was the last tick the last note?
+    //was the previous tick the last note?
     if(this->m_nextNote == -1)
         return ENDNOTE;
 
@@ -134,7 +134,7 @@ int Music::onTick(String& music)
     }
 
     //shift the note to the right octave
-    frequency = frequency / Music::divisors[this->m_octave];
+    frequency = frequency / (float)Music::divisors[this->m_octave];
     it++;
 
     //decode sharp or flat notes

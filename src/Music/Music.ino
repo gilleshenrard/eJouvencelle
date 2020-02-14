@@ -52,6 +52,8 @@ void setup() {
 
   //allow interrupts
   sei();
+
+  Serial.begin(9600);
 }
 
 /****************************************************************************/
@@ -60,7 +62,9 @@ void setup() {
 /*  O : /                                                                   */
 /****************************************************************************/
 ISR(TIMER1_COMPA_vect){
+  digitalWrite(12, HIGH);
   tick = true;
+  digitalWrite(12, LOW);
 }
 
 /****************************************************************************/
@@ -69,8 +73,10 @@ ISR(TIMER1_COMPA_vect){
 /*  O : /                                                                   */
 /****************************************************************************/
 void loop() {
+  int out = 0;
   unsigned long newTime = millis();
-
+  String music = "5g#4 3g8. f g";
+/*
   if(tick)
   {
     tick = false;
@@ -78,7 +84,13 @@ void loop() {
     digitalWrite(13,(toggle1 ? HIGH : LOW));
     toggle1 = !toggle1;
   }
+*/
+//  melody.start(newTime);
+//  melody.refresh(newTime);
 
-  melody.start(newTime);
-  melody.refresh(newTime);
+  delay(500);
+  while(!melody.finished())
+  {
+    melody.onTick(music);
+  }
 }

@@ -66,6 +66,9 @@ ISR(TIMER1_COMPA_vect){
 /*  O : /                                                                   */
 /****************************************************************************/
 void loop() {
+
+  melody.start();
+  
   if(tick)
   {
     tick = false;

@@ -1,5 +1,27 @@
 #include "Music.h"
 
+/*
+ * Devices used during tests :
+ *  - 1 x Arduino Nano V3 / Atmega 328p-au
+ *  - 1 x buzzer (part number unknown)
+ *  - 1 x 2.2k Ohms resistor (current limitation)
+ *  - 1 x 10k Ohms resistor (pull-down)
+ *  - 1 x N-channel MOSFET (P3NK507)
+ * 
+ * Music library testing procedure
+ * --------------------------------
+ *      MOSFET pins   |   
+ *      --------------|------------------
+ *      Drain : 1     |   Arduino : D11, Atmega : 15 (+ pull-down to GND in //)
+ *      Gate  : 2     |   buzzer -
+ *      Source: 3     |   GND
+ *      
+ *      Buzzer pins   |
+ *      --------------|------------------------------------
+ *      -             |   MOSFET : 2
+ *      +             |   VCC (via 2.2k resistor in series)
+ */
+
 //timer1 values
 // (value = 16,000,000 / (prescaler * Hz) - 1) -> must be < 65536 for timer1
 // 1/64 notes are chosen because smallest musical increment

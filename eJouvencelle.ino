@@ -1,6 +1,48 @@
 #include"src/CD4511/CD4511.h"
 #include"src/Music/Music.h"
 
+/* PINOUT
+ *  
+ * CD4511
+ * -------------------------------------------------------
+ *      CD4511 pins   |   Arduino pins   |   Atmega328p-au
+ *      --------------|------------------|----------------
+ *      B   : 1       |   D10            |   14  : PB2
+ *      C   : 2       |   D9             |   13  : PB1
+ *      LT  : 3       |   +5V            |   +5V
+ *      BL  : 4       |   D8             |   12  : PB0
+ *      LE  : 5       |   D7             |   11  : PD7
+ *      D   : 6       |   D6             |   10  : PD6
+ *      A   : 7       |   D5             |   9   : PD5
+ *      VSS : 8       |   GND            |   GND
+ *      VDD : 16      |   +5V            |   +5V
+ *      
+ *      CD4511 pins   |   7 segment display (1 bottom left)
+ *      --------------|------------------------------------
+ *      e : 9         |   1
+ *      d : 10        |   2
+ *      c : 11        |   4
+ *      b : 12        |   6
+ *      a : 13        |   7
+ *      g : 14        |   10
+ *      f : 15        |   9
+ *                    |   3 : GND
+ *                    |   8 : GND
+ *                    
+ *  Music
+ * -------------------------------------------------------
+ *      MOSFET pins   |   
+ *      --------------|------------------
+ *      Drain : 1     |   Arduino : D11, Atmega : 15 (+ pull-down to GND in //)
+ *      Gate  : 2     |   buzzer -
+ *      Source: 3     |   GND
+ *      
+ *      Buzzer pins   |
+ *      --------------|------------------------------------
+ *      -             |   MOSFET : 2
+ *      +             |   VCC (via 2.2k resistor in series)
+ */
+
 #define BPM120 62499 // 32Hz tick (1/64 note at 120 BPM)
 #define BPM140 53570 // 37.333Hz tick (1/64 note at 140 BPM)
 #define BPM160 46873 // 42.667Hz tick (1/64 note at 160 BPM)

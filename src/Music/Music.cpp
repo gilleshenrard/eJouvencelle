@@ -51,7 +51,6 @@ void Music::setup(){
 void Music::start(unsigned long curTime){
   if(!this->finished() && !this->started())
   {
-    tone(this->pin, this->Notes[this->noteIndex]);
     this->isStarted=true;
     this->prevTime=curTime;
   }
@@ -114,25 +113,25 @@ int Music::onTick(String& music)
     switch(*it)
     {
         case 'a':
-            frequency = 2093.0;
-            break;
-        case 'b':
-            frequency = 2349.0;
-            break;
-        case 'c':
-            frequency = 2637.0;
-            break;
-        case 'd':
-            frequency = 2794.0;
-            break;
-        case 'e':
-            frequency = 3136.0;
-            break;
-        case 'f':
             frequency = 3520.0;
             break;
-        case 'g':
+        case 'b':
             frequency = 3951.0;
+            break;
+        case 'c':
+            frequency = 2093.0;
+            break;
+        case 'd':
+            frequency = 2349.0;
+            break;
+        case 'e':
+            frequency = 2637.0;
+            break;
+        case 'f':
+            frequency = 2794.0;
+            break;
+        case 'g':
+            frequency = 3136.0;
             break;
         case 'r':
             frequency = 0.0;
@@ -172,6 +171,8 @@ int Music::onTick(String& music)
     if (note.indexOf(".") != -1)
         this->m_nbtick = (unsigned char)((float)this->m_nbtick * 1.5);
 
+    tone(this->pin, frequency);
+
     return NOTEOK;
 }
 
@@ -181,11 +182,8 @@ int Music::onTick(String& music)
  * O : /                                                        *
  ****************************************************************/
 void Music::stop(){
-  if(this->started())
-  {
     noTone(this->pin);
     this->isStarted=false;
-  }
 }
 
 /****************************************************************

@@ -14,6 +14,8 @@ int notes[28]={NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
                NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5, NOTE_C5};
 int length[28]={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2};
 
+String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
+
 volatile bool tick = false;
 bool toggle1 = true;
 int BeatsPM = 120;
@@ -73,24 +75,16 @@ ISR(TIMER1_COMPA_vect){
 /*  O : /                                                                   */
 /****************************************************************************/
 void loop() {
-  int out = 0;
-  unsigned long newTime = millis();
-  String music = "5g#4 3g8. f g";
-/*
   if(tick)
   {
     tick = false;
 
-    digitalWrite(13,(toggle1 ? HIGH : LOW));
-    toggle1 = !toggle1;
-  }
-*/
-//  melody.start(newTime);
-//  melody.refresh(newTime);
-
-  delay(500);
-  while(!melody.finished())
-  {
-    melody.onTick(music);
+      if(!melody.finished())
+        melody.onTick(mel);
+      else
+      {
+        Serial.write("finished\n");
+        melody.stop();
+      }
   }
 }

@@ -67,6 +67,7 @@ unsigned char number = 0, flicker=0;
 /******************************************************************************/
 void setup() {
   display.setup();
+  display.displayON();
   display.display(number);
   display.commit();
   melody.setup();
@@ -163,6 +164,7 @@ void animate(unsigned long newTime)
   
     if(displayOn)
     {
+      display.displayON();
       display.display(number);
       display.commit();
     }
@@ -176,6 +178,7 @@ void animate(unsigned long newTime)
       if(!numberSet)
       {
         number++;
+        display.displayON();
         display.display(number);
         display.commit();
         numberSet=true;

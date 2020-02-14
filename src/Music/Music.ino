@@ -1,5 +1,5 @@
-#import "Music.h"
-#import "notes.h"
+#include "Music.h"
+#include "notes.h"
 
 //timer1 values
 // (value = 16,000,000 / (prescaler * Hz) - 1) -> must be < 65536 for timer1

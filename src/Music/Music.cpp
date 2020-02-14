@@ -1,5 +1,7 @@
 #include "Music.h"
 
+constexpr unsigned char Music::divisors[];
+
 /****************************************************************
  * I : Pin on which the buzzer is plugged                       *
  * P : Builds a new Music module                                *
@@ -72,22 +74,26 @@ int Music::onTick(String& music)
         return NOTEOK;
     }
 
-    //NOTE UPDATE
 
-    //was the previous tick the last note?
-    if(this->m_nextNote == -1)
-        return ENDNOTE;
+    //NOTE UPDATE
 
     //roll the music to the right (nextNote is off by 1 increment)
     this->m_curNote = this->m_nextNote;
     this->m_nextNote = music.indexOf(' ', this->m_curNote);
 
+    //was the previous tick the last note?
+    if(this->m_curNote == -1)
+    {
+        this->isFinished = true;
+        return 0;
+    }
+
     //are there any notes left to decode?
     if(this->m_nextNote == -1)
-        return LASTNOTE;
-
-    //update nextNote to point to an actual note
-    this->m_nextNote ++;
+        this->lastnote = true;
+    else
+      //update nextNote to point to an actual note
+      this->m_nextNote ++;
 
 
     //NOTE DECODING
@@ -104,7 +110,7 @@ int Music::onTick(String& music)
     }
 
     //decode the note requested (7th octave by default)
-    float frequency = 0;
+    float frequency = 0.0;
     switch(*it)
     {
         case 'a':
@@ -153,6 +159,13 @@ int Music::onTick(String& music)
     int index = note.indexOf(*it);
     note = note.substring(index);
     unsigned char duration = (unsigned char)note.toInt();
+
+    //if none specified reused last specified
+    //otherwise, update specified
+    if(!duration)
+      duration = this->m_duration;
+    else
+      this->m_duration = duration;
     this->m_nbtick = 32 / duration;
 
     //decode dotted note (duration * 1.5)

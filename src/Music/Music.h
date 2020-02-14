@@ -1,9 +1,6 @@
 #ifndef MUSIC_H_INCLUDED
 #define MUSIC_H_INCLUDED
 #include <Arduino.h>
-#include <unistd.h>
-#include <string.h>
-#include <math.h>
 
 #define NOTEERR -1
 #define NOTEOK 0
@@ -29,6 +26,7 @@ class Music{
       int             m_nextNote;
       unsigned char   m_octave;
       unsigned char   m_nbtick;
+      unsigned char   m_duration;
 
   public:
       Music(int Pin, int notes[]=NULL, const int notesSz=0, int notesLen[]=NULL, int newBPM=0);

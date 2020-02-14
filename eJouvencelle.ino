@@ -1,21 +1,19 @@
 #include"src/segDisplay/segDisplay.h"
 #include"src/Music/Music.h"
-#include"src/Music/notes.h"
+
+#define BPM120 62499 // 32Hz tick (1/64 note at 120 BPM)
+#define BPM140 53570 // 37.333Hz tick (1/64 note at 140 BPM)
+#define BPM160 46873 // 42.667Hz tick (1/64 note at 160 BPM)
 
 #define startbutton 3
 #define resetbutton 2
 #define potentiometer A7
 
 unsigned long prevTime = 0;
-volatile bool started=false, reseted=false, last=false;
+volatile bool started=false, reseted=false, last=false, tick=false;
 
-int notes[28]={NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
-               NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
-               NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5 /*suspension*/, NOTE_D5,
-               NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5, NOTE_C5};
-int length[28]={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2};
-int BeatsPM = 100;
-Music melody = Music(11, notes, 28, length, BeatsPM);
+String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
+Music melody = Music(11);
 
 segDisplay display = segDisplay(8, 9, 10, 4, 5, 6, 7);
 bool displayOn=false, numberSet=false;
@@ -35,6 +33,28 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(startbutton), startbuttonfell, FALLING);
   pinMode(resetbutton, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(resetbutton), resetbuttonfell, FALLING);
+
+  //stop interrupts
+  cli();
+
+  //clear TCCR1
+  TCCR1A = 0;
+  TCCR1B = 0;
+
+  //reset counter value +
+  //set compare match register for 32 Hz increments
+  TCNT1  = 0;
+  OCR1A = BPM120;
+
+  // turn on CTC mode
+  // + Set CS12, CS11 and CS10 bits for 8 prescaler
+  // + enable timer compare interrupt
+  TCCR1B |= (1 << WGM12);
+  TCCR1B |= (0 << CS12) | (1 << CS11) | (0 << CS10);
+  TIMSK1 |= (1 << OCIE1A);
+
+  //allow interrupts
+  sei();
 }
 
 /******************************************************************************/
@@ -45,15 +65,16 @@ void setup() {
 void loop() {
   unsigned long newTime = millis();
 
+  if(melody.started() && tick)
+  {
+    tick = false;
+    melody.onTick(mel);
+  }
+
   if(started)
   {
-    BeatsPM = map(analogRead(potentiometer), 0, 1023, 80, 140);
-    melody.setBPM(BeatsPM);
-
-    melody.start(newTime);
+    melody.start();
     if(melody.last() && !last)
-      last=true;
-    if(last)
       animate(newTime);
   }
   else
@@ -70,8 +91,15 @@ void loop() {
       flicker=0;
     }
   }
+}
 
-  melody.refresh(newTime);
+/****************************************************************************/
+/*  I : timer1 comparator vector                                            */
+/*  P : toggle pin 13 at 32Hz (16Hz full wave)                              */
+/*  O : /                                                                   */
+/****************************************************************************/
+ISR(TIMER1_COMPA_vect){
+  tick = true;
 }
 
 /**********************************************************************************/

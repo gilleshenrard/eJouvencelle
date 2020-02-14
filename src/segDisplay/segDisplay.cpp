@@ -108,7 +108,7 @@ void segDisplay::display(int Number)
 /*  P : Turns the display off                               */
 /*  O : /                                                   */
 /************************************************************/
-void segDisplay::noDisplay()
+void segDisplay::displayOFF()
 {
   digitalWrite(this->a, LOW);
   digitalWrite(this->b, LOW);

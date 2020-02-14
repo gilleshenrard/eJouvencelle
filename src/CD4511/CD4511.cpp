@@ -9,7 +9,7 @@
 /*      with the matching pin numbers                       */
 /*  O : /                                                   */
 /************************************************************/
-CD4511::CD4511(int a, int b, int c, int d, int latch, int blank, int test)
+CD4511::CD4511(int a, int b, int c, int d, int latch, int blank, int test, int dot = -1)
 {
   this->a = a;
   this->b = b;
@@ -18,6 +18,7 @@ CD4511::CD4511(int a, int b, int c, int d, int latch, int blank, int test)
   this->latch = latch;
   this->blank = blank;
   this->test = test;
+  this->dot = dot;
 }
 
 /************************************************************/
@@ -27,6 +28,16 @@ CD4511::CD4511(int a, int b, int c, int d, int latch, int blank, int test)
 /************************************************************/
 CD4511::~CD4511()
 {}
+
+/************************************************************/
+/*  I : Pin number to assign to the display dot             */
+/*  P : assigns pin numbers to display dot                  */
+/*  O : /                                                   */
+/************************************************************/
+void CD4511::setDot(int t_dot)
+{
+  this->dot=t_dot;
+}
 
 /************************************************************/
 /*  I : /                                                   */
@@ -72,7 +83,7 @@ void CD4511::setup()
 /*            commit() must be called afterwards            */
 /*            (CD4511 needs a falling edge on the latch pin)*/
 /************************************************************/
-void CD4511::setNumber(int Number)
+void CD4511::display(int Number)
 {
   output_u decoder;
   
@@ -121,4 +132,14 @@ void CD4511::displayON()
 {
   if(this->blank > -1)
     digitalWrite(this->blank, HIGH);
+}
+
+/************************************************************/
+/*  I : level to set to the dot (true by default)           */
+/*  P : Turns the dot on the display on                     */
+/*  O : /                                                   */
+/************************************************************/
+void CD4511::displayDot(bool state)
+{
+  digitalWrite(this->dot, (state ? HIGH : LOW));
 }

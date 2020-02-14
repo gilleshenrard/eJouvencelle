@@ -33,7 +33,7 @@ void loop() {
   }
 
   //turn off the screen for 1s
-  displ.noDisplay();
+  displ.displayOFF();
   delay(1000);
 
 }

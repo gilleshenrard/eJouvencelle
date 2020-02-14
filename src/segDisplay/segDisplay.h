@@ -44,7 +44,7 @@ class segDisplay
     void setDot(int dot);
 
 		void display(int num);
-		void noDisplay();
+		void displayOFF();
 		void displayDot(bool state=true);
 };
 #endif

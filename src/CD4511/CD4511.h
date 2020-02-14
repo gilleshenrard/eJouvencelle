@@ -18,17 +18,18 @@ typedef union
 class CD4511
 {
 	private:
-		int a, b, c, d, latch, blank, test;
+		int a, b, c, d, latch, blank, test, dot;
 
 	public:
-		CD4511(int a, int b, int c, int d, int latch, int blank = -1 , int test = -1);
+		CD4511(int a, int b, int c, int d, int latch, int blank = -1 , int test = -1, int dot = -1);
 		~CD4511();
 
+    void setDot(int dot);
 		void setup();
-
-		void setNumber(int num);
+		void display(int num);
 		void commit();
 		void displayOFF();
 		void displayON();
+    void displayDot(bool state=true);
 };
 #endif

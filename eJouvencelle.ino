@@ -1,4 +1,4 @@
-#include"src/segDisplay/segDisplay.h"
+#include"src/CD4511/CD4511.h"
 #include"src/Music/Music.h"
 
 #define BPM120 62499 // 32Hz tick (1/64 note at 120 BPM)
@@ -7,7 +7,6 @@
 
 #define startbutton 3
 #define resetbutton 2
-#define potentiometer A7
 
 unsigned long prevTime = 0;
 volatile bool started=false, reseted=false, last=false, tick=false;
@@ -15,7 +14,7 @@ volatile bool started=false, reseted=false, last=false, tick=false;
 String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
 Music melody = Music(11);
 
-segDisplay display = segDisplay(8, 9, 10, 4, 5, 6, 7);
+CD4511 display = CD4511(5, 10, 9, 6, 7, 8);
 bool displayOn=false, numberSet=false;
 unsigned char number = 0, flicker=0;
 
@@ -27,6 +26,7 @@ unsigned char number = 0, flicker=0;
 void setup() {
   display.setup();
   display.display(number);
+  display.commit();
   melody.setup();
 
   pinMode(startbutton, INPUT_PULLUP);
@@ -85,6 +85,7 @@ void loop() {
       melody.reset();
       number=0;
       display.display(number);
+      display.commit();
       reseted=false;
       displayOn=false;
       numberSet=false;
@@ -119,9 +120,12 @@ void animate(unsigned long newTime)
     }
   
     if(displayOn)
+    {
       display.display(number);
+      display.commit();
+    }
     else
-      display.noDisplay();
+      display.displayOFF();
   }
   else
   {
@@ -131,6 +135,7 @@ void animate(unsigned long newTime)
       {
         number++;
         display.display(number);
+        display.commit();
         numberSet=true;
       }
       else

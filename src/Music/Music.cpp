@@ -7,14 +7,10 @@ constexpr unsigned char Music::divisors[];
  * P : Builds a new Music module                                *
  * O : /                                                        *
  ****************************************************************/
-Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], int newBPM = 0)
-:noteIndex(0), prevTime(0), isFinished(false), lastnote(false), isStarted(false)
+Music::Music(int Pin)
+:isFinished(false), lastnote(false), isStarted(false), m_curNote(0), m_nextNote(0), m_octave(0), m_nbtick(0), m_duration(0)
 {
   this->pin=Pin;
-  this->Notes=notes;
-  this->NotesSize=notesSz;
-  this->NotesLength=notesLen;
-  this->BPM=newBPM;
 }
 
 /****************************************************************
@@ -24,15 +20,6 @@ Music::Music(int Pin, int notes[], const int notesSz, int notesLen[], int newBPM
  ****************************************************************/
 Music::~Music()
 {}
-
-/****************************************************************
- * I : BPM to assign                                            *
- * P : Changes the BPM of the melody                            *
- * O : /                                                        *
- ****************************************************************/
-void Music::setBPM(int newBPM){
-  this->BPM = newBPM;
-}
 
 /****************************************************************
  * I : /                                                        *
@@ -48,12 +35,9 @@ void Music::setup(){
  * P : Plays the current selected note                          *
  * O : /                                                        *
  ****************************************************************/
-void Music::start(unsigned long curTime){
-  if(!this->finished() && !this->started())
-  {
+void Music::start(){
+  if(!this->finished())
     this->isStarted=true;
-    this->prevTime=curTime;
-  }
 }
 
 /****************************************************************/
@@ -66,11 +50,14 @@ void Music::start(unsigned long curTime){
 /****************************************************************/
 int Music::onTick(String& music)
 {
+    if(!this->isStarted)
+      return 0;
+
     //check if note duration has been reached
     if(this->m_nbtick > 0)
     {
         this->m_nbtick--;
-        return NOTEOK;
+        return 0;
     }
 
 
@@ -173,7 +160,7 @@ int Music::onTick(String& music)
 
     tone(this->pin, frequency);
 
-    return NOTEOK;
+    return 0;
 }
 
 /****************************************************************
@@ -192,38 +179,10 @@ void Music::stop(){
  * O : /                                                        *
  ****************************************************************/
 void Music::reset(){
-  this->noteIndex=0;
   this->lastnote=false;
   this->isFinished=false;
-}
-
-/****************************************************************
- * I : /                                                        *
- * P : Handles the beat for the music, and updates finished     *
- * O : /                                                        *
- ****************************************************************/
-void Music::refresh(unsigned long curTime){
-  if(this->NotesLength[this->noteIndex] && this->started() && !this->finished())
-  {
-    unsigned long lengthMillis=60000 / (this->BPM * this->NotesLength[this->noteIndex]);
-    unsigned long lapse = curTime - this->prevTime;
-  
-    if(lapse >= lengthMillis)
-    {
-      this->stop();
-      this->noteIndex++;
-      if(this->noteIndex+1 >= this->NotesSize)
-        this->lastnote=true;
-
-      if(this->noteIndex >= this->NotesSize)
-      {
-        this->isFinished=true;
-        this->lastnote=false;
-      }
-
-      this->start(curTime);
-    }
-  }
+  this->m_curNote = 0;
+  this->m_nextNote = 0;
 }
 
 /****************************************************************

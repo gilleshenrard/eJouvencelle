@@ -1,5 +1,4 @@
 #include "Music.h"
-#include "notes.h"
 
 //timer1 values
 // (value = 16,000,000 / (prescaler * Hz) - 1) -> must be < 65536 for timer1
@@ -8,18 +7,10 @@
 #define BPM140 53570 // 37.333Hz tick (1/64 note at 140 BPM)
 #define BPM160 46873 // 42.667Hz tick (1/64 note at 160 BPM)
 
-int notes[28]={NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
-               NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5,
-               NOTE_C5, NOTE_D5, NOTE_E5, NOTE_F5, NOTE_G5, NOTE_F5, NOTE_E5 /*suspension*/, NOTE_D5,
-               NOTE_G5, NOTE_F5, NOTE_E5, NOTE_D5, NOTE_C5};
-int length[28]={2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2};
-
 String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
 
 volatile bool tick = false;
-bool toggle1 = true;
-int BeatsPM = 120;
-Music melody = Music(11, notes, 28, length, BeatsPM);
+Music melody = Music(11);
 
 
 /****************************************************************************/

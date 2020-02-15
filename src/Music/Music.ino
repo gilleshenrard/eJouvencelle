@@ -12,7 +12,7 @@
  * --------------------------------
  *      MOSFET pins   |   
  *      --------------|------------------
- *      Drain : 1     |   Arduino : D11, Atmega : 15 (+ pull-down to GND in //)
+ *      Drain : 1     |   Arduino : D12, Atmega : 16 (+ pull-down to GND in //)
  *      Gate  : 2     |   buzzer -
  *      Source: 3     |   GND
  *      
@@ -32,7 +32,7 @@
 String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
 
 volatile bool tick = false;
-Music melody = Music(11);
+Music melody = Music(12);
 
 
 /****************************************************************************/
@@ -47,7 +47,7 @@ void setup() {
   //setup melody and pin 13 (test led)
   melody.setup();
   pinMode(13, OUTPUT);
-  digitalWrite(13, HIGH);
+  digitalWrite(13, LOW);
   
   //clear TCCR1
   TCCR1A = 0;

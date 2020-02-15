@@ -15,8 +15,8 @@
  *      D9            |   13:PB1          |   a:7
  *      D7            |   14:PB2          |   f:9
  *      D5            |   15:PB3          |   g:10
- *                    |   3 : GND
- *                    |   8 : GND
+ *                                        |   3 : GND
+ *                                        |   8 : GND
  */
 
 segDisplay displ = segDisplay(9, 11, 10, 8, 6, 7, 5);

@@ -1,21 +1,33 @@
-#include"src/segDisplay/segDisplay.h"
+#include"src/CD4511/CD4511.h"
 #include"src/Music/Music.h"
 
 /* PINOUT
  *  
- * display
- * -------------------------------------------------------
- *      Arduino pins  |   Atmega328p-au   |   7 segment display (1 bottom left)
- *      --------------|-------------------|------------------------------------
- *      D6            |   10:PD6          |   e:1
- *      D8            |   12:PB0          |   d:2
- *      D10           |   14:PB2          |   c:4
- *      D11           |   15:PB3          |   b:6
- *      D9            |   13:PB1          |   a:7
- *      D7            |   11:PD7          |   f:9
- *      D5            |   09:PD5          |   g:10
- *                                        |   3 : GND
- *                                        |   8 : GND
+ * CD4511 library testing procedure
+ * --------------------------------
+ *      CD4511 pins   |   Arduino pins   |   Atmega328p-au
+ *      --------------|------------------|----------------
+ *      B   : 1       |   D10            |   14  : PB2
+ *      C   : 2       |   D9             |   13  : PB1
+ *      LT  : 3       |   +5V            |   +5V
+ *      BL  : 4       |   D8             |   12  : PB0
+ *      LE  : 5       |   D7             |   11  : PD7
+ *      D   : 6       |   D6             |   10  : PD6
+ *      A   : 7       |   D5             |   9   : PD5
+ *      VSS : 8       |   GND            |   GND
+ *      VDD : 16      |   +5V            |   +5V
+ *      
+ *      CD4511 pins   |   7 segment display (1 bottom left)
+ *      --------------|------------------------------------
+ *      e : 9         |   1
+ *      d : 10        |   2
+ *      c : 11        |   4
+ *      b : 12        |   6
+ *      a : 13        |   7
+ *      g : 14        |   10
+ *      f : 15        |   9
+ *                    |   3 : GND
+ *                    |   8 : GND
  *                    
  *  Music
  * -------------------------------------------------------
@@ -44,7 +56,7 @@ volatile bool started=false, reseted=false, last=false, tick=false;
 String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
 Music melody = Music(12);
 
-segDisplay display = segDisplay(9, 11, 10, 8, 6, 7, 5);
+CD4511 display = CD4511(5, 10, 9, 6, 7, 8);
 bool displayOn=false, numberSet=false;
 unsigned char number = 0, flicker=0;
 
@@ -55,7 +67,9 @@ unsigned char number = 0, flicker=0;
 /******************************************************************************/
 void setup() {
   display.setup();
+  display.displayON();
   display.display(number);
+  display.commit();
   melody.setup();
 
   pinMode(startbutton, INPUT_PULLUP);
@@ -114,6 +128,7 @@ void loop() {
       melody.reset();
       number=0;
       display.display(number);
+      display.commit();
       reseted=false;
       displayOn=false;
       numberSet=false;
@@ -148,7 +163,7 @@ void animate(unsigned long newTime)
     }
   
     if(displayOn)
-      display.display(number);
+      display.displayON();
     else
       display.displayOFF();
   }
@@ -159,7 +174,9 @@ void animate(unsigned long newTime)
       if(!numberSet)
       {
         number++;
+        display.displayON();
         display.display(number);
+        display.commit();
         numberSet=true;
       }
       else

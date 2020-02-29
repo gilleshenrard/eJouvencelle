@@ -73,13 +73,12 @@ void setup() {
 
 /****************************************************************************/
 /*  I : timer1 comparator vector                                            */
-/*  P : toggle pin 13 at 32Hz (16Hz full wave)                              */
+/*  P : updates the melody at each tick (1/64 note)                         */
 /*  O : /                                                                   */
 /****************************************************************************/
 ISR(TIMER1_COMPA_vect){
-  digitalWrite(12, HIGH);
-  tick = true;
-  digitalWrite(12, LOW);
+  //onTick() takes 1ms at worst to finish -> ok to be put in interrupt function
+  melody.onTick(mel);
 }
 
 /****************************************************************************/
@@ -88,19 +87,8 @@ ISR(TIMER1_COMPA_vect){
 /*  O : /                                                                   */
 /****************************************************************************/
 void loop() {
-
-  melody.start();
-  
-  if(tick)
-  {
-    tick = false;
-
-      if(!melody.finished())
-        melody.onTick(mel);
-      else
-      {
-        Serial.write("finished\n");
-        melody.stop();
-      }
-  }
+    if(melody.finished())
+      melody.stop();
+    else
+      melody.start();
 }

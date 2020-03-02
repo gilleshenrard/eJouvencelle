@@ -1,6 +1,5 @@
 #include "Music.h"
 
-constexpr unsigned char Music::divisors[];
 constexpr unsigned char Music::notes[];
 
 /****************************************************************
@@ -106,7 +105,8 @@ int Music::onTick(String& music)
       frequency = (float)Music::notes[*it - 97];
 
     //shift the note to the right octave
-    frequency *= (float)Music::divisors[this->m_octave];
+    unsigned char multiplier = 1;
+    frequency *= (float)(multiplier << this->m_octave - 1);
     it++;
 
     //decode sharp or flat notes

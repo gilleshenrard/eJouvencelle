@@ -4,7 +4,7 @@
 
 class Music
 {
-  static constexpr unsigned char divisors[] = {128,64,32,16,8,4,2,1};
+  static constexpr unsigned char divisors[] = {0,1,2,4,8,16,32,64,128};
   
   private:
       int pin;

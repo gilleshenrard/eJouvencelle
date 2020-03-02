@@ -95,30 +95,30 @@ int Music::onTick(String& music)
         it++;
     }
 
-    //decode the note requested (7th octave by default)
+    //decode the note requested (1st octave by default)
     float frequency = 0.0;
     switch(*it)
     {
         case 'a':
-            frequency = 3520.0;
+            frequency = 55.0;
             break;
         case 'b':
-            frequency = 3951.0;
+            frequency = 62.0;
             break;
         case 'c':
-            frequency = 2093.0;
+            frequency = 33.0;
             break;
         case 'd':
-            frequency = 2349.0;
+            frequency = 37.0;
             break;
         case 'e':
-            frequency = 2637.0;
+            frequency = 41.0;
             break;
         case 'f':
-            frequency = 2794.0;
+            frequency = 44.0;
             break;
         case 'g':
-            frequency = 3136.0;
+            frequency = 49.0;
             break;
         case 'r':
             frequency = 0.0;
@@ -126,7 +126,7 @@ int Music::onTick(String& music)
     }
 
     //shift the note to the right octave
-    frequency = frequency / (float)Music::divisors[this->m_octave];
+    frequency *= (float)Music::divisors[this->m_octave];
     it++;
 
     //decode sharp or flat notes

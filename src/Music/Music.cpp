@@ -1,6 +1,7 @@
 #include "Music.h"
 
 constexpr unsigned char Music::divisors[];
+constexpr unsigned char Music::notes[];
 
 /****************************************************************
  * I : Pin on which the buzzer is plugged                       *
@@ -96,34 +97,13 @@ int Music::onTick(String& music)
     }
 
     //decode the note requested (1st octave by default)
-    float frequency = 0.0;
-    switch(*it)
-    {
-        case 'a':
-            frequency = 55.0;
-            break;
-        case 'b':
-            frequency = 62.0;
-            break;
-        case 'c':
-            frequency = 33.0;
-            break;
-        case 'd':
-            frequency = 37.0;
-            break;
-        case 'e':
-            frequency = 41.0;
-            break;
-        case 'f':
-            frequency = 44.0;
-            break;
-        case 'g':
-            frequency = 49.0;
-            break;
-        case 'r':
-            frequency = 0.0;
-            break;
-    }
+    // shift ASCII character to index
+    // -> must be a lower case letter between 'a' and 'g'
+    float frequency;
+    if(*it == 'r')
+      frequency = 0.0;
+    else
+      frequency = (float)Music::notes[*it - 97];
 
     //shift the note to the right octave
     frequency *= (float)Music::divisors[this->m_octave];

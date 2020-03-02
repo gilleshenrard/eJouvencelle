@@ -5,6 +5,7 @@
 class Music
 {
   static constexpr unsigned char divisors[] = {0,1,2,4,8,16,32,64,128};
+  static constexpr unsigned char notes[] = {55, 62, 33, 37, 41, 44, 49};
   
   private:
       int pin;

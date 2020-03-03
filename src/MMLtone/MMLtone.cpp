@@ -80,9 +80,12 @@ int MMLtone::onTick(String& MMLtone)
 
     //NOTE DECODING
 
-    //get the code for the current note
+    //get the code for the current note + declare all variables
     String note = MMLtone.substring(this->m_curNote, this->m_nextNote - 1);
     char* it = note.c_str();
+    float frequency;
+    int index;
+    unsigned char duration;
 
     //decode eventual octave change
     if(isdigit(*it))
@@ -92,7 +95,6 @@ int MMLtone::onTick(String& MMLtone)
     }
 
     //set the base freq. for the note requested (octave 0 @ A440 by default)
-    float frequency;
     switch(*it)
     { 
       case 'C':
@@ -154,9 +156,9 @@ int MMLtone::onTick(String& MMLtone)
     }
 
     //decode note duration (nb of ticks = nb of 1/32 notes)
-    int index = note.indexOf(*it);
+    index = note.indexOf(*it);
     note = note.substring(index);
-    unsigned char duration = (unsigned char)note.toInt();
+    duration = (unsigned char)note.toInt();
 
     //if none specified, reuse last specified
     //otherwise, update specified

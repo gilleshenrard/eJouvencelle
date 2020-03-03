@@ -6,9 +6,9 @@ class MMLtone
 { 
   private:
       int pin;
-      bool isFinished;
-      bool lastnote;
-      bool isStarted;
+      bool            isFinished;
+      bool            lastnote;
+      bool            isStarted;
       int             m_curNote;
       int             m_nextNote;
       unsigned char   m_octave;

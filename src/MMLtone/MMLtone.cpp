@@ -138,8 +138,7 @@ int MMLtone::onTick(String& MMLtone)
     }
 
     //multiply the freq. to get the right octave (2 pow(octave))
-    unsigned char multiplier = 1;
-    frequency *= (float)(multiplier << this->m_octave);
+    frequency *= (float)(1 << this->m_octave);
     it++;
 
     //decode sharp or flat notes

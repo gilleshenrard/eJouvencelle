@@ -51,7 +51,7 @@
 #define resetbutton 2
 
 unsigned long prevTime = 0;
-volatile bool started=false, reseted=false, last=false, tick=false;
+volatile bool started=false, reseted=false, last=false;
 
 String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
 MMLtone melody = MMLtone(12);
@@ -108,12 +108,6 @@ void setup() {
 void loop() {
   unsigned long newTime = millis();
 
-  if(melody.started() && tick)
-  {
-    tick = false;
-    melody.onTick(mel);
-  }
-
   if(started)
   {
     melody.start();
@@ -143,7 +137,10 @@ void loop() {
 /*  O : /                                                                   */
 /****************************************************************************/
 ISR(TIMER1_COMPA_vect){
-  tick = true;
+  if(!melody.started())
+    return;
+  
+  melody.onTick(mel);
 }
 
 /**********************************************************************************/

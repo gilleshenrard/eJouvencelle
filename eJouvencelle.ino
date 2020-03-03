@@ -1,5 +1,5 @@
 #include"src/CD4511/CD4511.h"
-#include"src/Music/Music.h"
+#include"src/MMLtone/MMLtone.h"
 
 /* PINOUT
  *  
@@ -54,7 +54,7 @@ unsigned long prevTime = 0;
 volatile bool started=false, reseted=false, last=false, tick=false;
 
 String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
-Music melody = Music(12);
+MMLtone melody = MMLtone(12);
 
 CD4511 display = CD4511(5, 10, 9, 6, 7, 8);
 bool displayOn=false, numberSet=false;

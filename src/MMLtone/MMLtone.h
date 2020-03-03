@@ -2,7 +2,7 @@
 #define MUSIC_H_INCLUDED
 #include <Arduino.h>
 
-class Music
+class MMLtone
 { 
   private:
       int pin;
@@ -16,8 +16,8 @@ class Music
       unsigned char   m_duration;
 
   public:
-      Music(int Pin);
-      ~Music();
+      MMLtone(int Pin);
+      ~MMLtone();
       void setup();
       void start();
       int onTick(String& music);

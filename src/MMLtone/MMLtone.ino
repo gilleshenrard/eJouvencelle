@@ -1,4 +1,4 @@
-#include "Music.h"
+#include "MMLtone.h"
 
 /*
  * Devices used during tests :
@@ -32,7 +32,7 @@
 String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
 
 volatile bool tick = false;
-Music melody = Music(12);
+MMLtone melody = MMLtone(12);
 
 
 /****************************************************************************/

@@ -3,9 +3,7 @@
 #include <Arduino.h>
 
 class Music
-{
-  static constexpr unsigned char notes[] = {55, 62, 33, 37, 41, 44, 49};
-  
+{ 
   private:
       int pin;
       bool isFinished;

@@ -1,7 +1,5 @@
 #include "Music.h"
 
-constexpr unsigned char Music::notes[];
-
 /****************************************************************
  * I : Pin on which the buzzer is plugged                       *
  * P : Builds a new Music module                                *
@@ -95,18 +93,55 @@ int Music::onTick(String& music)
         it++;
     }
 
-    //decode the note requested (1st octave by default)
-    // shift ASCII character to index
-    // -> must be a lower case letter between 'a' and 'g'
+    //decode the note requested (octave 0 @ A440 by default)
     float frequency;
-    if(*it == 'r')
-      frequency = 0.0;
-    else
-      frequency = (float)Music::notes[*it - 97];
+    switch(*it)
+    { 
+      case 'C':
+      case 'c':
+        frequency = 16.35;
+        break;
+      
+      case 'D':
+      case 'd':
+        frequency = 18.35;
+        break;
+      
+      case 'E':
+      case 'e':
+        frequency = 20.6;
+        break;
+      
+      case 'F':
+      case 'f':
+        frequency = 21.83;
+        break;
+      
+      case 'G':
+      case 'g':
+        frequency = 24.5;
+        break;
 
-    //shift the note to the right octave
+      case 'A':
+      case 'a':
+        frequency = 27.5;
+        break;
+      
+      case 'B':
+      case 'b':
+        frequency = 30.87;
+        break;
+      
+      case 'R':
+      case 'r':
+      default:
+        frequency = 0.0;
+        break;
+    }
+
+    //shift the note to the right octave (2 pow(octave))
     unsigned char multiplier = 1;
-    frequency *= (float)(multiplier << this->m_octave - 1);
+    frequency *= (float)(multiplier << this->m_octave);
     it++;
 
     //decode sharp or flat notes

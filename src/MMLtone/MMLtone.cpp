@@ -2,7 +2,7 @@
 
 /****************************************************************
  * I : Pin on which the buzzer is plugged                       *
- * P : Builds a new MMLtone module                                *
+ * P : Builds a new MMLtone module                              *
  * O : /                                                        *
  ****************************************************************/
 MMLtone::MMLtone(int Pin)
@@ -13,7 +13,7 @@ MMLtone::MMLtone(int Pin)
 
 /****************************************************************
  * I : /                                                        *
- * P : Destroys the current MMLtone module                        *
+ * P : Destroys the current MMLtone module                      *
  * O : /                                                        *
  ****************************************************************/
 MMLtone::~MMLtone()
@@ -21,7 +21,7 @@ MMLtone::~MMLtone()
 
 /****************************************************************
  * I : /                                                        *
- * P : Plays the current selected note                          *
+ * P : Set the pin as an output                                 *
  * O : /                                                        *
  ****************************************************************/
 void MMLtone::setup(){
@@ -30,7 +30,7 @@ void MMLtone::setup(){
 
 /****************************************************************
  * I : /                                                        *
- * P : Plays the current selected note                          *
+ * P : Set the isStarted flag as true                           *
  * O : /                                                        *
  ****************************************************************/
 void MMLtone::start(){
@@ -39,15 +39,13 @@ void MMLtone::start(){
 }
 
 /****************************************************************/
-/*  I : MMLtone MML string to decode                              */
+/*  I : MMLtone MML string to decode                            */
 /*  P : When a tick is reached, decode a note and play it       */
-/*  O : NOTEERR : error while decoding                          */
-/*      NOTEOK  : note properly decoded                         */
-/*      LASTNOTE: no further notes afterwards                   */
-/*      ENDNOTE : last note has been played, end of MMLtone       */
+/*  O : /                                                       */
 /****************************************************************/
 int MMLtone::onTick(String& MMLtone)
 {
+    //if music is supposed to be stopped, exit
     if(!this->isStarted)
       return 0;
 
@@ -84,17 +82,16 @@ int MMLtone::onTick(String& MMLtone)
 
     //get the code for the current note
     String note = MMLtone.substring(this->m_curNote, this->m_nextNote - 1);
-    //char* it = note.c_str();
-    char* it = NULL;
+    char* it = note.c_str();
 
     //decode eventual octave change
     if(isdigit(*it))
     {
-        this->m_octave = *it - 48; //translate from ASCII -> shift 48
+        this->m_octave = *it - 48; //translate ASCII to number ('0' = 48)
         it++;
     }
 
-    //decode the note requested (octave 0 @ A440 by default)
+    //set the base freq. for the note requested (octave 0 @ A440 by default)
     float frequency;
     switch(*it)
     { 
@@ -140,7 +137,7 @@ int MMLtone::onTick(String& MMLtone)
         break;
     }
 
-    //shift the note to the right octave (2 pow(octave))
+    //multiply the freq. to get the right octave (2 pow(octave))
     unsigned char multiplier = 1;
     frequency *= (float)(multiplier << this->m_octave);
     it++;
@@ -162,7 +159,7 @@ int MMLtone::onTick(String& MMLtone)
     note = note.substring(index);
     unsigned char duration = (unsigned char)note.toInt();
 
-    //if none specified reused last specified
+    //if none specified, reuse last specified
     //otherwise, update specified
     if(!duration)
       duration = this->m_duration;
@@ -181,7 +178,7 @@ int MMLtone::onTick(String& MMLtone)
 
 /****************************************************************
  * I : /                                                        *
- * P : Stops playing                                            *
+ * P : Turn the tone off and unset the started flag             *
  * O : /                                                        *
  ****************************************************************/
 void MMLtone::stop(){
@@ -191,7 +188,7 @@ void MMLtone::stop(){
 
 /****************************************************************
  * I : /                                                        *
- * P : Resets the melody                                        *
+ * P : Reset all the flags to 0                                 *
  * O : /                                                        *
  ****************************************************************/
 void MMLtone::reset(){
@@ -203,7 +200,7 @@ void MMLtone::reset(){
 
 /****************************************************************
  * I : /                                                        *
- * P : Informs about whether the melody is started or not       *
+ * P : Inform about whether the melody is started or not        *
  * O : Melody state                                             *
  ****************************************************************/
 bool MMLtone::started()
@@ -213,7 +210,7 @@ bool MMLtone::started()
 
 /****************************************************************
  * I : /                                                        *
- * P : Informs about whether the melody is finished or not      *
+ * P : Inform about whether the melody is finished or not       *
  * O : Melody state                                             *
  ****************************************************************/
 bool MMLtone::finished()
@@ -223,7 +220,7 @@ bool MMLtone::finished()
 
 /****************************************************************
  * I : /                                                        *
- * P : Informs about whether the melody is finished or not      *
+ * P : Informs about whether the last tone is reached or not    *
  * O : Melody state                                             *
  ****************************************************************/
 bool MMLtone::last()

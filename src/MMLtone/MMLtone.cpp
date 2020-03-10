@@ -91,7 +91,7 @@ int MMLtone::onTick()
     //get the code for the current note + declare all variables
     char* it = this->m_curNote;
     float frequency;
-    unsigned char duration;
+    unsigned char duration = 0;
 
     //decode eventual octave change
     if(isdigit(*it))

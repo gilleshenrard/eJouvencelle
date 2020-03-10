@@ -73,7 +73,8 @@ void setup() {
 /*  O : /                                                                   */
 /****************************************************************************/
 ISR(TIMER1_COMPA_vect){
-  //onTick() takes 1ms at worst to finish -> ok to be put in interrupt function
+  //onTick() takes 215us at worst to finish
+  //  -> ok to be put in interrupt function
   melody.onTick();
 }
 

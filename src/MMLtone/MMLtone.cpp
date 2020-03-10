@@ -2,6 +2,7 @@
 
 /****************************************************************
  * I : Pin on which the buzzer is plugged                       *
+ *     MML music code to play                                   *
  * P : Builds a new MMLtone module                              *
  * O : /                                                        *
  ****************************************************************/
@@ -40,7 +41,7 @@ void MMLtone::start(){
 }
 
 /****************************************************************/
-/*  I : MMLtone MML string to decode                            */
+/*  I : /                                                       */
 /*  P : When a tick is reached, decode a note and play it       */
 /*  O : /                                                       */
 /****************************************************************/
@@ -60,7 +61,7 @@ int MMLtone::onTick()
 
     //NOTE UPDATE
 
-    //roll the MMLtone to the right
+    //set pointers to the next note (and the note after)
     if(!this->m_curNote)
     {
       this->m_curNote = this->m_music;
@@ -72,19 +73,21 @@ int MMLtone::onTick()
     while(*this->m_nextNote!=' ' && *this->m_nextNote!='\0')
         this->m_nextNote++;
 
+    //rectify the pointer to the note after
     if(*this->m_nextNote!='\0')
       this->m_nextNote++;
 
-    //was the previous tick the last note?
+    //has the last note been played already?
     if(*this->m_curNote == '\0')
     {
         this->isFinished = true;
         return 0;
     }
 
-    //are there any notes left to decode?
+    //has the last note been reached?
     if(*this->m_nextNote == '\0')
         this->lastnote = true;
+
 
     //NOTE DECODING
 
@@ -145,7 +148,7 @@ int MMLtone::onTick()
         break;
     }
 
-    //multiply the freq. to get the right octave (2 pow(octave))
+    //multiply the freq. to get the right octave (2 ^ octave)
     frequency *= (float)(1 << this->m_octave);
     it++;
 
@@ -161,7 +164,7 @@ int MMLtone::onTick()
         it++;
     }
 
-    //decode note duration (nb of ticks = nb of 1/32 notes)
+    //decode note duration
     if(isdigit(*it))
     {
       duration = *it - 48;
@@ -174,17 +177,21 @@ int MMLtone::onTick()
     }
 
     //if none specified, reuse last specified
-    //otherwise, update specified
+    //otherwise, update duration
     if(!duration)
       duration = this->m_duration;
     else
       this->m_duration = duration;
+
+    //set the number of ticks
+    // (nb of ticks = nb of 1/32 notes to reach proper duration)
     this->m_nbtick = 32 / duration;
 
     //decode dotted note (duration * 1.5)
     if (*it == '.')
         this->m_nbtick = (unsigned char)((float)this->m_nbtick * 1.5);
 
+    //play the note
     tone(this->pin, frequency);
 
     return 0;

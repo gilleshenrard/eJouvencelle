@@ -29,10 +29,8 @@
 #define BPM140 53570 // 37.333Hz tick (1/64 note at 140 BPM)
 #define BPM160 46873 // 42.667Hz tick (1/64 note at 160 BPM)
 
-String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
-
 volatile bool tick = false;
-MMLtone melody = MMLtone(12);
+MMLtone melody = MMLtone(12, "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c");
 
 
 /****************************************************************************/
@@ -46,8 +44,6 @@ void setup() {
   
   //setup melody and pin 13 (test led)
   melody.setup();
-  pinMode(13, OUTPUT);
-  digitalWrite(13, LOW);
   
   //clear TCCR1
   TCCR1A = 0;
@@ -78,7 +74,7 @@ void setup() {
 /****************************************************************************/
 ISR(TIMER1_COMPA_vect){
   //onTick() takes 1ms at worst to finish -> ok to be put in interrupt function
-  melody.onTick(mel);
+  melody.onTick();
 }
 
 /****************************************************************************/

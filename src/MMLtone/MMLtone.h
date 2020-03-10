@@ -9,18 +9,19 @@ class MMLtone
       bool            isFinished;
       bool            lastnote;
       bool            isStarted;
-      int             m_curNote;
-      int             m_nextNote;
+      char*           m_curNote;
+      char*           m_nextNote;
+      char*           m_music;
       unsigned char   m_octave;
       unsigned char   m_nbtick;
       unsigned char   m_duration;
 
   public:
-      MMLtone(int Pin);
+      MMLtone(int Pin, const char* music);
       ~MMLtone();
       void setup();
       void start();
-      int onTick(String& music);
+      int onTick();
       void stop();
       void reset();
 

@@ -5,10 +5,11 @@
  * P : Builds a new MMLtone module                              *
  * O : /                                                        *
  ****************************************************************/
-MMLtone::MMLtone(int Pin)
-:isFinished(false), lastnote(false), isStarted(false), m_curNote(0), m_nextNote(0), m_octave(0), m_nbtick(0), m_duration(0)
+MMLtone::MMLtone(int Pin, const char* music)
+:isFinished(false), lastnote(false), isStarted(false), m_curNote(NULL), m_nextNote(NULL), m_octave(0), m_nbtick(0), m_duration(0)
 {
-  this->pin=Pin;
+  this->pin = Pin;
+  this->m_music = music;
 }
 
 /****************************************************************
@@ -43,8 +44,8 @@ void MMLtone::start(){
 /*  P : When a tick is reached, decode a note and play it       */
 /*  O : /                                                       */
 /****************************************************************/
-int MMLtone::onTick(String& MMLtone)
-{
+int MMLtone::onTick()
+{ 
     //if music is supposed to be stopped, exit
     if(!this->isStarted)
       return 0;
@@ -59,32 +60,37 @@ int MMLtone::onTick(String& MMLtone)
 
     //NOTE UPDATE
 
-    //roll the MMLtone to the right (nextNote is off by 1 increment)
-    this->m_curNote = this->m_nextNote;
-    this->m_nextNote = MMLtone.indexOf(' ', this->m_curNote);
+    //roll the MMLtone to the right
+    if(!this->m_curNote)
+    {
+      this->m_curNote = this->m_music;
+      this->m_nextNote = this->m_curNote + 1;
+    }
+    else
+      this->m_curNote = this->m_nextNote;
+
+    while(*this->m_nextNote!=' ' && *this->m_nextNote!='\0')
+        this->m_nextNote++;
+
+    if(*this->m_nextNote!='\0')
+      this->m_nextNote++;
 
     //was the previous tick the last note?
-    if(this->m_curNote == -1)
+    if(*this->m_curNote == '\0')
     {
         this->isFinished = true;
         return 0;
     }
 
     //are there any notes left to decode?
-    if(this->m_nextNote == -1)
+    if(*this->m_nextNote == '\0')
         this->lastnote = true;
-    else
-      //update nextNote to point to an actual note
-      this->m_nextNote ++;
-
 
     //NOTE DECODING
 
     //get the code for the current note + declare all variables
-    String note = MMLtone.substring(this->m_curNote, this->m_nextNote - 1);
-    char* it = note.c_str();
+    char* it = this->m_curNote;
     float frequency;
-    int index;
     unsigned char duration;
 
     //decode eventual octave change
@@ -156,9 +162,16 @@ int MMLtone::onTick(String& MMLtone)
     }
 
     //decode note duration (nb of ticks = nb of 1/32 notes)
-    index = note.indexOf(*it);
-    note = note.substring(index);
-    duration = (unsigned char)note.toInt();
+    if(isdigit(*it))
+    {
+      duration = *it - 48;
+      it++;
+    }
+    if(isdigit(*it))
+    {
+      duration = (duration * 10) + (*it - 48);
+      it++;
+    }
 
     //if none specified, reuse last specified
     //otherwise, update specified
@@ -169,7 +182,7 @@ int MMLtone::onTick(String& MMLtone)
     this->m_nbtick = 32 / duration;
 
     //decode dotted note (duration * 1.5)
-    if (note.indexOf(".") != -1)
+    if (*it == '.')
         this->m_nbtick = (unsigned char)((float)this->m_nbtick * 1.5);
 
     tone(this->pin, frequency);
@@ -195,8 +208,8 @@ void MMLtone::stop(){
 void MMLtone::reset(){
   this->lastnote=false;
   this->isFinished=false;
-  this->m_curNote = 0;
-  this->m_nextNote = 0;
+  this->m_curNote = NULL;
+  this->m_nextNote = NULL;
 }
 
 /****************************************************************

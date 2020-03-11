@@ -32,18 +32,18 @@ class segDisplay
                                           {.display=0b01111011}};
 
 	private:
-		int dot;
-		int a, b, c, d, e, f, g;
+		unsigned char dot;
+		unsigned char a, b, c, d, e, f, g;
 
 	public:
-		segDisplay(int a, int b, int c, int d, int e, int f, int g);
+		segDisplay(unsigned char a, unsigned char b, unsigned char c, unsigned char d, unsigned char e, unsigned char f, unsigned char g);
 		~segDisplay();
 
 		void setup();
-		void setPins(int a, int b, int c, int d, int e, int f, int g);
-    void setDot(int dot);
+		void setPins(unsigned char a, unsigned char b, unsigned char c, unsigned char d, unsigned char e, unsigned char f, unsigned char g);
+    void setDot(unsigned char dot);
 
-		void display(int num);
+		void display(unsigned char num);
 		void displayOFF();
 		void displayDot(bool state=true);
 };

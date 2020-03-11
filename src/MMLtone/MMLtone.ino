@@ -30,7 +30,7 @@
 #define BPM160 46873 // 42.667Hz tick (1/64 note at 160 BPM)
 
 volatile bool tick = false;
-MMLtone melody = MMLtone(12, "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c");
+MMLtone melody = MMLtone(12, "5d8 e f g f e d c d e f g f e d c d e f g f e4 d8 g f e d c");
 
 
 /****************************************************************************/

@@ -45,7 +45,7 @@ void loop() {
   displ.displayON();
 
   //display all numbers from 0 to 9 (for 0.5s each)
-  for(int i=0 ; i<10 ; i++){
+  for(unsigned char i=0 ; i<10 ; i++){
     displ.display(i);
     displ.commit();
     delay(500);

@@ -11,20 +11,19 @@ typedef union
     char b:1;
     char c:1;
     char d:1;
-    char buf:4;
   }pinsval;
 }output_u;
 
 class CD4511
 {
 	private:
-		int a, b, c, d, latch, blank, test, dot;
+		unsigned char a, b, c, d, latch, blank, test, dot;
 
 	public:
-		CD4511(int a, int b, int c, int d, int latch, int blank = -1 , int test = -1, int dot = -1);
+		CD4511(unsigned char a, unsigned char b, unsigned char c, unsigned char d, unsigned char latch, unsigned char blank = -1 , unsigned char test = -1, unsigned char dot = -1);
 		~CD4511();
 
-    void setDot(int dot);
+    void setDot(unsigned char dot);
 		void setup();
 		void display(int num);
 		void commit();

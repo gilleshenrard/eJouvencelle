@@ -160,7 +160,7 @@ int MMLtone::onTick()
     }
     if (*it == '-')
     {
-        frequency /= 1.059;
+        frequency *= 0.9443; // = div 1.059
         it++;
     }
 

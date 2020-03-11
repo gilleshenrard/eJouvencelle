@@ -6,7 +6,7 @@
  * P : Builds a new MMLtone module                              *
  * O : /                                                        *
  ****************************************************************/
-MMLtone::MMLtone(int Pin, const char* music)
+MMLtone::MMLtone(unsigned char Pin, const char* music)
 :isFinished(false), lastnote(false), isStarted(false), m_curNote(NULL), m_nextNote(NULL), m_octave(0), m_nbtick(0), m_duration(0)
 {
   this->pin = Pin;
@@ -27,7 +27,7 @@ MMLtone::~MMLtone()
  * O : /                                                        *
  ****************************************************************/
 void MMLtone::setup(){
-  pinMode(this->pin, OUTPUT);
+  pinMode((int)this->pin, OUTPUT);
 }
 
 /****************************************************************

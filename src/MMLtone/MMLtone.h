@@ -5,7 +5,7 @@
 class MMLtone
 { 
   private:
-      int pin;
+      unsigned char   pin;
       bool            isFinished;
       bool            lastnote;
       bool            isStarted;
@@ -17,7 +17,7 @@ class MMLtone
       unsigned char   m_duration;
 
   public:
-      MMLtone(int Pin, const char* music);
+      MMLtone(unsigned char Pin, const char* music);
       ~MMLtone();
       void setup();
       void start();

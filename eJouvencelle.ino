@@ -43,9 +43,19 @@
  *      +             |   VCC (via 2.2k resistor in series)
  */
 
-#define BPM120 62499 // 32Hz tick (1/64 note at 120 BPM)
-#define BPM140 53570 // 37.333Hz tick (1/64 note at 140 BPM)
-#define BPM160 46873 // 42.667Hz tick (1/64 note at 160 BPM)
+//timer1 values with 16 MHz crystal
+// 1/64 notes are chosen as smallest musical increment
+// (value = 16,000,000 / (prescaler * Hz) - 1) -> must be < 65536 for timer1
+#define BPM120CRY 62499 // 32Hz tick (1/64 note at 120 BPM)
+#define BPM140CRY 53570 // 37.333Hz tick (1/64 note at 140 BPM)
+#define BPM160CRY 46873 // 42.667Hz tick (1/64 note at 160 BPM)
+
+//timer1 values with 8 MHz internal resonator
+// 1/64 notes are chosen as smallest musical increment
+// (value = 8,000,000 / (prescaler * Hz) - 1) -> must be < 65536 for timer1
+#define BPM120INT 31249 // 32Hz tick (1/64 note at 120 BPM)
+#define BPM140INT 26784 // 37.333Hz tick (1/64 note at 140 BPM)
+#define BPM160INT 23436 // 42.667Hz tick (1/64 note at 160 BPM)
 
 #define startbutton 3
 #define resetbutton 2
@@ -53,8 +63,7 @@
 unsigned long prevTime = 0;
 volatile bool started=false, reseted=false, last=false;
 
-String mel = "5d4 e f g f e d c d e f g f e d c d e f g f e2 d4 g f e d c";
-MMLtone melody = MMLtone(12);
+MMLtone melody = MMLtone(12, "5d8 e f g f e d c d e f g f e d c d e f g f e4 d8 g f e d c");
 
 CD4511 display = CD4511(5, 10, 9, 6, 7, 8);
 bool displayOn=false, numberSet=false;
@@ -87,7 +96,7 @@ void setup() {
   //reset counter value +
   //set compare match register for 32 Hz increments
   TCNT1  = 0;
-  OCR1A = BPM120;
+  OCR1A = BPM120CRY;
 
   // turn on CTC mode
   // + Set CS12, CS11 and CS10 bits for 8 prescaler
@@ -140,7 +149,7 @@ ISR(TIMER1_COMPA_vect){
   if(!melody.started())
     return;
   
-  melody.onTick(mel);
+  melody.onTick();
 }
 
 /**********************************************************************************/

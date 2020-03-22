@@ -164,6 +164,9 @@ int MMLtone::onTick()
         it++;
     }
 
+    //play the note
+    tone(this->pin, frequency);
+
     //decode note duration
     if(isdigit(*it))
     {
@@ -193,9 +196,6 @@ int MMLtone::onTick()
 
     //decrement tick count (1 cycle is used to refresh note)
     this->m_nbtick--;
-
-    //play the note
-    tone(this->pin, frequency);
 
     return 0;
 }

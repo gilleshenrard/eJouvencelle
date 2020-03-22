@@ -191,6 +191,9 @@ int MMLtone::onTick()
     if (*it == '.')
         this->m_nbtick = (unsigned char)((float)this->m_nbtick * 1.5);
 
+    //decrement tick count (1 cycle is used to refresh note)
+    this->m_nbtick--;
+
     //play the note
     tone(this->pin, frequency);
 

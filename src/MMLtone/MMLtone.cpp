@@ -89,6 +89,7 @@ int MMLtone::onTick()
         this->lastnote = true;
 
 
+
     //NOTE DECODING
 
     //get the code for the current note + declare all variables
@@ -166,6 +167,10 @@ int MMLtone::onTick()
 
     //play the note
     tone(this->pin, frequency);
+
+
+
+    //DURATION DECODING
 
     //decode note duration (possible 2 digits)
     if(isdigit(*it))

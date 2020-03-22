@@ -51,7 +51,7 @@ int MMLtone::onTick()
     if(!this->isStarted)
       return 0;
 
-    //check if note duration has been reached
+    //check if note is still to be played
     if(this->m_nbtick > 0)
     {
         this->m_nbtick--;
@@ -59,9 +59,9 @@ int MMLtone::onTick()
     }
 
 
-    //NOTE UPDATE
+    //NOTE POINTERS UPDATE
 
-    //set pointers to the next note (and the note after)
+    //update pointers to get the new current and next notes
     if(!this->m_curNote)
     {
       this->m_curNote = this->m_music;
@@ -73,18 +73,18 @@ int MMLtone::onTick()
     while(*this->m_nextNote!=' ' && *this->m_nextNote!='\0')
         this->m_nextNote++;
 
-    //rectify the pointer to the note after
+    //rectify the next note pointer (currently points to ' ')
     if(*this->m_nextNote!='\0')
       this->m_nextNote++;
 
-    //has the last note been played already?
+    //if current note end of the MML string, music is finished
     if(*this->m_curNote == '\0')
     {
         this->isFinished = true;
         return 0;
     }
 
-    //has the last note been reached?
+    //check if current note the last one of the string
     if(*this->m_nextNote == '\0')
         this->lastnote = true;
 
@@ -148,7 +148,7 @@ int MMLtone::onTick()
         break;
     }
 
-    //multiply the freq. to get the right octave (2 ^ octave)
+    //multiply the freq. to get the right octave (freq * 2 ^ octave)
     frequency *= (float)(1 << this->m_octave);
     it++;
 
@@ -167,7 +167,7 @@ int MMLtone::onTick()
     //play the note
     tone(this->pin, frequency);
 
-    //decode note duration
+    //decode note duration (possible 2 digits)
     if(isdigit(*it))
     {
       duration = *it - 48;

@@ -64,6 +64,7 @@ unsigned long prevTime = 0;
 volatile bool started=false, reseted=false, last=false;
 
 MMLtone melody = MMLtone(12, "5d8 e f g f e d c d e f g f e d c d e f g f e4 d8 g f e d c");
+MMLtone warcry = MMLtone(12, "4D4 G2 G8 B8 A8 B8 G2 G8. G32. G64. R64 G4 A4. A16. A64. R64 A16. A64. R64 A8 G8 A8 B4 G8. G32. R64 G4 D4 G2 G8 B8 A8 B8 G2. B4 A4 5C4 4B4 A4 G4");
 
 CD4511 display = CD4511(5, 10, 9, 6, 7, 8);
 bool displayOn=false, numberSet=false;

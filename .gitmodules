@@ -1,0 +1,3 @@
+[submodule "src/MMLtone"]
+	path = src/MMLtone
+	url = https://github.com/gilleshenrard/MMLtone

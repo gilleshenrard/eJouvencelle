@@ -698,4 +698,36 @@ Wire Notes Line
 	800  6250 4050 6250
 Text Notes 850  7400 0    50   ~ 0
 Buttons w/ hardware debouncing
+Text GLabel 6400 5050 2    50   Input ~ 0
+Btn2
+Text GLabel 6400 4950 2    50   Input ~ 0
+Btn1
+Text GLabel 6400 4850 2    50   Input ~ 0
+TX
+Text GLabel 6400 4750 2    50   Input ~ 0
+RX
+Text GLabel 6400 3700 2    50   Input ~ 0
+RST
+Text GLabel 6400 5150 2    50   Input ~ 0
+BPM3
+Text GLabel 5100 5150 0    50   Input ~ 0
+BPM1
+Text GLabel 5100 4950 0    50   Input ~ 0
+BPM2
+Wire Wire Line
+	6400 3700 6350 3700
+Wire Wire Line
+	6400 4750 6350 4750
+Wire Wire Line
+	6400 4850 6350 4850
+Wire Wire Line
+	6350 4950 6400 4950
+Wire Wire Line
+	6400 5050 6350 5050
+Wire Wire Line
+	6350 5150 6400 5150
+Wire Wire Line
+	5150 5150 5100 5150
+Wire Wire Line
+	5100 4950 5150 4950
 $EndSCHEMATC

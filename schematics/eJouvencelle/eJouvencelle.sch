@@ -422,4 +422,134 @@ F 3 "" H 4900 3250 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	5150 3050 4900 3050
+$Comp
+L Connector:Conn_01x06_Female J?
+U 1 1 5E912E98
+P 1050 3850
+F 0 "J?" H 942 3325 50  0000 C CNN
+F 1 "1X6 female header" H 942 3416 50  0000 C CNN
+F 2 "" H 1050 3850 50  0001 C CNN
+F 3 "~" H 1050 3850 50  0001 C CNN
+	1    1050 3850
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5E9155DD
+P 1350 4050
+F 0 "#PWR?" H 1350 3800 50  0001 C CNN
+F 1 "GND" H 1355 3877 50  0000 C CNN
+F 2 "" H 1350 4050 50  0001 C CNN
+F 3 "" H 1350 4050 50  0001 C CNN
+	1    1350 4050
+	1    0    0    -1  
+$EndComp
+NoConn ~ 1250 3950
+$Comp
+L power:+5V #PWR?
+U 1 1 5E917405
+P 1550 3900
+F 0 "#PWR?" H 1550 3750 50  0001 C CNN
+F 1 "+5V" H 1565 4073 50  0000 C CNN
+F 2 "" H 1550 3900 50  0001 C CNN
+F 3 "" H 1550 3900 50  0001 C CNN
+	1    1550 3900
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E91C82E
+P 1550 3750
+F 0 "R?" V 1600 3550 50  0000 L CNN
+F 1 "1k" V 1600 3900 50  0000 L CNN
+F 2 "" V 1480 3750 50  0001 C CNN
+F 3 "~" H 1550 3750 50  0001 C CNN
+	1    1550 3750
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E91D625
+P 1550 3650
+F 0 "R?" V 1600 3450 50  0000 L CNN
+F 1 "1k" V 1500 3800 50  0000 L CNN
+F 2 "" V 1480 3650 50  0001 C CNN
+F 3 "~" H 1550 3650 50  0001 C CNN
+	1    1550 3650
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5E91D857
+P 1750 3450
+F 0 "C?" V 1700 3300 50  0000 L CNN
+F 1 "100nF" V 1600 3300 50  0000 L CNN
+F 2 "" H 1750 3450 50  0001 C CNN
+F 3 "~" H 1750 3450 50  0001 C CNN
+	1    1750 3450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1350 4050 1250 4050
+Wire Wire Line
+	1550 3900 1550 3850
+Wire Wire Line
+	1550 3850 1250 3850
+Wire Wire Line
+	1400 3650 1250 3650
+Wire Wire Line
+	1400 3750 1250 3750
+Text GLabel 1950 3650 2    50   Input ~ 0
+TX
+Wire Wire Line
+	1950 3650 1700 3650
+Text GLabel 1950 3750 2    50   Input ~ 0
+RX
+Wire Wire Line
+	1950 3750 1700 3750
+Text GLabel 1950 3450 2    50   Input ~ 0
+RST
+Wire Wire Line
+	1250 3550 1650 3550
+Wire Wire Line
+	1650 3550 1650 3450
+$Comp
+L Device:R R?
+U 1 1 5E9329C4
+P 1900 3250
+F 0 "R?" H 1750 3150 50  0000 L CNN
+F 1 "100k" H 1650 3250 50  0000 L CNN
+F 2 "" V 1830 3250 50  0001 C CNN
+F 3 "~" H 1900 3250 50  0001 C CNN
+	1    1900 3250
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5E933D66
+P 1900 3100
+F 0 "#PWR?" H 1900 2950 50  0001 C CNN
+F 1 "+5V" H 1915 3273 50  0000 C CNN
+F 2 "" H 1900 3100 50  0001 C CNN
+F 3 "" H 1900 3100 50  0001 C CNN
+	1    1900 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1900 3400 1900 3450
+Wire Wire Line
+	1900 3450 1850 3450
+Wire Wire Line
+	1950 3450 1900 3450
+Connection ~ 1900 3450
+Wire Notes Line
+	2450 2800 2450 4550
+Wire Notes Line
+	2450 4550 650  4550
+Wire Notes Line
+	650  4550 650  2800
+Wire Notes Line
+	650  2800 2450 2800
+Text Notes 700  4500 0    50   ~ 0
+FTDI header (reprogramming)
 $EndSCHEMATC

@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name eJouvencelle)(type Legacy)(uri ${KIPRJMOD}/eJouvencelle.lib)(options "")(descr ""))
+)

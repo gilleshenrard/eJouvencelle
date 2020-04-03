@@ -288,4 +288,114 @@ Wire Notes Line
 	650  2550 650  600 
 Text Notes 700  2500 0    50   ~ 0
 Main + BPM switch (DP4T)
+$Comp
+L power:+5V #PWR?
+U 1 1 5E8E172E
+P 4950 950
+F 0 "#PWR?" H 4950 800 50  0001 C CNN
+F 1 "+5V" H 4965 1123 50  0000 C CNN
+F 2 "" H 4950 950 50  0001 C CNN
+F 3 "" H 4950 950 50  0001 C CNN
+	1    4950 950 
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5E8E3004
+P 4350 1450
+F 0 "#PWR?" H 4350 1200 50  0001 C CNN
+F 1 "GND" H 4355 1277 50  0000 C CNN
+F 2 "" H 4350 1450 50  0001 C CNN
+F 3 "" H 4350 1450 50  0001 C CNN
+	1    4350 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C?
+U 1 1 5E8E579B
+P 4700 1250
+F 0 "C?" H 4792 1296 50  0000 L CNN
+F 1 "10pF" H 4792 1205 50  0000 L CNN
+F 2 "" H 4700 1250 50  0001 C CNN
+F 3 "~" H 4700 1250 50  0001 C CNN
+	1    4700 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 1450 4700 1450
+Wire Wire Line
+	4700 1450 4700 1350
+Connection ~ 4350 1450
+Wire Wire Line
+	4700 1150 4700 950 
+Wire Wire Line
+	4700 950  4650 950 
+Connection ~ 4700 950 
+Wire Wire Line
+	4350 1250 4350 1450
+$Comp
+L Regulator_Linear:LM1117-5.0 U?
+U 1 1 5E8E0075
+P 4350 950
+F 0 "U?" H 4350 1192 50  0000 C CNN
+F 1 "LM1117IMPX-5.0/NOPB" H 4350 1101 50  0000 C CNN
+F 2 "" H 4350 950 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/lm1117.pdf" H 4350 950 50  0001 C CNN
+	1    4350 950 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Q_PMOS_DGS Q?
+U 1 1 5E8F175C
+P 3650 1050
+F 0 "Q?" V 3992 1050 50  0000 C CNN
+F 1 "PPMT30V4" V 3901 1050 50  0000 C CNN
+F 2 "" H 3850 1150 50  0001 C CNN
+F 3 "~" H 3650 1050 50  0001 C CNN
+	1    3650 1050
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3850 950  3950 950 
+Wire Wire Line
+	3650 1250 3650 1450
+Wire Wire Line
+	3650 1450 3950 1450
+Text GLabel 3400 950  0    50   Input ~ 0
+Vbatt
+Wire Wire Line
+	3400 950  3450 950 
+$Comp
+L Device:C_Small C?
+U 1 1 5E8F774D
+P 3950 1250
+F 0 "C?" H 4042 1296 50  0000 L CNN
+F 1 "10pF" H 4042 1205 50  0000 L CNN
+F 2 "" H 3950 1250 50  0001 C CNN
+F 3 "~" H 3950 1250 50  0001 C CNN
+	1    3950 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3950 1150 3950 950 
+Connection ~ 3950 950 
+Wire Wire Line
+	3950 950  4050 950 
+Wire Wire Line
+	3950 1350 3950 1450
+Connection ~ 3950 1450
+Wire Wire Line
+	3950 1450 4350 1450
+Text Notes 3000 1850 0    50   ~ 0
+Voltage regulation + Reverse voltage protection
+Wire Notes Line
+	5100 1900 2950 1900
+Wire Notes Line
+	2950 1900 2950 600 
+Wire Wire Line
+	4700 950  4950 950 
+Wire Notes Line
+	5100 1900 5100 600 
+Wire Notes Line
+	2950 600  5100 600 
 $EndSCHEMATC

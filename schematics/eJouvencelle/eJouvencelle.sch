@@ -17,8 +17,8 @@ $Comp
 L eJouvencelle:ATmega328P-AU U?
 U 1 1 5E886BB2
 P 5500 4950
-F 0 "U?" H 5050 6450 50  0000 C CNN
-F 1 "ATmega328P-AU" H 5900 3500 50  0000 C CNN
+F 0 "U?" H 5050 6500 50  0000 C CNN
+F 1 "ATmega328P-AU" H 5050 6400 50  0000 C CNN
 F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 5500 4700 50  0001 C CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 5500 4950 50  0001 C CNN
 	1    5500 4950

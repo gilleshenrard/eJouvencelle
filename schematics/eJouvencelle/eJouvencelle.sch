@@ -14,17 +14,6 @@ Comment3 "License : MIT"
 Comment4 "Author : Gilles Henrard"
 $EndDescr
 $Comp
-L eJouvencelle:ATmega328P-AU U?
-U 1 1 5E886BB2
-P 5500 4950
-F 0 "U?" H 5050 6500 50  0000 C CNN
-F 1 "ATmega328P-AU" H 5050 6400 50  0000 C CNN
-F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 5500 4700 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 5500 4950 50  0001 C CNN
-	1    5500 4950
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR?
 U 1 1 5E88977D
 P 5500 6450
@@ -128,158 +117,6 @@ F 3 "" H 6250 3450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Connection ~ 6250 3450
-$Comp
-L eJouvencelle:SW_DP4T SW?
-U 1 1 5E8A8418
-P 1900 1250
-F 0 "SW?" H 1850 1835 50  0000 C CNN
-F 1 "SW_DP4T" H 1850 1744 50  0000 C CNN
-F 2 "" H 1800 1400 50  0001 C CNN
-F 3 "~" H 1800 1400 50  0001 C CNN
-	1    1900 1250
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector_Generic:Conn_01x02 J?
-U 1 1 5E8AB0B1
-P 800 1100
-F 0 "J?" H 718 775 50  0000 C CNN
-F 1 "Vin" H 718 866 50  0000 C CNN
-F 2 "" H 800 1100 50  0001 C CNN
-F 3 "~" H 800 1100 50  0001 C CNN
-	1    800  1100
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5E8AD4E2
-P 1000 1300
-F 0 "#PWR?" H 1000 1050 50  0001 C CNN
-F 1 "GND" H 1005 1127 50  0000 C CNN
-F 2 "" H 1000 1300 50  0001 C CNN
-F 3 "" H 1000 1300 50  0001 C CNN
-	1    1000 1300
-	1    0    0    -1  
-$EndComp
-NoConn ~ 2050 850 
-NoConn ~ 2050 1350
-Text GLabel 2350 950  2    50   Input ~ 0
-Vbatt
-Wire Wire Line
-	2050 1050 2300 1050
-Wire Wire Line
-	2300 1050 2300 950 
-Wire Wire Line
-	2300 950  2050 950 
-Wire Wire Line
-	2050 1150 2300 1150
-Wire Wire Line
-	2300 1150 2300 1050
-Connection ~ 2300 1050
-Wire Wire Line
-	2350 950  2300 950 
-Connection ~ 2300 950 
-$Comp
-L power:+5V #PWR?
-U 1 1 5E8B2017
-P 1550 1450
-F 0 "#PWR?" H 1550 1300 50  0001 C CNN
-F 1 "+5V" H 1565 1623 50  0000 C CNN
-F 2 "" H 1550 1450 50  0001 C CNN
-F 3 "" H 1550 1450 50  0001 C CNN
-	1    1550 1450
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1550 1450 1550 1500
-Wire Wire Line
-	1550 1500 1650 1500
-Text GLabel 2500 1450 2    50   Input ~ 0
-BPM1
-Text GLabel 2500 1550 2    50   Input ~ 0
-BPM2
-Text GLabel 2500 1650 2    50   Input ~ 0
-BPM3
-$Comp
-L Device:R R?
-U 1 1 5E8B44F5
-P 2100 1950
-F 0 "R?" H 1950 2000 50  0000 L CNN
-F 1 "10k" H 1900 1900 50  0000 L CNN
-F 2 "" V 2030 1950 50  0001 C CNN
-F 3 "~" H 2100 1950 50  0001 C CNN
-	1    2100 1950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5E8B514B
-P 2350 1950
-F 0 "R?" H 2200 2000 50  0000 L CNN
-F 1 "10k" H 2150 1900 50  0000 L CNN
-F 2 "" V 2280 1950 50  0001 C CNN
-F 3 "~" H 2350 1950 50  0001 C CNN
-	1    2350 1950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5E8B5557
-P 2450 1950
-F 0 "R?" H 2550 2000 50  0000 L CNN
-F 1 "10k" H 2520 1905 50  0000 L CNN
-F 2 "" V 2380 1950 50  0001 C CNN
-F 3 "~" H 2450 1950 50  0001 C CNN
-	1    2450 1950
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2100 1800 2100 1650
-Wire Wire Line
-	2100 1650 2050 1650
-Wire Wire Line
-	2350 1800 2350 1550
-Wire Wire Line
-	2450 1800 2450 1450
-$Comp
-L power:GND #PWR?
-U 1 1 5E8BA2A4
-P 2350 2150
-F 0 "#PWR?" H 2350 1900 50  0001 C CNN
-F 1 "GND" H 2355 1977 50  0000 C CNN
-F 2 "" H 2350 2150 50  0001 C CNN
-F 3 "" H 2350 2150 50  0001 C CNN
-	1    2350 2150
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2100 2100 2100 2150
-Wire Wire Line
-	2450 2150 2450 2100
-Connection ~ 2350 2150
-Wire Wire Line
-	2350 2100 2350 2150
-Wire Wire Line
-	2500 1450 2450 1450
-Connection ~ 2450 1450
-Wire Wire Line
-	2500 1550 2350 1550
-Connection ~ 2350 1550
-Wire Wire Line
-	2050 1450 2450 1450
-Wire Wire Line
-	2050 1550 2350 1550
-Wire Wire Line
-	2100 1650 2500 1650
-Connection ~ 2100 1650
-Wire Wire Line
-	2100 2150 2350 2150
-Wire Wire Line
-	2450 2150 2350 2150
-Wire Notes Line
-	650  2550 650  600 
-Text Notes 700  2500 0    50   ~ 0
-Main switch (DP4T) + reverse voltage protection
 $Comp
 L power:+5V #PWR?
 U 1 1 5E8E172E
@@ -398,32 +235,6 @@ Wire Notes Line
 	8950 650  10750 650 
 Text Notes 9000 2350 0    50   ~ 0
 FTDI header (reprogramming)
-$Comp
-L Device:Q_PMOS_DGS Q?
-U 1 1 5E94B563
-P 1250 1100
-F 0 "Q?" V 1592 1100 50  0000 C CNN
-F 1 "PPMT30V4" V 1501 1100 50  0000 C CNN
-F 2 "" H 1450 1200 50  0001 C CNN
-F 3 "~" H 1250 1100 50  0001 C CNN
-	1    1250 1100
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	1000 1100 1000 1300
-Wire Wire Line
-	1050 1000 1000 1000
-Wire Wire Line
-	1250 1300 1000 1300
-Connection ~ 1000 1300
-Wire Wire Line
-	1650 1000 1450 1000
-Wire Notes Line
-	2900 2550 2900 600 
-Wire Notes Line
-	650  600  2900 600 
-Wire Notes Line
-	650  2550 2900 2550
 Wire Wire Line
 	5500 1000 5650 1000
 Wire Notes Line
@@ -1156,4 +967,193 @@ Wire Notes Line
 	1450 7500 1450 5500
 Wire Notes Line
 	1450 5500 3150 5500
+Wire Notes Line
+	650  2550 2900 2550
+Wire Notes Line
+	650  600  2900 600 
+Wire Notes Line
+	2900 2550 2900 600 
+Wire Wire Line
+	1650 1000 1450 1000
+Connection ~ 1000 1300
+Wire Wire Line
+	1250 1300 1000 1300
+Wire Wire Line
+	1050 1000 1000 1000
+Wire Wire Line
+	1000 1100 1000 1300
+$Comp
+L Device:Q_PMOS_DGS Q?
+U 1 1 5E94B563
+P 1250 1100
+F 0 "Q?" V 1592 1100 50  0000 C CNN
+F 1 "PPMT30V4" V 1501 1100 50  0000 C CNN
+F 2 "" H 1450 1200 50  0001 C CNN
+F 3 "~" H 1250 1100 50  0001 C CNN
+	1    1250 1100
+	0    -1   -1   0   
+$EndComp
+Text Notes 700  2500 0    50   ~ 0
+Main switch (DP4T) + reverse voltage protection
+Wire Notes Line
+	650  2550 650  600 
+Wire Wire Line
+	2450 2150 2350 2150
+Wire Wire Line
+	2100 2150 2350 2150
+Connection ~ 2100 1650
+Wire Wire Line
+	2100 1650 2500 1650
+Wire Wire Line
+	2050 1550 2350 1550
+Wire Wire Line
+	2050 1450 2450 1450
+Connection ~ 2350 1550
+Wire Wire Line
+	2500 1550 2350 1550
+Connection ~ 2450 1450
+Wire Wire Line
+	2500 1450 2450 1450
+Wire Wire Line
+	2350 2100 2350 2150
+Connection ~ 2350 2150
+Wire Wire Line
+	2450 2150 2450 2100
+Wire Wire Line
+	2100 2100 2100 2150
+$Comp
+L power:GND #PWR?
+U 1 1 5E8BA2A4
+P 2350 2150
+F 0 "#PWR?" H 2350 1900 50  0001 C CNN
+F 1 "GND" H 2355 1977 50  0000 C CNN
+F 2 "" H 2350 2150 50  0001 C CNN
+F 3 "" H 2350 2150 50  0001 C CNN
+	1    2350 2150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2450 1800 2450 1450
+Wire Wire Line
+	2350 1800 2350 1550
+Wire Wire Line
+	2100 1650 2050 1650
+Wire Wire Line
+	2100 1800 2100 1650
+$Comp
+L Device:R R?
+U 1 1 5E8B5557
+P 2450 1950
+F 0 "R?" H 2550 2000 50  0000 L CNN
+F 1 "10k" H 2520 1905 50  0000 L CNN
+F 2 "" V 2380 1950 50  0001 C CNN
+F 3 "~" H 2450 1950 50  0001 C CNN
+	1    2450 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E8B514B
+P 2350 1950
+F 0 "R?" H 2200 2000 50  0000 L CNN
+F 1 "10k" H 2150 1900 50  0000 L CNN
+F 2 "" V 2280 1950 50  0001 C CNN
+F 3 "~" H 2350 1950 50  0001 C CNN
+	1    2350 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E8B44F5
+P 2100 1950
+F 0 "R?" H 1950 2000 50  0000 L CNN
+F 1 "10k" H 1900 1900 50  0000 L CNN
+F 2 "" V 2030 1950 50  0001 C CNN
+F 3 "~" H 2100 1950 50  0001 C CNN
+	1    2100 1950
+	1    0    0    -1  
+$EndComp
+Text GLabel 2500 1650 2    50   Input ~ 0
+BPM3
+Text GLabel 2500 1550 2    50   Input ~ 0
+BPM2
+Text GLabel 2500 1450 2    50   Input ~ 0
+BPM1
+Wire Wire Line
+	1550 1500 1650 1500
+Wire Wire Line
+	1550 1450 1550 1500
+$Comp
+L power:+5V #PWR?
+U 1 1 5E8B2017
+P 1550 1450
+F 0 "#PWR?" H 1550 1300 50  0001 C CNN
+F 1 "+5V" H 1565 1623 50  0000 C CNN
+F 2 "" H 1550 1450 50  0001 C CNN
+F 3 "" H 1550 1450 50  0001 C CNN
+	1    1550 1450
+	1    0    0    -1  
+$EndComp
+Connection ~ 2300 950 
+Wire Wire Line
+	2350 950  2300 950 
+Connection ~ 2300 1050
+Wire Wire Line
+	2300 1150 2300 1050
+Wire Wire Line
+	2050 1150 2300 1150
+Wire Wire Line
+	2300 950  2050 950 
+Wire Wire Line
+	2300 1050 2300 950 
+Wire Wire Line
+	2050 1050 2300 1050
+Text GLabel 2350 950  2    50   Input ~ 0
+Vbatt
+NoConn ~ 2050 1350
+NoConn ~ 2050 850 
+$Comp
+L power:GND #PWR?
+U 1 1 5E8AD4E2
+P 1000 1300
+F 0 "#PWR?" H 1000 1050 50  0001 C CNN
+F 1 "GND" H 1005 1127 50  0000 C CNN
+F 2 "" H 1000 1300 50  0001 C CNN
+F 3 "" H 1000 1300 50  0001 C CNN
+	1    1000 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x02 J?
+U 1 1 5E8AB0B1
+P 800 1100
+F 0 "J?" H 718 775 50  0000 C CNN
+F 1 "Vin" H 718 866 50  0000 C CNN
+F 2 "" H 800 1100 50  0001 C CNN
+F 3 "~" H 800 1100 50  0001 C CNN
+	1    800  1100
+	-1   0    0    1   
+$EndComp
+$Comp
+L eJouvencelle:SW_DP4T SW?
+U 1 1 5E8A8418
+P 1900 1250
+F 0 "SW?" H 1850 1835 50  0000 C CNN
+F 1 "SW_DP4T" H 1850 1744 50  0000 C CNN
+F 2 "" H 1800 1400 50  0001 C CNN
+F 3 "~" H 1800 1400 50  0001 C CNN
+	1    1900 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L eJouvencelle:ATmega328P-AU U?
+U 1 1 5E886BB2
+P 5500 4950
+F 0 "U?" H 5050 6500 50  0000 C CNN
+F 1 "ATmega328P-AU" H 5050 6400 50  0000 C CNN
+F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 5500 4700 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 5500 4950 50  0001 C CNN
+	1    5500 4950
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

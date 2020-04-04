@@ -5,7 +5,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "eJouvencelle"
-Date "2020-04-03"
+Date "2020-04-04"
 Rev "v3.0"
 Comp ""
 Comment1 ""
@@ -388,126 +388,6 @@ F 3 "" H 5150 3550 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	5400 3350 5150 3350
-$Comp
-L Connector:Conn_01x06_Female J?
-U 1 1 5E912E98
-P 9050 1650
-F 0 "J?" H 8942 1125 50  0000 C CNN
-F 1 "1X6 female header" H 8942 1216 50  0000 C CNN
-F 2 "" H 9050 1650 50  0001 C CNN
-F 3 "~" H 9050 1650 50  0001 C CNN
-	1    9050 1650
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5E9155DD
-P 9350 1850
-F 0 "#PWR?" H 9350 1600 50  0001 C CNN
-F 1 "GND" H 9355 1677 50  0000 C CNN
-F 2 "" H 9350 1850 50  0001 C CNN
-F 3 "" H 9350 1850 50  0001 C CNN
-	1    9350 1850
-	1    0    0    -1  
-$EndComp
-NoConn ~ 9250 1750
-$Comp
-L power:+5V #PWR?
-U 1 1 5E917405
-P 9550 1700
-F 0 "#PWR?" H 9550 1550 50  0001 C CNN
-F 1 "+5V" H 9565 1873 50  0000 C CNN
-F 2 "" H 9550 1700 50  0001 C CNN
-F 3 "" H 9550 1700 50  0001 C CNN
-	1    9550 1700
-	-1   0    0    1   
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5E91C82E
-P 9550 1550
-F 0 "R?" V 9600 1350 50  0000 L CNN
-F 1 "1k" V 9600 1700 50  0000 L CNN
-F 2 "" V 9480 1550 50  0001 C CNN
-F 3 "~" H 9550 1550 50  0001 C CNN
-	1    9550 1550
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5E91D625
-P 9550 1450
-F 0 "R?" V 9600 1250 50  0000 L CNN
-F 1 "1k" V 9500 1600 50  0000 L CNN
-F 2 "" V 9480 1450 50  0001 C CNN
-F 3 "~" H 9550 1450 50  0001 C CNN
-	1    9550 1450
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:C_Small C?
-U 1 1 5E91D857
-P 9750 1250
-F 0 "C?" V 9700 1100 50  0000 L CNN
-F 1 "100nF" V 9600 1100 50  0000 L CNN
-F 2 "" H 9750 1250 50  0001 C CNN
-F 3 "~" H 9750 1250 50  0001 C CNN
-	1    9750 1250
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	9350 1850 9250 1850
-Wire Wire Line
-	9550 1700 9550 1650
-Wire Wire Line
-	9550 1650 9250 1650
-Wire Wire Line
-	9400 1450 9250 1450
-Wire Wire Line
-	9400 1550 9250 1550
-Text GLabel 9950 1450 2    50   Input ~ 0
-TX
-Wire Wire Line
-	9950 1450 9700 1450
-Text GLabel 9950 1550 2    50   Input ~ 0
-RX
-Wire Wire Line
-	9950 1550 9700 1550
-Text GLabel 9950 1250 2    50   Input ~ 0
-RST
-Wire Wire Line
-	9250 1350 9650 1350
-Wire Wire Line
-	9650 1350 9650 1250
-$Comp
-L Device:R R?
-U 1 1 5E9329C4
-P 9900 1050
-F 0 "R?" H 9750 950 50  0000 L CNN
-F 1 "100k" H 9650 1050 50  0000 L CNN
-F 2 "" V 9830 1050 50  0001 C CNN
-F 3 "~" H 9900 1050 50  0001 C CNN
-	1    9900 1050
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:+5V #PWR?
-U 1 1 5E933D66
-P 9900 900
-F 0 "#PWR?" H 9900 750 50  0001 C CNN
-F 1 "+5V" H 9915 1073 50  0000 C CNN
-F 2 "" H 9900 900 50  0001 C CNN
-F 3 "" H 9900 900 50  0001 C CNN
-	1    9900 900 
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9900 1200 9900 1250
-Wire Wire Line
-	9900 1250 9850 1250
-Wire Wire Line
-	9950 1250 9900 1250
-Connection ~ 9900 1250
 Wire Notes Line
 	10450 600  10450 2350
 Wire Notes Line
@@ -1156,4 +1036,124 @@ Text GLabel 5350 5350 0    50   Input ~ 0
 Buzzer
 Wire Wire Line
 	5400 5350 5350 5350
+Connection ~ 9900 1250
+Wire Wire Line
+	9950 1250 9900 1250
+Wire Wire Line
+	9900 1250 9850 1250
+Wire Wire Line
+	9900 1200 9900 1250
+$Comp
+L power:+5V #PWR?
+U 1 1 5E933D66
+P 9900 900
+F 0 "#PWR?" H 9900 750 50  0001 C CNN
+F 1 "+5V" H 9915 1073 50  0000 C CNN
+F 2 "" H 9900 900 50  0001 C CNN
+F 3 "" H 9900 900 50  0001 C CNN
+	1    9900 900 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E9329C4
+P 9900 1050
+F 0 "R?" H 9750 950 50  0000 L CNN
+F 1 "100k" H 9650 1050 50  0000 L CNN
+F 2 "" V 9830 1050 50  0001 C CNN
+F 3 "~" H 9900 1050 50  0001 C CNN
+	1    9900 1050
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9650 1350 9650 1250
+Wire Wire Line
+	9250 1350 9650 1350
+Text GLabel 9950 1250 2    50   Input ~ 0
+RST
+Wire Wire Line
+	9950 1550 9700 1550
+Text GLabel 9950 1550 2    50   Input ~ 0
+RX
+Wire Wire Line
+	9950 1450 9700 1450
+Text GLabel 9950 1450 2    50   Input ~ 0
+TX
+Wire Wire Line
+	9400 1550 9250 1550
+Wire Wire Line
+	9400 1450 9250 1450
+Wire Wire Line
+	9550 1650 9250 1650
+Wire Wire Line
+	9550 1700 9550 1650
+Wire Wire Line
+	9350 1850 9250 1850
+$Comp
+L Device:C_Small C?
+U 1 1 5E91D857
+P 9750 1250
+F 0 "C?" V 9700 1100 50  0000 L CNN
+F 1 "100nF" V 9600 1100 50  0000 L CNN
+F 2 "" H 9750 1250 50  0001 C CNN
+F 3 "~" H 9750 1250 50  0001 C CNN
+	1    9750 1250
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E91D625
+P 9550 1450
+F 0 "R?" V 9600 1250 50  0000 L CNN
+F 1 "1k" V 9500 1600 50  0000 L CNN
+F 2 "" V 9480 1450 50  0001 C CNN
+F 3 "~" H 9550 1450 50  0001 C CNN
+	1    9550 1450
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E91C82E
+P 9550 1550
+F 0 "R?" V 9600 1350 50  0000 L CNN
+F 1 "1k" V 9600 1700 50  0000 L CNN
+F 2 "" V 9480 1550 50  0001 C CNN
+F 3 "~" H 9550 1550 50  0001 C CNN
+	1    9550 1550
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR?
+U 1 1 5E917405
+P 9550 1700
+F 0 "#PWR?" H 9550 1550 50  0001 C CNN
+F 1 "+5V" H 9565 1873 50  0000 C CNN
+F 2 "" H 9550 1700 50  0001 C CNN
+F 3 "" H 9550 1700 50  0001 C CNN
+	1    9550 1700
+	-1   0    0    1   
+$EndComp
+NoConn ~ 9250 1750
+$Comp
+L power:GND #PWR?
+U 1 1 5E9155DD
+P 9350 1850
+F 0 "#PWR?" H 9350 1600 50  0001 C CNN
+F 1 "GND" H 9355 1677 50  0000 C CNN
+F 2 "" H 9350 1850 50  0001 C CNN
+F 3 "" H 9350 1850 50  0001 C CNN
+	1    9350 1850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x06_Female J?
+U 1 1 5E912E98
+P 9050 1650
+F 0 "J?" H 8942 1125 50  0000 C CNN
+F 1 "1X6 female header" H 8942 1216 50  0000 C CNN
+F 2 "" H 9050 1650 50  0001 C CNN
+F 3 "~" H 9050 1650 50  0001 C CNN
+	1    9050 1650
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC

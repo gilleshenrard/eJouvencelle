@@ -5,6 +5,7 @@
 /*		Pin number of the Latch Enable decoder pin 			      */
 /*		Pin number of the Blank decoder pin (ignored by def.) */
 /*		Pin number of the Test decoder pin (ignored by def.)  */
+/*    Pin number of the Dot LED (ignored by def.)           */
 /*  P : Builds and initialises a new CD4511 decoder	        */
 /*      with the matching pin numbers                       */
 /*  O : /                                                   */
@@ -18,7 +19,7 @@ CD4511::CD4511(unsigned char a, unsigned char b, unsigned char c, unsigned char 
   this->latch = latch;
   this->blank = blank;
   this->test = test;
-  this->dot = dot;
+  this->setDot(dot);
 }
 
 /************************************************************/

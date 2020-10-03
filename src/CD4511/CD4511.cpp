@@ -10,7 +10,7 @@
 /*      with the matching pin numbers                       */
 /*  O : /                                                   */
 /************************************************************/
-CD4511::CD4511(unsigned char a, unsigned char b, unsigned char c, unsigned char d, unsigned char latch, unsigned char blank = -1, unsigned char test = -1, unsigned char dot = -1)
+CD4511::CD4511(unsigned char a, unsigned char b, unsigned char c, unsigned char d, unsigned char latch, unsigned char blank, unsigned char test, unsigned char dot)
 {
   this->a = a;
   this->b = b;
@@ -37,7 +37,7 @@ CD4511::~CD4511()
 /************************************************************/
 void CD4511::setDot(unsigned char t_dot)
 {
-  this->dot=t_dot;
+  this->dot = t_dot;
 }
 
 /************************************************************/
@@ -66,11 +66,11 @@ void CD4511::setup()
 	digitalWrite((int)this->latch, HIGH);
 	
 	//enable the blank pin if selected
-	if(this->blank > -1)
+	if(this->blank != IGNORE_PIN)
 		pinMode((int)this->blank, OUTPUT);
 
 	//enable the test pin if selected
-	if(this->test > -1)
+	if(this->test != IGNORE_PIN)
 		pinMode((int)this->test, OUTPUT);
 }
 
@@ -117,7 +117,7 @@ void CD4511::commit()
 /************************************************************/
 void CD4511::displayOFF()
 {
-  if(this->blank > -1)
+  if(this->blank != IGNORE_PIN)
     digitalWrite((int)this->blank, LOW);
 }
 
@@ -128,7 +128,7 @@ void CD4511::displayOFF()
 /************************************************************/
 void CD4511::displayON()
 {
-  if(this->blank > -1)
+  if(this->blank != IGNORE_PIN)
     digitalWrite((int)this->blank, HIGH);
 }
 

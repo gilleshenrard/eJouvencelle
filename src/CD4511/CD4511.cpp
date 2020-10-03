@@ -71,14 +71,18 @@ void CD4511::setup()
 /*  I : Number to display                                   */
 /*  P : Sets each pin on the CD4511 to display the number   */
 /*        when the blank pin is released                    */
-/*  O : /                                                   */
+/*  O : 0 if the number to display is between 0 and 9       */
+/*     -1 otherwise                                         */
 /************************************************************/
 /*  WARNING : to actually display a number, the method      */
 /*            commit() must be called afterwards            */
 /*            (CD4511 needs a falling edge on the latch pin)*/
 /************************************************************/
-void CD4511::display(int Number)
+int CD4511::display(int Number)
 {
+  if(Number < 0 || Number > 9)
+    return -1;
+  
   output_u decoder;
 
   //set the char part of the union with Number
@@ -89,6 +93,8 @@ void CD4511::display(int Number)
   digitalWrite((int)this->b, decoder.pinsval.b);
   digitalWrite((int)this->c, decoder.pinsval.c);
   digitalWrite((int)this->d, decoder.pinsval.d);
+
+  return 0;
 }
 
 /************************************************************/

@@ -27,7 +27,7 @@ class CD4511
 
     void setDot(unsigned char dot);
 		void setup();
-		void display(int num);
+		int display(int num);
 		void commit();
 		void displayOFF();
 		void displayON();

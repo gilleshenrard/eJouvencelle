@@ -19,7 +19,7 @@ CD4511::CD4511(unsigned char a, unsigned char b, unsigned char c, unsigned char 
   this->latch = latch;
   this->blank = blank;
   this->test = test;
-  this->setDot(dot);
+  this->dot = dot;
 }
 
 /************************************************************/
@@ -29,16 +29,6 @@ CD4511::CD4511(unsigned char a, unsigned char b, unsigned char c, unsigned char 
 /************************************************************/
 CD4511::~CD4511()
 {}
-
-/************************************************************/
-/*  I : Pin number to assign to the display dot             */
-/*  P : assigns pin numbers to display dot                  */
-/*  O : /                                                   */
-/************************************************************/
-void CD4511::setDot(unsigned char t_dot)
-{
-  this->dot = t_dot;
-}
 
 /************************************************************/
 /*  I : /                                                   */

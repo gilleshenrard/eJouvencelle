@@ -25,7 +25,6 @@ class CD4511
 		CD4511(unsigned char a, unsigned char b, unsigned char c, unsigned char d, unsigned char latch, unsigned char blank = IGNORE_PIN , unsigned char test = IGNORE_PIN, unsigned char dot = IGNORE_PIN);
 		~CD4511();
 
-    void setDot(unsigned char dot);
 		void setup();
 		int display(int num);
 		void commit();

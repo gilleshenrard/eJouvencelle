@@ -66,6 +66,9 @@ void CD4511::setup()
 /*  WARNING : to actually display a number, the method      */
 /*            commit() must be called afterwards            */
 /*            (CD4511 needs a falling edge on the latch pin)*/
+/*                                                          */
+/*            No need to test if legal number imputted. The */
+/*            CD4511 automatically blanks on any illegal nb */
 /************************************************************/
 void CD4511::display(int Number)
 {

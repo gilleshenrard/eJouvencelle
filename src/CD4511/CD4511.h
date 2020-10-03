@@ -26,7 +26,7 @@ class CD4511
 		~CD4511();
 
 		void setup();
-		int display(int num);
+		void display(int num);
 		void commit();
 		void displayOFF();
 		void displayON();

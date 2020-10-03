@@ -1,21 +1,21 @@
 #include"src/CD4511/CD4511.h"
 #include"src/MMLtone/MMLtone.h"
 
-/* PINOUT
+/* WIRING
  *  
- * CD4511 library testing procedure
+ * CD4511 (w/ Arduino Pro Mini)
  * --------------------------------
  *      CD4511 pins   |   Arduino pins   |   Atmega328p-au
  *      --------------|------------------|----------------
- *      B   : 1       |   D10            |   14  : PB2
- *      C   : 2       |   D9             |   13  : PB1
- *      LT  : 3       |   +5V            |   +5V
- *      BL  : 4       |   D8             |   12  : PB0
- *      LE  : 5       |   D7             |   11  : PD7
- *      D   : 6       |   D6             |   10  : PD6
- *      A   : 7       |   D5             |   9   : PD5
+ *      B   : 1       |   A0             |   23  : PC0
+ *      C   : 2       |   A1             |   24  : PC1
+ *      LT  : 3       |   +3.3V          |   +3.3V
+ *      BL  : 4       |   A2             |   25  : PC2
+ *      LE  : 5       |   A3             |   26  : PC3
+ *      D   : 6       |   A4             |   27  : PC4
+ *      A   : 7       |   A5             |   28  : PC5
  *      VSS : 8       |   GND            |   GND
- *      VDD : 16      |   +5V            |   +5V
+ *      VDD : 16      |   +3.3V          |   +3.3V
  *      
  *      CD4511 pins   |   7 segment display (1 bottom left)
  *      --------------|------------------------------------
@@ -50,7 +50,7 @@
 #define BPM140CRY 53570 // 37.333Hz tick (1/64 note at 140 BPM)
 #define BPM160CRY 46873 // 42.667Hz tick (1/64 note at 160 BPM)
 
-//timer1 values with 8 MHz internal resonator
+//timer1 values with 8 MHz crystal
 // 1/64 notes are chosen as smallest musical increment
 // (value = 8,000,000 / (prescaler * Hz) - 1) -> must be < 65536 for timer1
 #define BPM120INT 31249 // 32Hz tick (1/64 note at 120 BPM)
@@ -69,7 +69,7 @@ const char warcrycode[] PROGMEM = {"4D4 G2 G8 B8 A8 B8 G2 G8. G32. G64. R64 G4 A
 MMLtone melody = MMLtone(12, melodycode, sizeof(melodycode));
 MMLtone warcry = MMLtone(12, warcrycode, sizeof(warcrycode));
 
-CD4511 display = CD4511(5, 10, 9, 6, 7, 8);
+CD4511 display = CD4511(A5, A0, A1, A4, A3, A2);
 bool displayOn=false, numberSet=false;
 unsigned char number = 0, flicker=0;
 
@@ -100,7 +100,7 @@ void setup() {
   //reset counter value +
   //set compare match register for 32 Hz increments
   TCNT1  = 0;
-  OCR1A = BPM120CRY;
+  OCR1A = BPM120INT;
 
   // turn on CTC mode
   // + Set CS12, CS11 and CS10 bits for 8 prescaler

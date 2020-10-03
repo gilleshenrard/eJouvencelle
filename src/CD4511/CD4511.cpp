@@ -1,7 +1,7 @@
 #include "CD4511.h"
 
 /************************************************************/
-/*  I : Matching pin numbers for each decoder pin           */
+/*  I : Matching pin numbers for each decoder pin (A,B,C,D) */
 /*		Pin number of the Latch Enable decoder pin 			      */
 /*		Pin number of the Blank decoder pin (ignored by def.) */
 /*		Pin number of the Test decoder pin (ignored by def.)  */
@@ -47,24 +47,13 @@ void CD4511::setDot(unsigned char t_dot)
 /************************************************************/
 void CD4511::setup()
 {
-	//set the BCD value to 0
+	//set mandatory pins as outputs
 	pinMode((int)this->a, OUTPUT);
-	digitalWrite((int)this->a, LOW);
- 
-	pinMode((int)this->b, OUTPUT);
-	digitalWrite((int)this->b, LOW);
-	
-	pinMode((int)this->c, OUTPUT);
-	digitalWrite((int)this->c, LOW);
-	
-	pinMode((int)this->d, OUTPUT);
-	digitalWrite((int)this->d, LOW);
+  pinMode((int)this->b, OUTPUT);
+  pinMode((int)this->c, OUTPUT);
+  pinMode((int)this->d, OUTPUT);
+  pinMode((int)this->latch, OUTPUT);
 
-	//setup latch pin and send a pulse to fixate the 0 value
-	pinMode((int)this->latch, OUTPUT);
-	digitalWrite((int)this->latch, LOW);
-	digitalWrite((int)this->latch, HIGH);
-	
 	//enable the blank pin if selected
 	if(this->blank != IGNORE_PIN)
 		pinMode((int)this->blank, OUTPUT);
@@ -72,6 +61,10 @@ void CD4511::setup()
 	//enable the test pin if selected
 	if(this->test != IGNORE_PIN)
 		pinMode((int)this->test, OUTPUT);
+
+ //enable the dot pin if selected
+  if(this->dot != IGNORE_PIN)
+    pinMode((int)this->dot, OUTPUT);
 }
 
 /************************************************************/

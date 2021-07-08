@@ -96,4 +96,10 @@ K switch dual-pole double-throw spdt ON-ON
 F ~
 $ENDCMP
 #
+$CMP TC4428
+D Buck LED Lamp Driver Average-Mode Constant Current, MSOP8
+K Buck LED Lamp Driver Low Voltage Average CC
+F http://ww1.microchip.com/downloads/en/devicedoc/hv9967b.pdf
+$ENDCMP
+#
 #End Doc Library

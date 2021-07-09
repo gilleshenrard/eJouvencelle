@@ -539,7 +539,7 @@ U 1 1 5E912E98
 P 9650 5150
 F 0 "J?" H 9542 4625 50  0000 C CNN
 F 1 "1X6 female header" H 9650 4700 50  0000 C CNN
-F 2 "" H 9650 5150 50  0001 C CNN
+F 2 "Connector_PinHeader_1.00mm:PinHeader_1x06_P1.00mm_Vertical" H 9650 5150 50  0001 C CNN
 F 3 "~" H 9650 5150 50  0001 C CNN
 	1    9650 5150
 	1    0    0    1   

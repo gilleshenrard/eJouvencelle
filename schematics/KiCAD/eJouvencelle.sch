@@ -212,12 +212,12 @@ Wire Notes Line
 	7700 850  10800 850 
 Text Notes 7800 3100 0    50   ~ 0
 7-segment w/ BCD decoder
-Text GLabel 2000 3250 1    50   Input ~ 0
+Text GLabel 2100 3450 1    50   Input ~ 0
 Vbatt
-Text GLabel 1450 3650 0    50   Input ~ 0
+Text GLabel 1550 4050 0    50   Input ~ 0
 Buzzer
-Text Notes 1200 4600 0    50   ~ 0
-MOSFET-driven buzzer
+Text Notes 1300 4950 0    50   ~ 0
+Buzzer
 Text GLabel 4550 5150 0    50   Input ~ 0
 Buzzer
 Wire Wire Line
@@ -771,23 +771,23 @@ $EndComp
 $Comp
 L power:GND #PWR?
 U 1 1 5EA2FE7F
-P 2000 4250
-F 0 "#PWR?" H 2000 4000 50  0001 C CNN
-F 1 "GND" H 2005 4077 50  0000 C CNN
-F 2 "" H 2000 4250 50  0001 C CNN
-F 3 "" H 2000 4250 50  0001 C CNN
-	1    2000 4250
+P 2100 4650
+F 0 "#PWR?" H 2100 4400 50  0001 C CNN
+F 1 "GND" H 2105 4477 50  0000 C CNN
+F 2 "" H 2100 4650 50  0001 C CNN
+F 3 "" H 2100 4650 50  0001 C CNN
+	1    2100 4650
 	-1   0    0    -1  
 $EndComp
 $Comp
 L Device:Buzzer BZ?
 U 1 1 5E9C10D5
-P 2600 3750
-F 0 "BZ?" H 2500 3450 50  0000 L CNN
-F 1 "GPC3010YB-5V" H 2500 3550 50  0000 L CNN
-F 2 "" V 2575 3850 50  0001 C CNN
-F 3 "~" V 2575 3850 50  0001 C CNN
-	1    2600 3750
+P 2700 4150
+F 0 "BZ?" H 2600 3850 50  0000 L CNN
+F 1 "GPC3010YB-5V" H 2600 3950 50  0000 L CNN
+F 2 "" V 2675 4250 50  0001 C CNN
+F 3 "~" V 2675 4250 50  0001 C CNN
+	1    2700 4150
 	1    0    0    1   
 $EndComp
 $Comp
@@ -1190,28 +1190,63 @@ Wire Wire Line
 	5200 2800 5100 2800
 Wire Wire Line
 	5100 2800 5100 2850
+Wire Wire Line
+	1700 4050 1700 4250
+Wire Wire Line
+	1550 4050 1700 4050
+Wire Wire Line
+	2500 4050 2600 4050
+Wire Wire Line
+	2500 4250 2600 4250
+Wire Wire Line
+	2100 4550 2100 4650
+$Comp
+L power:GND #PWR?
+U 1 1 60E9B367
+P 1550 3750
+F 0 "#PWR?" H 1550 3500 50  0001 C CNN
+F 1 "GND" H 1555 3577 50  0000 C CNN
+F 2 "" H 1550 3750 50  0001 C CNN
+F 3 "" H 1550 3750 50  0001 C CNN
+	1    1550 3750
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	2100 3450 2100 3550
+Connection ~ 2100 3550
+Wire Wire Line
+	2100 3550 2100 3750
+Connection ~ 1700 4050
 $Comp
 L eJouvencelle:TC4428 U?
 U 1 1 60E78FEB
-P 2000 3750
-F 0 "U?" H 2250 4200 50  0000 C CNN
-F 1 "TC4428" H 2200 4100 50  0000 C CNN
-F 2 "Package_SO:MSOP-8_3x3mm_P0.65mm" H 1950 3250 50  0001 C CNN
-F 3 "http://ww1.microchip.com/downloads/en/devicedoc/hv9967b.pdf" H 2000 3750 50  0001 C CNN
-	1    2000 3750
+P 2100 4150
+F 0 "U?" H 2350 4600 50  0000 C CNN
+F 1 "TC4428" H 2300 4500 50  0000 C CNN
+F 2 "Package_SO:MSOP-8_3x3mm_P0.65mm" H 2050 3650 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/devicedoc/hv9967b.pdf" H 2100 4150 50  0001 C CNN
+	1    2100 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP_Small C?
+U 1 1 60E925D2
+P 1550 3650
+F 0 "C?" H 1638 3696 50  0000 L CNN
+F 1 "470uF" H 1638 3605 50  0000 L CNN
+F 2 "" H 1550 3650 50  0001 C CNN
+F 3 "~" H 1550 3650 50  0001 C CNN
+	1    1550 3650
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1600 3650 1600 3850
-Wire Wire Line
-	1450 3650 1600 3650
-Connection ~ 1600 3650
-Wire Wire Line
-	2400 3650 2500 3650
-Wire Wire Line
-	2400 3850 2500 3850
-Wire Wire Line
-	2000 3250 2000 3350
-Wire Wire Line
-	2000 4150 2000 4250
+	1550 3550 2100 3550
+Wire Notes Line
+	1150 3100 3300 3100
+Wire Notes Line
+	3300 3100 3300 5000
+Wire Notes Line
+	3300 5000 1150 5000
+Wire Notes Line
+	1150 5000 1150 3100
 $EndSCHEMATC

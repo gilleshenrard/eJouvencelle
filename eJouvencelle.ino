@@ -31,16 +31,18 @@
  *                    
  *  Music
  * -------------------------------------------------------
- *      MOSFET pins   |   
+ *      TC4428	      |   
  *      --------------|------------------
- *      Drain : 1     |   Arduino : D12, Atmega : 16 (+ pull-down to GND in //)
- *      Gate  : 2     |   buzzer -
- *      Source: 3     |   GND
+ *      IN_A    : 2   |   Arduino : D12, Atmega : 16 (PB4)
+ *      GND     : 3   |   GND
+ *      IN_B    : 4   |   Arduino : D12, Atmega : 16 (PB4)
+ *      OUT_B   : 5   |   buzzer
+ *      Vdd     : 6   |   Vbatt
+ *      ~OUT_A  : 7   |   buzzer
  *      
  *      Buzzer pins   |
  *      --------------|------------------------------------
- *      -             |   MOSFET : 2
- *      +             |   VCC (via 2.2k resistor in series)
+ *                    |   Each on the TC4428 outputs
  */
 
 //timer1 values with 16 MHz crystal
